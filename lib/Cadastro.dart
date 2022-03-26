@@ -42,6 +42,7 @@ class _CadastroState extends State<Cadastro> {
         _mensagemErro = "Preencha o Nome";
       });
     }
+
     _cadastrarUsuario(){
       FirebaseAuth auth = FirebaseAuth.instance;
 
