@@ -1,8 +1,7 @@
 
-
 import 'dart:ui';
-
 import 'package:flutter/material.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Cadastro extends StatefulWidget {
   const Cadastro({Key? key}) : super(key: key);
@@ -16,13 +15,37 @@ class _CadastroState extends State<Cadastro> {
   TextEditingController _controllerEmail = TextEditingController();
   TextEditingController _controllerSenha = TextEditingController();
   String _mensagemErro = "";
-  validarCampos(){
+  _validarCampos(){
     //recuperar os dados dos campos
     String nome = _controllerNome.text;
     String email = _controllerEmail.text;
     String senha = _controllerSenha.text;
+    if (nome.isNotEmpty){
+      if(email.isNotEmpty && email.contains("@")){
+        if(senha.isNotEmpty){
+          setState(() {
+            _mensagemErro = "";
+          });
+        }else{
+          setState(() {
+            _mensagemErro = "Preencha a Senha";
+          });
+        }
+      }else{
+        setState(() {
+          _mensagemErro = "Preencha o E-mail utilizando @";
+        });
+      }
 
+    }else{
+      setState(() {
+        _mensagemErro = "Preencha o Nome";
+      });
+    }
+    _cadastrarUsuario(){
+      FirebaseAuth auth = FirebaseAuth.instance;
 
+    }
   }
   @override
   Widget build(BuildContext context) {
@@ -87,6 +110,7 @@ class _CadastroState extends State<Cadastro> {
                     ),
                     TextField(
                       controller: _controllerSenha,
+                      obscureText: true,
                       keyboardType: TextInputType.text,
                       style: TextStyle(fontSize: 20),
                       decoration: InputDecoration(
@@ -110,17 +134,17 @@ class _CadastroState extends State<Cadastro> {
                             borderRadius: BorderRadius.circular(32)
                         ),
                         onPressed: () {
-                          validarCampos();
+                          _validarCampos();
                         },
                       ),
                     ),
-                    Text(
-                      _mensagemErro, style: TextStyle(
-                      color: Colors.red,
-                      fontSize: 20
+                    Center(
+                      child:Text(
+                          _mensagemErro, style: TextStyle(
+                          color: Colors.red,
+                          fontSize: 20)
+                      ),
                     )
-
-                    ),
                   ],
                 ),
               )),
