@@ -7,9 +7,8 @@ import 'package:projetointegrado_e/Login.dart';
 
 
 void main ()async{
-
-//aloaloalo
-
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(MaterialApp(
     home: Login(),
     theme: ThemeData(
