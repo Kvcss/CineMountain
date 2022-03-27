@@ -1,6 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:projetointegrado_e/Cadastro.dart';
+import 'package:projetointegrado_e/model/Usuario.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
 class Login extends StatefulWidget {
   const Login({Key? key}) : super(key: key);
@@ -10,6 +12,46 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
+  TextEditingController _controllerEmail = TextEditingController();
+  TextEditingController _controllerSenha = TextEditingController();
+  String _mensagemErro = "";
+  _validarCampos() {
+    //recuperar os dados dos campos
+    String email = _controllerEmail.text;
+    String senha = _controllerSenha.text;
+    if (email.isNotEmpty && email.contains("@")) {
+      if (senha.isNotEmpty && senha.length > 6) {
+        setState(() {
+          _mensagemErro = "";
+        });
+        Usuario usuario = Usuario();
+        usuario.email = email;
+        usuario.senha = senha;
+        _logarUsuario(usuario);
+      } else {
+        setState(() {
+          _mensagemErro = "Preencha a Senha! Digite mais de 6 caracteres";
+        });
+      }
+    } else {
+      setState(() {
+        _mensagemErro = "Preencha o E-mail utilizando @";
+      });
+    }
+  }
+    _logarUsuario(Usuario usuario) {
+      FirebaseAuth auth = FirebaseAuth.instance;
+      auth.signInWithEmailAndPassword(
+          email: usuario.email,
+          password: usuario.senha
+      ).then((firebaseUser){
+
+      }).catchError((error){
+        setState(() {
+          _mensagemErro = "Erro ao autenticar usuário, verifique seus dados!"
+        });
+      });
+    }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -89,7 +131,6 @@ class _LoginState extends State<Login> {
                     color : Colors.white,
                     fontSize: 18,
                     fontWeight: FontWeight.bold
-
                   )
                   ),
                   onTap: (){
@@ -100,6 +141,16 @@ class _LoginState extends State<Login> {
                       );
                   },
                 ),
+              ),
+              Padding(
+                padding: EdgeInsets.only(top: 16),
+                child: Center(
+                  child:Text(
+                      _mensagemErro, style: TextStyle(
+                      color: Colors.red,
+                      fontSize: 20)
+                  ),
+                ) ,
               )
             ],
           ),
@@ -107,4 +158,5 @@ class _LoginState extends State<Login> {
       ),
     );
   }
-}
+  }
+
