@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:projetointegrado_e/Cadastro.dart';
+import 'package:projetointegrado_e/Home.dart';
 import 'package:projetointegrado_e/model/Usuario.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -20,7 +21,7 @@ class _LoginState extends State<Login> {
     String email = _controllerEmail.text;
     String senha = _controllerSenha.text;
     if (email.isNotEmpty && email.contains("@")) {
-      if (senha.isNotEmpty && senha.length > 6) {
+      if (senha.isNotEmpty) {
         setState(() {
           _mensagemErro = "";
         });
@@ -45,10 +46,10 @@ class _LoginState extends State<Login> {
           email: usuario.email,
           password: usuario.senha
       ).then((firebaseUser){
-
+        Navigator.push(context, MaterialPageRoute(builder:(contex)=> Home()));
       }).catchError((error){
         setState(() {
-          _mensagemErro = "Erro ao autenticar usuário, verifique seus dados!"
+          _mensagemErro = "Erro ao autenticar usuário, verifique seus dados!";
         });
       });
     }
@@ -86,6 +87,7 @@ class _LoginState extends State<Login> {
               Padding(
                 padding: EdgeInsets.only(bottom: 8),
                 child: TextField(
+                  controller: _controllerEmail,
                   autofocus: true,
                   keyboardType: TextInputType.emailAddress,
                   style: TextStyle(fontSize: 20),
@@ -93,19 +95,21 @@ class _LoginState extends State<Login> {
                       contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                       hintText: "E-mail",
                       filled: true,
-                      fillColor: Colors.grey,
+                      fillColor: Colors.white,
                       border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(32))),
                 ),
               ),
               TextField(
+                controller: _controllerSenha,
+                obscureText: true,
                 keyboardType: TextInputType.text,
                 style: TextStyle(fontSize: 20),
                 decoration: InputDecoration(
                     contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
                     hintText: "Senha:",
                     filled: true,
-                    fillColor: Colors.grey,
+                    fillColor: Colors.white,
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(32))),
               ),
@@ -121,7 +125,10 @@ class _LoginState extends State<Login> {
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(32)
                   ),
-                  onPressed: () {},
+                  onPressed: () {
+                    _validarCampos();
+
+                  },
                 ),
               ),
               Center(
