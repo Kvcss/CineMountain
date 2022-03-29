@@ -3,6 +3,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:projetointegrado_e/Home.dart';
+import 'package:projetointegrado_e/Login.dart';
 import 'package:projetointegrado_e/model/Usuario.dart';
 
 class Cadastro extends StatefulWidget {
@@ -56,7 +57,7 @@ class _CadastroState extends State<Cadastro> {
           email: usuario.email,
           password: usuario.senha
       ).then((firebaseUser){
-       Navigator.push(context, MaterialPageRoute(builder:(contex)=> Home()));
+       Navigator.push(context, MaterialPageRoute(builder:(contex)=> Login()));
       }).catchError((error){
           setState(() {
             _mensagemErro = "Erro ao cadastrar usuário, verifique os campos e tente novamente";
@@ -103,7 +104,7 @@ class _CadastroState extends State<Cadastro> {
                         style: TextStyle(fontSize: 20),
                         decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                            hintText: "Nome",
+                            hintText: "Nome: ",
                             filled: true,
                             fillColor: Colors.white,
                             border: OutlineInputBorder(
@@ -118,7 +119,7 @@ class _CadastroState extends State<Cadastro> {
                         style: TextStyle(fontSize: 20),
                         decoration: InputDecoration(
                             contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                            hintText: "E-mail",
+                            hintText: "E-mail:",
                             filled: true,
                             fillColor: Colors.white,
                             border: OutlineInputBorder(
