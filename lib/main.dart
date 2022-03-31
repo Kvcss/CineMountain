@@ -1,18 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:projetointegrado_e/Home.dart';
-import 'package:projetointegrado_e/Login.dart';
+import 'package:projetointegrado_e/usuario/Login.dart';
 
 
 void main ()async{
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MaterialApp(
-    home: Login(),
+    home: const Login(),
     theme: ThemeData(
-      primaryColor: Color(0xb5d70e48),
+      primaryColor: const Color(0xb5d70e48),
     ),
     debugShowCheckedModeBanner: false,
 

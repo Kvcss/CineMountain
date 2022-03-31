@@ -18,27 +18,27 @@ class MyDotsApp extends StatelessWidget {
       child: Row(
         children: <Widget>[
           AnimatedContainer(
-            duration: Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 300),
             height: 7,
             width: 7,
             decoration:
                 BoxDecoration(color: getColor(0), shape: BoxShape.circle),
           ),
-          SizedBox(
+          const SizedBox(
             width: 8,
           ),
           AnimatedContainer(
-            duration: Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 300),
             height: 7,
             width: 7,
             decoration:
                 BoxDecoration(color: getColor(1), shape: BoxShape.circle),
           ),
-          SizedBox(
+          const SizedBox(
             width: 8,
           ),
           AnimatedContainer(
-            duration: Duration(milliseconds: 300),
+            duration: const Duration(milliseconds: 300),
             height: 7,
             width: 7,
             decoration:

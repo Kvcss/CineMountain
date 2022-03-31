@@ -1,7 +1,6 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:projetointegrado_e/Widgets/card_app.dart';
 import 'package:projetointegrado_e/Widgets/home_aux.dart';
 import 'package:projetointegrado_e/Widgets/my_dots_app.dart';
 import 'package:projetointegrado_e/Widgets/page_view_app.dart';
@@ -54,7 +53,7 @@ class _HomeState extends State<Home> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
-                  SizedBox(
+                  const SizedBox(
                     width: 60,
                   ),
                   Padding(
@@ -73,7 +72,7 @@ class _HomeState extends State<Home> {
                       color: Colors.pink,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 25,
                   ),
                   Padding(
@@ -105,7 +104,7 @@ class _HomeState extends State<Home> {
               height: 1,
               color: Colors.black,
               child: Row(
-                children: <Widget>[
+                children: const <Widget>[
                   Padding(
                     padding: EdgeInsets.only(left: 70),
                     child: Text('Pré-Compra', style: TextStyle(color: Colors.white,
@@ -133,7 +132,7 @@ class _HomeState extends State<Home> {
               child: ListView(
                 scrollDirection: Axis.horizontal,
                 children: <Widget>[
-                  SizedBox(
+                  const SizedBox(
                     width: 45,
                   ),
                   Padding(
@@ -152,7 +151,7 @@ class _HomeState extends State<Home> {
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 35,
                   ),
                   Padding(
@@ -170,7 +169,7 @@ class _HomeState extends State<Home> {
                       color: Colors.black,
                     ),
                   ),
-                  SizedBox(
+                  const SizedBox(
                     width: 35,
                   ),
                   Padding(

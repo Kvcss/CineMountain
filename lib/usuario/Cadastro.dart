@@ -2,8 +2,7 @@
 import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:projetointegrado_e/Home.dart';
-import 'package:projetointegrado_e/Login.dart';
+import 'package:projetointegrado_e/usuario/Login.dart';
 import 'package:projetointegrado_e/model/Usuario.dart';
 
 class Cadastro extends StatefulWidget {
@@ -14,9 +13,9 @@ class Cadastro extends StatefulWidget {
 }
 
 class _CadastroState extends State<Cadastro> {
-  TextEditingController _controllerNome = TextEditingController();
-  TextEditingController _controllerEmail = TextEditingController();
-  TextEditingController _controllerSenha = TextEditingController();
+  final TextEditingController _controllerNome = TextEditingController();
+  final TextEditingController _controllerEmail = TextEditingController();
+  final TextEditingController _controllerSenha = TextEditingController();
   String _mensagemErro = "";
   _validarCampos() {
     //recuperar os dados dos campos
@@ -73,8 +72,8 @@ class _CadastroState extends State<Cadastro> {
           backgroundColor:  Colors.black,
         ),
         body:  Container(
-          decoration: BoxDecoration(color: Color(0xff000000)),
-          padding: EdgeInsets.all(16),
+          decoration: const BoxDecoration(color: Color(0xff000000)),
+          padding: const EdgeInsets.all(16),
           child: Center(
               child: SingleChildScrollView(
                 child: Column(
@@ -88,7 +87,7 @@ class _CadastroState extends State<Cadastro> {
                         height: 150,
                       ),
                     ),
-                    Padding(
+                    const Padding(
                       padding: EdgeInsets.fromLTRB(45, 20, 0, 20),
                       child: Text("Bora criar uma conta ?", style: TextStyle(
                           color: Colors.white, fontSize: 27, fontWeight: FontWeight.bold
@@ -96,14 +95,14 @@ class _CadastroState extends State<Cadastro> {
                     ),
 
                     Padding(
-                      padding: EdgeInsets.only(bottom: 8),
+                      padding: const EdgeInsets.only(bottom: 8),
                       child: TextField(
                         controller: _controllerNome,
                         autofocus: true,
                         keyboardType: TextInputType.text,
-                        style: TextStyle(fontSize: 20),
+                        style: const TextStyle(fontSize: 20),
                         decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                            contentPadding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
                             hintText: "Nome: ",
                             filled: true,
                             fillColor: Colors.white,
@@ -112,13 +111,13 @@ class _CadastroState extends State<Cadastro> {
                       ),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(bottom: 8),
+                      padding: const EdgeInsets.only(bottom: 8),
                       child: TextField(
                         controller: _controllerEmail,
                         keyboardType: TextInputType.emailAddress,
-                        style: TextStyle(fontSize: 20),
+                        style: const TextStyle(fontSize: 20),
                         decoration: InputDecoration(
-                            contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                            contentPadding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
                             hintText: "E-mail:",
                             filled: true,
                             fillColor: Colors.white,
@@ -130,9 +129,9 @@ class _CadastroState extends State<Cadastro> {
                       controller: _controllerSenha,
                       obscureText: true,
                       keyboardType: TextInputType.text,
-                      style: TextStyle(fontSize: 20),
+                      style: const TextStyle(fontSize: 20),
                       decoration: InputDecoration(
-                          contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                          contentPadding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
                           hintText: "Senha:",
                           filled: true,
                           fillColor: Colors.white,
@@ -140,14 +139,14 @@ class _CadastroState extends State<Cadastro> {
                               borderRadius: BorderRadius.circular(32))),
                     ),
                     Padding(
-                      padding: EdgeInsets.only(top: 16, bottom: 10),
+                      padding: const EdgeInsets.only(top: 16, bottom: 10),
                       child: RaisedButton(
-                        child: Text(
+                        child: const Text(
                           "Cadastrar",
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
                         color: Colors.pink,
-                        padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                        padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
                         shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(32)
                         ),
@@ -158,7 +157,7 @@ class _CadastroState extends State<Cadastro> {
                     ),
                     Center(
                       child:Text(
-                          _mensagemErro, style: TextStyle(
+                          _mensagemErro, style: const TextStyle(
                           color: Colors.red,
                           fontSize: 20)
                       ),

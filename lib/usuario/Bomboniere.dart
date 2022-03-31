@@ -1,4 +1,3 @@
-import 'dart:ui';
 
 import 'package:flutter/material.dart';
 class Bomboniere extends StatefulWidget {
@@ -14,13 +13,11 @@ class _BomboniereState extends State<Bomboniere> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text('Bomboniere', style: TextStyle(color: Colors.white),),
+        title: const Text('Bomboniere', style: TextStyle(color: Colors.white),),
       ),
-      body: Container(
-        child: Image.network('https://media.discordapp.net/attachments/933404614391390310/959055061407891456/Screenshot_20220330-205326_Gallery.jpg?width=224&height=473'
+      body: Image.network('https://media.discordapp.net/attachments/933404614391390310/959055061407891456/Screenshot_20220330-205326_Gallery.jpg?width=224&height=473'
 
-        ),
-    )
+      )
     );
   }
 }

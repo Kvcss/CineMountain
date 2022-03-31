@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
-import 'package:projetointegrado_e/Bomboniere.dart';
-import 'package:projetointegrado_e/Cadastro.dart';
-import 'package:projetointegrado_e/Home.dart';
+import 'package:projetointegrado_e/usuario/Bomboniere.dart';
+import 'package:projetointegrado_e/usuario/Cadastro.dart';
+import 'package:projetointegrado_e/usuario/Home.dart';
 import 'package:projetointegrado_e/model/Usuario.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -14,8 +14,8 @@ class Login extends StatefulWidget {
 }
 
 class _LoginState extends State<Login> {
-  TextEditingController _controllerEmail = TextEditingController();
-  TextEditingController _controllerSenha = TextEditingController();
+  final TextEditingController _controllerEmail = TextEditingController();
+  final TextEditingController _controllerSenha = TextEditingController();
   String _mensagemErro = "";
   _validarCampos() {
     //recuperar os dados dos campos
@@ -90,27 +90,27 @@ class _LoginState extends State<Login> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(color: Color(0xff000000)),
-        padding: EdgeInsets.all(16),
+        decoration: const BoxDecoration(color: Color(0xff000000)),
+        padding: const EdgeInsets.all(16),
         child: Center(
             child: SingleChildScrollView(
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: <Widget>[
               Padding(
-                padding: EdgeInsets.only(bottom: 0),
+                padding: const EdgeInsets.only(bottom: 0),
                 child: Image.asset(
                   "imagens/CineMountain-Logo.png",
                   width: 500,
                   height: 350,
                 ),
-              ), Padding(
+              ), const Padding(
                 padding: EdgeInsets.only(left: 70),
                 child: Text("Bem vindo ao", style: TextStyle(
                     color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold
                 ),),
               ),
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(bottom: 40,left: 35),
             child: Text(" entreterimento!🎬", style: TextStyle(
               color: Colors.white, fontSize: 35, fontWeight: FontWeight.bold
@@ -118,15 +118,15 @@ class _LoginState extends State<Login> {
           ),
 
               Padding(
-                padding: EdgeInsets.only(bottom: 8),
+                padding: const EdgeInsets.only(bottom: 8),
                 child: TextField(
                   controller: _controllerEmail,
                   autofocus: true,
                   keyboardType: TextInputType.emailAddress,
-                  style: TextStyle(fontSize: 20),
+                  style: const TextStyle(fontSize: 20),
                   decoration: InputDecoration(
-                      contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
-                      hintText: "E-mail",
+                      contentPadding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
+                      hintText: "E-mail:",
                       filled: true,
                       fillColor: Colors.white,
                       border: OutlineInputBorder(
@@ -137,9 +137,9 @@ class _LoginState extends State<Login> {
                 controller: _controllerSenha,
                 obscureText: true,
                 keyboardType: TextInputType.text,
-                style: TextStyle(fontSize: 20),
+                style: const TextStyle(fontSize: 20),
                 decoration: InputDecoration(
-                    contentPadding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                    contentPadding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
                     hintText: "Senha:",
                     filled: true,
                     fillColor: Colors.white,
@@ -147,14 +147,14 @@ class _LoginState extends State<Login> {
                         borderRadius: BorderRadius.circular(32))),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 16, bottom: 10),
+                padding: const EdgeInsets.only(top: 16, bottom: 10),
                 child: RaisedButton(
-                  child: Text(
+                  child: const Text(
                     "Entrar",
                     style: TextStyle(color: Colors.white, fontSize: 20),
                   ),
                   color: Colors.pink,
-                  padding: EdgeInsets.fromLTRB(32, 16, 32, 16),
+                  padding: const EdgeInsets.fromLTRB(32, 16, 32, 16),
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(32)
                   ),
@@ -166,7 +166,7 @@ class _LoginState extends State<Login> {
               ),
               Center(
                 child: GestureDetector(
-                  child: Text("Não tem uma conta?",
+                  child: const Text("Não tem uma conta?",
                   style: TextStyle(
                     color : Colors.white,
                     fontSize: 18,
@@ -183,10 +183,10 @@ class _LoginState extends State<Login> {
                 ),
               ),
               Padding(
-                padding: EdgeInsets.only(top: 16),
+                padding: const EdgeInsets.only(top: 16),
                 child: Center(
                   child:Text(
-                      _mensagemErro, style: TextStyle(
+                      _mensagemErro, style: const TextStyle(
                       color: Colors.red,
                       fontSize: 20)
                   ),
