@@ -6,6 +6,8 @@ import 'package:projetointegrado_e/Widgets/home_aux.dart';
 import 'package:projetointegrado_e/Widgets/my_dots_app.dart';
 import 'package:projetointegrado_e/Widgets/page_view_app.dart';
 
+import 'Bomboniere.dart';
+
 class Home extends StatefulWidget {
   @override
   State<Home> createState() => _HomeState();
@@ -172,18 +174,26 @@ class _HomeState extends State<Home> {
                     width: 35,
                   ),
                   Padding(
+
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 12),
-                    child: Container(
-                      child: Column(
-                        children: <Widget>[
-                          Image.network('https://s3-alpha-sig.figma.com/img/ac3d/dfb4/bdaf779c9ea32975413fab92807f2f7d?Expires=1649635200&Signature=U8d3NFM3vsJ06X9fjiRS-SKblRf8xypO9X~0E-UMKM6KG42LaMq8z1NeNguPsy4T3gMKotR9PUp034FH4~oBgb2ZQp2cgoExrbkCOh2HXhAt8ltWzcOE2B0YlY4xKYf73Q-FPrzXe6hsNwU3~t9OguajLmUukauODkWdE5Hhw5NbHeGj~~v2x8-Ul9kS5UlXD-va0YtgRGHn55pgK41EM-Q6i0XIrfOdIIVI3c9YHKW~AtvU5iazNqmzcfQ9V8xJseIJNXKusDiaEZ~Hk-lN80zYfK-T9bOWuRCaUaYbOqAuzp1ZhniVAuZVvg3Ts184GR7ZjAHT9zd2tjHRE8aEZg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',
-                            height: 45, color: Colors.white,
-                          ),
-                        ],
+                    child:GestureDetector(
+                      child: Container(
+                        child: Column(
+                          children: <Widget>[
+                            Image.network('https://s3-alpha-sig.figma.com/img/ac3d/dfb4/bdaf779c9ea32975413fab92807f2f7d?Expires=1649635200&Signature=U8d3NFM3vsJ06X9fjiRS-SKblRf8xypO9X~0E-UMKM6KG42LaMq8z1NeNguPsy4T3gMKotR9PUp034FH4~oBgb2ZQp2cgoExrbkCOh2HXhAt8ltWzcOE2B0YlY4xKYf73Q-FPrzXe6hsNwU3~t9OguajLmUukauODkWdE5Hhw5NbHeGj~~v2x8-Ul9kS5UlXD-va0YtgRGHn55pgK41EM-Q6i0XIrfOdIIVI3c9YHKW~AtvU5iazNqmzcfQ9V8xJseIJNXKusDiaEZ~Hk-lN80zYfK-T9bOWuRCaUaYbOqAuzp1ZhniVAuZVvg3Ts184GR7ZjAHT9zd2tjHRE8aEZg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA',
+                              height: 45, color: Colors.white,
+                            ),
+                          ],
+                        ),
+                        width: 60,
+                        color: Colors.black,
                       ),
-                      width: 60,
-                      color: Colors.black,
+                      onTap: (){
+                        Navigator.push(context,
+                            MaterialPageRoute(builder:(context) => Bomboniere())
+                        );
+                      },
                     ),
                   ),
                 ],
