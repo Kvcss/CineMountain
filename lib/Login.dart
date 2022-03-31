@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:projetointegrado_e/Bomboniere.dart';
 import 'package:projetointegrado_e/Cadastro.dart';
 import 'package:projetointegrado_e/Home.dart';
 import 'package:projetointegrado_e/model/Usuario.dart';
@@ -20,24 +21,30 @@ class _LoginState extends State<Login> {
     //recuperar os dados dos campos
     String email = _controllerEmail.text;
     String senha = _controllerSenha.text;
-    if (email.isNotEmpty && email.contains("@")) {
-      if (senha.isNotEmpty) {
-        setState(() {
-          _mensagemErro = "";
-        });
-        Usuario usuario = Usuario();
-        usuario.email = email;
-        usuario.senha = senha;
-        _logarUsuario(usuario);
+    if(email.isNotEmpty && email.contains("adm@gmail.com")){
+      if(senha.isNotEmpty && senha.contains("adm12345")){
+        _validarCamposAdm(email, senha);
+      }
+    }else {
+      if (email.isNotEmpty && email.contains("@")) {
+        if (senha.isNotEmpty) {
+          setState(() {
+            _mensagemErro = "";
+          });
+          Usuario usuario = Usuario();
+          usuario.email = email;
+          usuario.senha = senha;
+          _logarUsuario(usuario);
+        } else {
+          setState(() {
+            _mensagemErro = "Preencha a Senha! Digite mais de 6 caracteres";
+          });
+        }
       } else {
         setState(() {
-          _mensagemErro = "Preencha a Senha! Digite mais de 6 caracteres";
+          _mensagemErro = "Preencha o E-mail utilizando @";
         });
       }
-    } else {
-      setState(() {
-        _mensagemErro = "Preencha o E-mail utilizando @";
-      });
     }
   }
     _logarUsuario(Usuario usuario) {
@@ -52,6 +59,32 @@ class _LoginState extends State<Login> {
           _mensagemErro = "Erro ao autenticar usuário, verifique seus dados!";
         });
       });
+    }
+    _logarUsuarioAdm(Usuario usuario){
+        FirebaseAuth auth = FirebaseAuth.instance;
+        auth.signInWithEmailAndPassword(
+            email: usuario.email,
+            password: usuario.senha
+        ).then((firebaseUser){
+          Navigator.push(context, MaterialPageRoute(builder:(contex)=> Bomboniere()));
+        }).catchError((error){
+          setState(() {
+            _mensagemErro = "Erro ao autenticar usuário, verifique seus dados!";
+          });
+        });
+      }
+    _validarCamposAdm(String email, String senha) {
+      if (email.isNotEmpty && email.contains("adm@gmail.com")) {
+        if (senha.isNotEmpty && senha.contains("adm12345")) {
+          setState(() {
+            _mensagemErro = "";
+          });
+          Usuario usuario = Usuario();
+          usuario.email = email;
+          usuario.senha = senha;
+          _logarUsuarioAdm(usuario);
+        }
+      }
     }
   @override
   Widget build(BuildContext context) {
