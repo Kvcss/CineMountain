@@ -8,6 +8,8 @@ import 'package:projetointegrado_e/Widgets/page_view_app.dart';
 import 'Bomboniere.dart';
 
 class Home extends StatefulWidget {
+  const Home({Key? key}) : super(key: key);
+
   @override
   State<Home> createState() => _HomeState();
 }

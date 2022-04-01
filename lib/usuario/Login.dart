@@ -1,6 +1,6 @@
 
 import 'package:flutter/material.dart';
-import 'package:projetointegrado_e/usuario/Bomboniere.dart';
+import 'package:projetointegrado_e/admin/HomeAdm.dart';
 import 'package:projetointegrado_e/usuario/Cadastro.dart';
 import 'package:projetointegrado_e/usuario/Home.dart';
 import 'package:projetointegrado_e/model/Usuario.dart';
@@ -66,7 +66,7 @@ class _LoginState extends State<Login> {
             email: usuario.email,
             password: usuario.senha
         ).then((firebaseUser){
-          Navigator.push(context, MaterialPageRoute(builder:(contex)=> Bomboniere()));
+          Navigator.push(context, MaterialPageRoute(builder:(contex)=> HomeAdm()));
         }).catchError((error){
           setState(() {
             _mensagemErro = "Erro ao autenticar usuário, verifique seus dados!";
