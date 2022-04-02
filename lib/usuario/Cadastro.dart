@@ -142,7 +142,7 @@ class _CadastroState extends State<Cadastro> {
                       padding: const EdgeInsets.only(top: 16, bottom: 10),
                       child: RaisedButton(
                         child: const Text(
-                          "Cadastrar",
+                          "Cadastrar ",
                           style: TextStyle(color: Colors.white, fontSize: 20),
                         ),
                         color: Colors.pink,
