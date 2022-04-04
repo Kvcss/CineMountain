@@ -22,7 +22,7 @@ class _HomeAdmState extends State<HomeAdm> {
           Column(
             children: <Widget>[
                 SizedBox(
-                  height: _screenHeight *.1,
+                  height: _screenHeight *.1, //strech
                 ),
                 Container(
                   color: Colors.black,
