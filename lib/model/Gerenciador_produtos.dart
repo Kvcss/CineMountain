@@ -9,7 +9,7 @@ class GerenciadorProduto {
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
   Future<void> _carregarTodosProdutos() async {
-    final QuerySnapshot snapProducts = await firestore.collection('produtos').get(); // Pegamos todos produtos da coleção
+    final QuerySnapshot snapProducts = await firestore.collection('produtos').get(); // Pega todos produtos da coleção
 
     for(DocumentSnapshot doc in snapProducts.docs){
       print(doc.data);
