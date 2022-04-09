@@ -15,7 +15,7 @@ class _BomboniereState extends State<Bomboniere> {
         backgroundColor: Colors.black,
         title: const Text('Bomboniere', style: TextStyle(color: Colors.white),),
       ),
-      body: Image.network('https://media.discordapp.net/attachments/933404614391390310/959055061407891456/Screenshot_20220330-205326_Gallery.jpg?width=224&height=473'
+      body: Image.network( ''
 
       )
     );
