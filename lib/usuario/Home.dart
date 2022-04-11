@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:flutter/material.dart';
 import 'package:projetointegrado_e/Widgets/home_aux.dart';
 import 'package:projetointegrado_e/Widgets/my_dots_app.dart';

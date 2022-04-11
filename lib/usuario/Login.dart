@@ -160,7 +160,6 @@ class _LoginState extends State<Login> {
                   ),
                   onPressed: () {
                     _validarCampos();
-
                   },
                 ),
               ),
@@ -176,7 +175,6 @@ class _LoginState extends State<Login> {
                   onTap: (){
                       Navigator.push(context,
                         MaterialPageRoute(builder:(context) => Cadastro()
-
                         )
                       );
                   },
