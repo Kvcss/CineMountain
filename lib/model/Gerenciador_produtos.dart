@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
+import 'package:projetointegrado_e/model/Produto.dart';
 
-class GerenciadorProduto {
+class GerenciadorProduto extends ChangeNotifier {
 
   GerenciadorProduto(){
     _carregarTodosProdutos();
@@ -8,11 +10,16 @@ class GerenciadorProduto {
 
   final FirebaseFirestore firestore = FirebaseFirestore.instance;
 
+  List<Produto> _todosProdutos = []; // Declaração de lista privada do tipo produtos
+
   Future<void> _carregarTodosProdutos() async {
     final QuerySnapshot snapProducts = await firestore.collection('produtos').get(); // Pega todos produtos da coleção
 
-    for(DocumentSnapshot doc in snapProducts.docs){
-      print(doc.data);
-    }
+    // Pega cada um dos documentos, coloca na variavel "d", transformando documento em um Produto, depois transf em uma lista
+    _todosProdutos = snapProducts.doc.map(
+            (d) => Produto.fromDocument(d)).toList();
+
+    // Notificar que lista foi modificada
+    notifyListeners();
   }
 }
