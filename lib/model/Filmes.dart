@@ -5,12 +5,19 @@ class Filmes{
   late String _RestricaoDeIdade;
   late String _Genero;
   late String _Sinopse;
+  late String _Url;
+
   Filmes();
 
   String get Sinopse => _Sinopse;
 
   set Sinopse(String value){
     _Sinopse = value;
+  }
+  String get Url => _Url;
+
+  set Url(String value){
+    _Url = value;
   }
 
   String get NomeDoFilme => _NomeDoFilme;

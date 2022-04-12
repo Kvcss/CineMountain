@@ -1,11 +1,10 @@
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
-import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projetointegrado_e/model/Filmes.dart';
+import 'dart:io';
 class CadastroFilme extends StatefulWidget {
 
   const CadastroFilme({Key? key}) : super(key: key);
@@ -21,7 +20,7 @@ class _CadastroFilmeState extends State<CadastroFilme> {
  final TextEditingController _controllerRestricaoIdade = TextEditingController();
  final TextEditingController _controllerGenero = TextEditingController();
  final TextEditingController _controllerSinopse = TextEditingController();
-
+ String Url = "";
  String _mensagemErro ="";
 
  validarCadastro(){
@@ -38,6 +37,10 @@ class _CadastroFilmeState extends State<CadastroFilme> {
          if(RestricaoIdade.isNotEmpty){
            if(Genero.isNotEmpty){
              if(Sinopse.isNotEmpty){
+               setState(() {
+                 _mensagemErro = "";
+               });
+
                Filmes filme = Filmes();
                filme.NomeDoFilme = NomeFilme;
                filme.DataLancamento = DataDeLancamento;
@@ -45,12 +48,37 @@ class _CadastroFilmeState extends State<CadastroFilme> {
                filme.RestricaoDeIdade = RestricaoIdade;
                filme.Genero = Genero;
                filme.Sinopse = Sinopse;
+               uploadFile(filme);
                _AdicionarFilme(filme);
+             }else{
+               setState(() {
+                 _mensagemErro = 'Insira uma sinopse';
+               });
              }
+           }else{
+             setState(() {
+               _mensagemErro = 'Insira um genero';
+             });
            }
+         }else{
+           setState(() {
+             _mensagemErro = 'Insira uma restrição de idade';
+           });
          }
+       }else{
+         setState(() {
+           _mensagemErro = 'Insira uma Duração';
+         });
        }
+     }else{
+       setState(() {
+         _mensagemErro = 'Insira uma data de lançamento';
+       });
      }
+   }else{
+     setState(() {
+       _mensagemErro = 'Insira o nome do filme';
+     });
    }
  }
  _AdicionarFilme(Filmes filme) async {
@@ -63,20 +91,21 @@ class _CadastroFilmeState extends State<CadastroFilme> {
       'Duracao': filme.Duracao,
       'Restrição de idade': filme.RestricaoDeIdade,
       'Genero': filme.Genero,
-      'Sinopse': filme.Sinopse
+      'Sinopse': filme.Sinopse,
+      'Image': filme.Url,
     }
   );
 
  }
 
   PlatformFile? pickedFile;
-  Future uploadFile()async{
-    final path = 'files/my-image.jpg';
+  Future uploadFile(Filmes filmes)async{
+    final path = 'files/my-image2.jpg';
     final file = File(pickedFile!.path!);
 
     final ref = FirebaseStorage.instance.ref().child(path);
     ref.putFile(file);
-   // url = (await ref.getDownloadURL()).toString();
+    Url = (await ref.getDownloadURL()).toString();
 
   }
   Future selectFile() async{
@@ -85,7 +114,6 @@ class _CadastroFilmeState extends State<CadastroFilme> {
     setState(() {
       pickedFile = result.files.first;
     });
-    uploadFile();
   }
   @override
   Widget build(BuildContext context) {
@@ -242,7 +270,7 @@ class _CadastroFilmeState extends State<CadastroFilme> {
                               decoration: InputDecoration(
                                   contentPadding:
                                       const EdgeInsets.fromLTRB(5, 15, 15, 15),
-                                  hintText: "Tempo Limite:",
+                                  hintText: "Restrição de Idade:",
                                   filled: true,
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(
@@ -281,7 +309,7 @@ class _CadastroFilmeState extends State<CadastroFilme> {
                     ],
                   ),
                   const SizedBox(
-                    height: 50,
+                    height: 20,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -365,6 +393,12 @@ class _CadastroFilmeState extends State<CadastroFilme> {
                       )
                     ],
                   ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Text(_mensagemErro, style: TextStyle(color: Colors.red,fontSize:20,fontWeight: FontWeight.bold),)
+                    ],
+                  )
                 ],
               ),
             ],

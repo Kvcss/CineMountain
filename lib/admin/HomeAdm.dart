@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'CadastroFilmeAdm.dart';
-
 class HomeAdm extends StatefulWidget {
   const HomeAdm({Key? key}) : super(key: key);
 
