@@ -62,7 +62,7 @@ class _CadastroFilmeState extends State<CadastroFilme> {
            }
          }else{
            setState(() {
-             _mensagemErro = 'Insira uma restrição de idade';
+             _mensagemErro = 'Insira uma restrição de idade ';
            });
          }
        }else{
