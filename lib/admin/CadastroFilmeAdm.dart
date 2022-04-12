@@ -1,6 +1,13 @@
+import 'package:file_picker/file_picker.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-
+import 'package:image_picker/image_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
+import 'dart:io';
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:projetointegrado_e/model/Filmes.dart';
 class CadastroFilme extends StatefulWidget {
+
   const CadastroFilme({Key? key}) : super(key: key);
 
   @override
@@ -8,13 +15,85 @@ class CadastroFilme extends StatefulWidget {
 }
 
 class _CadastroFilmeState extends State<CadastroFilme> {
+ final TextEditingController _controllerNomeFilme = TextEditingController();
+ final TextEditingController _controllerDataLancamento = TextEditingController();
+ final TextEditingController _controllerDuracao = TextEditingController();
+ final TextEditingController _controllerRestricaoIdade = TextEditingController();
+ final TextEditingController _controllerGenero = TextEditingController();
+ final TextEditingController _controllerSinopse = TextEditingController();
+
+ String _mensagemErro ="";
+
+ validarCadastro(){
+   String NomeFilme = _controllerNomeFilme.text;
+   String DataDeLancamento = _controllerDataLancamento.text;
+   String Duracao = _controllerDuracao.text;
+   String RestricaoIdade = _controllerRestricaoIdade.text;
+   String Genero = _controllerGenero.text;
+   String Sinopse = _controllerSinopse.text;
+
+   if(NomeFilme.isNotEmpty){
+     if(DataDeLancamento.isNotEmpty){
+       if(Duracao.isNotEmpty){
+         if(RestricaoIdade.isNotEmpty){
+           if(Genero.isNotEmpty){
+             if(Sinopse.isNotEmpty){
+               Filmes filme = Filmes();
+               filme.NomeDoFilme = NomeFilme;
+               filme.DataLancamento = DataDeLancamento;
+               filme.Duracao = Duracao;
+               filme.RestricaoDeIdade = RestricaoIdade;
+               filme.Genero = Genero;
+               filme.Sinopse = Sinopse;
+               _AdicionarFilme(filme);
+             }
+           }
+         }
+       }
+     }
+   }
+ }
+ _AdicionarFilme(Filmes filme) async {
+  await Firebase.initializeApp();
+  var collection = FirebaseFirestore.instance.collection("Filmes");
+  collection.doc().set(
+    {
+      'Nome do Filme': filme.NomeDoFilme,
+      'Data Lancamento' : filme.DataLancamento,
+      'Duracao': filme.Duracao,
+      'Restrição de idade': filme.RestricaoDeIdade,
+      'Genero': filme.Genero,
+      'Sinopse': filme.Sinopse
+    }
+  );
+
+ }
+
+  PlatformFile? pickedFile;
+  Future uploadFile()async{
+    final path = 'files/my-image.jpg';
+    final file = File(pickedFile!.path!);
+
+    final ref = FirebaseStorage.instance.ref().child(path);
+    ref.putFile(file);
+   // url = (await ref.getDownloadURL()).toString();
+
+  }
+  Future selectFile() async{
+    final result = await FilePicker.platform.pickFiles();
+    if(result == null) return;
+    setState(() {
+      pickedFile = result.files.first;
+    });
+    uploadFile();
+  }
   @override
   Widget build(BuildContext context) {
     double _screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
-      backgroundColor: Colors.white,
+      backgroundColor: Colors.black,
       body: Container(
-        color: Colors.blue,
+        color: Colors.black,
         child: SingleChildScrollView(
           child: Stack(
             alignment: Alignment.topCenter,
@@ -65,14 +144,14 @@ class _CadastroFilmeState extends State<CadastroFilme> {
                   Positioned(
                     top: 0,
                     child: Container(
-                      color: Colors.red,
+                      color: Colors.black,
                       height: _screenHeight * .07,
                       child: Padding(
                         padding: const EdgeInsets.all(7.0),
                         child: TextField(
-                          //controller: _controllerSenha,
+                          controller: _controllerNomeFilme,
                           keyboardType: TextInputType.text,
-                          style: const TextStyle(fontSize: 20),
+                          style: const TextStyle(fontSize: 16),
                           decoration: InputDecoration(
                               contentPadding:
                                   const EdgeInsets.fromLTRB(3, 0, 0, 0),
@@ -93,13 +172,13 @@ class _CadastroFilmeState extends State<CadastroFilme> {
                       Padding(
                         padding: EdgeInsets.all(0),
                         child: Container(
-                          color: Colors.green,
+                          color: Colors.black,
                           height: _screenHeight * .08,
                           width: _screenHeight * .25,
                           child: Padding(
                             padding: const EdgeInsets.all(7.0),
                             child: TextField(
-                              //controller: _controllerSenha,
+                              controller: _controllerDataLancamento,
                               keyboardType: TextInputType.text,
                               style: const TextStyle(fontSize: 15),
                               decoration: InputDecoration(
@@ -120,13 +199,13 @@ class _CadastroFilmeState extends State<CadastroFilme> {
                       Padding(
                         padding: EdgeInsets.all(0),
                         child: Container(
-                          color: Colors.green,
+                          color: Colors.black,
                           height: _screenHeight * .08,
                           width: _screenHeight * .15,
                           child: Padding(
                             padding: const EdgeInsets.all(7.0),
                             child: TextField(
-                              //controller: _controllerSenha,
+                              controller: _controllerDuracao,
                               keyboardType: TextInputType.text,
                               style: const TextStyle(fontSize: 15),
                               decoration: InputDecoration(
@@ -143,7 +222,7 @@ class _CadastroFilmeState extends State<CadastroFilme> {
                       ),
                     ],
                   ),
-                  SizedBox(
+                const  SizedBox(
                     height: 30,
                   ),
                   Row(
@@ -151,19 +230,19 @@ class _CadastroFilmeState extends State<CadastroFilme> {
                       Padding(
                         padding: EdgeInsets.all(0),
                         child: Container(
-                          color: Colors.green,
+                          color: Colors.black,
                           height: _screenHeight * .08,
                           width: _screenHeight * .25,
                           child: Padding(
                             padding: const EdgeInsets.all(7.0),
                             child: TextField(
-                              //controller: _controllerSenha,
+                              controller: _controllerRestricaoIdade,
                               keyboardType: TextInputType.text,
                               style: const TextStyle(fontSize: 15),
                               decoration: InputDecoration(
                                   contentPadding:
                                       const EdgeInsets.fromLTRB(5, 15, 15, 15),
-                                  hintText: "Data de Lançamento:",
+                                  hintText: "Tempo Limite:",
                                   filled: true,
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(
@@ -178,19 +257,19 @@ class _CadastroFilmeState extends State<CadastroFilme> {
                       Padding(
                         padding: EdgeInsets.all(0),
                         child: Container(
-                          color: Colors.green,
+                          color: Colors.black,
                           height: _screenHeight * .08,
                           width: _screenHeight * .15,
                           child: Padding(
                             padding: const EdgeInsets.all(7.0),
                             child: TextField(
-                              //controller: _controllerSenha,
+                              controller: _controllerGenero,
                               keyboardType: TextInputType.text,
                               style: const TextStyle(fontSize: 15),
                               decoration: InputDecoration(
                                   contentPadding:
                                       const EdgeInsets.fromLTRB(5, 15, 15, 15),
-                                  hintText: "Duração:",
+                                  hintText: "Genero:",
                                   filled: true,
                                   fillColor: Colors.white,
                                   border: OutlineInputBorder(
@@ -210,7 +289,7 @@ class _CadastroFilmeState extends State<CadastroFilme> {
                       Padding(
                         padding: EdgeInsets.all(0),
                         child: Container(
-                          color: Colors.green,
+                          color: Colors.black,
                           height: _screenHeight * .25,
                           width: _screenHeight * .30,
                           child: Padding(
@@ -221,7 +300,7 @@ class _CadastroFilmeState extends State<CadastroFilme> {
                               ),
                               child: TextField(
                                 maxLines: 15,
-                                //controller: _controllerSenha,
+                                controller: _controllerSinopse,
                                 keyboardType: TextInputType.text,
                                 style: const TextStyle(fontSize: 15),
                                 decoration: InputDecoration(
@@ -258,21 +337,36 @@ class _CadastroFilmeState extends State<CadastroFilme> {
                           shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(32)),
                           onPressed: () {
+                            selectFile();
                           },
                         ),
                       ),
                     ],
-                  )
+                  ),
+
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: <Widget>[
+                      Padding(
+                        padding: EdgeInsets.all(0),
+                        child: RaisedButton(
+                          child: const Text(
+                            "           Cadastrar           ",
+                            style: TextStyle(color: Colors.white, fontSize: 20),
+                          ),
+                          color: Colors.pink,
+                          padding: const EdgeInsets.fromLTRB(20, 10, 20, 10),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(32)),
+                          onPressed: () {
+                            validarCadastro();
+                          },
+                        ),
+                      )
+                    ],
+                  ),
                 ],
               ),
-              Row(
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: <Widget>[
-                  Padding(
-                    padding: EdgeInsets.all(0),
-                  )
-                ],
-              )
             ],
           ),
         ),

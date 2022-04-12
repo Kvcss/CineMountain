@@ -1,9 +1,9 @@
-
-import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:projetointegrado_e/usuario/Login.dart';
 import 'package:projetointegrado_e/model/Usuario.dart';
+import 'dart:ui';
+
 
 class Cadastro extends StatefulWidget {
   const Cadastro({Key? key}) : super(key: key);

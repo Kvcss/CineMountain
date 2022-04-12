@@ -38,6 +38,10 @@ dependencies:
   cloud_firestore: ^1.0.1 #Banco de dados
   firebase_storage: ^8.0.0 #Armazenamento de arquivos
   firebase_auth: ^1.0.1 #Autenticação de usuário
+  image_picker: ^0.8.4+2
+  file_picker: ^4.5.1
+
+
 
 
 dev_dependencies:
