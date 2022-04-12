@@ -1,10 +1,11 @@
 import 'dart:ui';
-
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:projetointegrado_e/Widgets/home_aux.dart';
 import 'package:projetointegrado_e/Widgets/my_dots_app.dart';
 import 'package:projetointegrado_e/Widgets/page_view_app.dart';
 import 'Bomboniere.dart';
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -15,11 +16,35 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   late int _currentIndex;
-
+  String UrlBebidas="";
+  String UrlDoces="";
+  String UrlPipocas = "";
+  String UrlCombo = "";
   @override
   void initState() {
     super.initState();
     _currentIndex = 0;
+  }
+  lerDados()async{
+    await Firebase.initializeApp();
+    var collection = FirebaseFirestore.instance.collection('produtos');
+    var result = await collection.get();
+
+    for(var doc in result.docs){
+      if(doc['nome'] == 'Bebidas'){
+        UrlBebidas = doc['imagem'];
+      }
+      if(doc['nome'] == 'Doces'){
+        UrlDoces = doc['imagem'];
+      }
+      if(doc['nome'] == 'Pipocas'){
+        UrlPipocas = doc['imagem'];
+      }
+      if(doc['nome'] == 'Combo'){
+        UrlCombo = doc['imagem'];
+      }
+    }
+
   }
 
   @override
@@ -191,6 +216,7 @@ class _HomeState extends State<Home> {
                             color: Colors.white,
                           ),
                           onTap: () {
+                            lerDados();
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(

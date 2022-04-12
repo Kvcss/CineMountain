@@ -22,7 +22,33 @@ class _CadastroFilmeState extends State<CadastroFilme> {
  final TextEditingController _controllerSinopse = TextEditingController();
  String Url = "";
  String _mensagemErro ="";
+ String UrlBebidas="";
+ String UrlDoces="";
+ String UrlPipocas = "";
+ String UrlCombo = "";
 
+
+ lerDados()async{
+    await Firebase.initializeApp();
+    var collection = FirebaseFirestore.instance.collection('produtos');
+    var result = await collection.get();
+
+    for(var doc in result.docs){
+      if(doc['nome'] == 'Bebidas'){
+        UrlBebidas = doc['imagem'];
+      }
+      if(doc['nome'] == 'Doces'){
+        UrlDoces = doc['imagem'];
+      }
+      if(doc['nome'] == 'Pipocas'){
+        UrlPipocas = doc['imagem'];
+      }
+      if(doc['nome'] == 'Combo'){
+        UrlCombo = doc['imagem'];
+      }
+    }
+
+ }
  validarCadastro(){
    String NomeFilme = _controllerNomeFilme.text;
    String DataDeLancamento = _controllerDataLancamento.text;
@@ -30,6 +56,7 @@ class _CadastroFilmeState extends State<CadastroFilme> {
    String RestricaoIdade = _controllerRestricaoIdade.text;
    String Genero = _controllerGenero.text;
    String Sinopse = _controllerSinopse.text;
+   String _Url = Url;
 
    if(NomeFilme.isNotEmpty){
      if(DataDeLancamento.isNotEmpty){
@@ -40,7 +67,7 @@ class _CadastroFilmeState extends State<CadastroFilme> {
                setState(() {
                  _mensagemErro = "";
                });
-
+               uploadFile();
                Filmes filme = Filmes();
                filme.NomeDoFilme = NomeFilme;
                filme.DataLancamento = DataDeLancamento;
@@ -48,7 +75,7 @@ class _CadastroFilmeState extends State<CadastroFilme> {
                filme.RestricaoDeIdade = RestricaoIdade;
                filme.Genero = Genero;
                filme.Sinopse = Sinopse;
-               uploadFile(filme);
+               filme.Url = _Url;
                _AdicionarFilme(filme);
              }else{
                setState(() {
@@ -99,7 +126,7 @@ class _CadastroFilmeState extends State<CadastroFilme> {
  }
 
   PlatformFile? pickedFile;
-  Future uploadFile(Filmes filmes)async{
+  Future uploadFile()async{
     final path = 'files/my-image2.jpg';
     final file = File(pickedFile!.path!);
 
