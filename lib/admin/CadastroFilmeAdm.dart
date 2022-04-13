@@ -67,7 +67,7 @@ class _CadastroFilmeState extends State<CadastroFilme> {
                setState(() {
                  _mensagemErro = "";
                });
-               uploadFile();
+               //uploadFile();
                Filmes filme = Filmes();
                filme.NomeDoFilme = NomeFilme;
                filme.DataLancamento = DataDeLancamento;
@@ -127,7 +127,7 @@ class _CadastroFilmeState extends State<CadastroFilme> {
 
   PlatformFile? pickedFile;
   Future uploadFile()async{
-    final path = 'files/my-image2.jpg';
+    const path = 'files/my-image2.jpg';
     final file = File(pickedFile!.path!);
 
     final ref = FirebaseStorage.instance.ref().child(path);
@@ -141,6 +141,7 @@ class _CadastroFilmeState extends State<CadastroFilme> {
     setState(() {
       pickedFile = result.files.first;
     });
+    uploadFile();
   }
   @override
   Widget build(BuildContext context) {
