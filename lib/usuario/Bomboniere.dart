@@ -12,7 +12,6 @@ class Bomboniere extends StatefulWidget {
 }
 
 class _BomboniereState extends State<Bomboniere> {
-
   String UrlBebidas="";
   String UrlDoces="";
   String UrlPipocas = "";
@@ -22,10 +21,6 @@ class _BomboniereState extends State<Bomboniere> {
   String NomeDoce = "";
   String NomePipoca = "";
   String NomeCombo = "";
-
-
-
-
   Future lerDados()async{
     await Firebase.initializeApp();
     var collection = FirebaseFirestore.instance.collection('produtos');

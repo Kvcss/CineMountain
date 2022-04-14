@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'CadastroFilmeAdm.dart';
+import 'CadastroPreVendas.dart';
 class HomeAdm extends StatefulWidget {
   const HomeAdm({Key? key}) : super(key: key);
 
@@ -132,7 +133,7 @@ class _HomeAdmState extends State<HomeAdm> {
                       borderRadius: BorderRadius.circular(32)
                   ),
                   onPressed: () {
-
+                    Navigator.push(context, MaterialPageRoute(builder:(contex)=> CadastroPreVendas()));
                   },
                 ),
               )
