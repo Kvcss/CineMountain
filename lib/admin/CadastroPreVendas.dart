@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 class CadastroPreVendas extends StatefulWidget {
   const CadastroPreVendas({Key? key}) : super(key: key);
@@ -7,6 +9,20 @@ class CadastroPreVendas extends StatefulWidget {
 }
 
 class _CadastroPreVendasState extends State<CadastroPreVendas> {
+  final Map <dynamic, dynamic> listaNome = Map();
+  final dropValue = ValueNotifier('');
+
+
+  associarArray()async{
+    await Firebase.initializeApp();
+    var collection = FirebaseFirestore.instance.collection('Filmes');
+    var result = await collection.get();
+    int cont = 0;
+    for(var doc in result.docs){
+      listaNome[cont] = doc['Nome do Filme'];
+      cont = cont +1;
+    }
+  }
   @override
   Widget build(BuildContext context) {
     double _screenHeight = MediaQuery.of(context).size.height;
@@ -59,6 +75,25 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
                         ),
                       ],
                     ),
+                  ),
+                  Center(
+                    child: ValueListenableBuilder(
+                      valueListenable: dropValue, builder: (BuildContext context,String value,_) {
+                        return DropdownButton<String>(
+                          hint: const Text('Selecione o Filme'),
+                          value: (value.isEmpty)? null : value,
+                          onChanged: (escolha)=> dropValue.value = escolha.toString(),
+                          items: listaNome
+                              .map(
+                                (op)=>DropdownMenuItem(
+                                value: op,
+                                  child: Text(op),
+                                ),
+                          )
+                            .toList(),
+
+                        );
+                    }),
                   )
                 ],
               )
