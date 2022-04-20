@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -9,8 +11,10 @@ class CadastroPreVendas extends StatefulWidget {
 }
 
 class _CadastroPreVendasState extends State<CadastroPreVendas> {
-  final Map <dynamic, dynamic> listaNome = Map();
+  late List<String> listaNome;
   final dropValue = ValueNotifier('');
+  String? value;
+
 
 
   associarArray()async{
@@ -20,6 +24,7 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
     int cont = 0;
     for(var doc in result.docs){
       listaNome[cont] = doc['Nome do Filme'];
+   //   print(listaNome[0]);
       cont = cont +1;
     }
   }
@@ -29,78 +34,75 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
     return Scaffold(
       backgroundColor: Colors.black,
       body: Container(
-        color: Colors.black,
-        child: SingleChildScrollView(
-          child: Stack(
-            alignment: Alignment.topCenter,
-            children: <Widget>[
-              Column(
-                children: <Widget>[
-                  SizedBox(
-                    height: _screenHeight * .1, //strech
-                  ),
-                  Container(
-                    color: Colors.black,
-                    child: Column(
-                      children: <Widget>[
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const <Widget>[
-                            Padding(
-                              padding: EdgeInsets.only(right: 0),
-                              child: Text(
-                                "Cadastro de Pré",
-                                style: TextStyle(
-                                    fontSize: 28,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ],
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: const <Widget>[
-                            Padding(
-                              padding: EdgeInsets.only(right: 0),
-                              child: Text(
-                                "Venda",
-                                style: TextStyle(
-                                    fontSize: 28,
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold),
-                              ),
-                            ),
-                          ],
-                        ),
-                      ],
-                    ),
-                  ),
-                  Center(
-                    child: ValueListenableBuilder(
-                      valueListenable: dropValue, builder: (BuildContext context,String value,_) {
-                        return DropdownButton<String>(
-                          hint: const Text('Selecione o Filme'),
-                          value: (value.isEmpty)? null : value,
-                          onChanged: (escolha)=> dropValue.value = escolha.toString(),
-                          items: listaNome
-                              .map(
-                                (op)=>DropdownMenuItem(
-                                value: op,
-                                  child: Text(op),
+                color: Colors.black,
+                child: SingleChildScrollView(
+                  child: Stack(
+                    alignment: Alignment.topCenter,
+                    children: <Widget>[
+                      Column(
+                        children: <Widget>[
+                          SizedBox(
+                            height: _screenHeight * .1, //strech
+                          ),
+                          Container(
+                            color: Colors.black,
+                            child: Column(
+                              children: <Widget>[
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const <Widget>[
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 0),
+                                      child: Text(
+                                        "Cadastro de Pré",
+                                        style: TextStyle(
+                                            fontSize: 28,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ],
                                 ),
-                          )
-                            .toList(),
-
-                        );
-                    }),
-                  )
-                ],
-              )
-            ],
-          ),
-        )
-      ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: const <Widget>[
+                                    Padding(
+                                      padding: EdgeInsets.only(right: 0),
+                                      child: Text(
+                                        "Venda",
+                                        style: TextStyle(
+                                            fontSize: 28,
+                                            color: Colors.white,
+                                            fontWeight: FontWeight.bold),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ],
+                            ),
+                          ),
+                          Center(
+                            child: DropdownButton<String>(
+                              items: listaNome.map(buildMenuItem).toList(),
+                              onChanged: (value) =>
+                                  setState(() => this.value = value),
+                            ),
+                          ),
+                        ],
+                      )
+                    ],
+                  ),
+                ),
+            ),
     );
+
   }
+  DropdownMenuItem<String> buildMenuItem(String listaNome) =>
+      DropdownMenuItem(
+        value: listaNome,
+        child: Text(
+          listaNome,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+      );
 }
