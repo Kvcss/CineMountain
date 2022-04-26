@@ -113,11 +113,20 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
                         height: 20,
                       ),
                       Center(
-                        child: DropdownButton<String>(
-                          dropdownColor: Colors.white,
-                          items: ListaNome.map(buildMenuItem).toList(),
-                          onChanged: (value)=> setState(() => this.valorEscolido = value),
+                        child: Container(
+                          decoration: BoxDecoration(
 
+                              borderRadius: BorderRadius.circular(16)
+                           ),
+                          child: DropdownButton<String>(
+                           // hint: Text('Selecione o nome do Filme',style: TextStyle(color: Colors.black)),
+                            hint: Text('Selecione o filme', style: TextStyle(color: Colors.white),),
+                            dropdownColor: Colors.black,
+                            style: TextStyle(color: Colors.white),
+                            items: ListaNome.map(buildMenuItem).toList(),
+                            onChanged: (value)=> setState(() => this.valorEscolido = value),
+
+                          ),
                         ),
                       ),
                       SizedBox(
@@ -240,12 +249,12 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
   }
   DropdownMenuItem<String> buildMenuItem(String listaNome) =>
       DropdownMenuItem(
-
         value: listaNome,
         child: Text(
           listaNome,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
         ),
+
       );
 
 
