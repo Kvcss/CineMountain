@@ -39,6 +39,7 @@ dependencies:
   firebase_storage: ^8.0.0 #Armazenamento de arquivos
   firebase_auth: ^1.0.1 #Autenticação de usuário
   file_picker: ^4.5.1
+  provider : 6.0.2
 
 
 

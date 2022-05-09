@@ -15,7 +15,7 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
   final TextEditingController _controllerDataLancamento = TextEditingController();
   final TextEditingController _controllerHorario = TextEditingController();
   final TextEditingController _controllerSala = TextEditingController();
-  //final dropValue = ValueNotifier('');
+ // final dropValue = ValueNotifier('');
   List<String> ListaNome = [];
    String? valorEscolido;
 
@@ -109,27 +109,89 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
                           ],
                         ),
                       ),
-                      SizedBox(
+                     const SizedBox(
                         height: 20,
                       ),
-                      Center(
-                        child: Container(
-                          decoration: BoxDecoration(
+                     /*
+                     Container(
+                       height: 60,
+                       width: 260,
+                       color: Colors.white,
+                       child: Center(
+                         child: ValueListenableBuilder(
+                           valueListenable: dropValue, builder: (BuildContext context, String value,_){
+                             return SizedBox(
+                               width: 280,
+                               child: DropdownButtonFormField<String>(
+                                 isExpanded: true,
+                                 hint: const Text('Selecione o filme:', style: TextStyle(color: Colors.black),),
+                                 decoration: InputDecoration(
+                                   fillColor: Colors.white,
+                                   border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(6),
 
-                              borderRadius: BorderRadius.circular(16)
-                           ),
-                          child: DropdownButton<String>(
-                           // hint: Text('Selecione o nome do Filme',style: TextStyle(color: Colors.black)),
-                            hint: Text('Selecione o filme', style: TextStyle(color: Colors.white),),
-                            dropdownColor: Colors.black,
-                            style: TextStyle(color: Colors.white),
-                            items: ListaNome.map(buildMenuItem).toList(),
-                            onChanged: (value)=> setState(() => this.valorEscolido = value),
+                                   )
+                                 ),
+                                 value: (value.isEmpty)? null: value,
+                                 onChanged: (escolha)=> dropValue.value = escolha.toString(),
+                                 items: ListaNome.map((opcao)=>DropdownMenuItem(
 
-                          ),
+                                     child: Text(opcao, style: TextStyle(color: Colors.black),),
+                                    value: opcao,
+                                 ),).toList(),
+                               ),
+                             );
+                         }),
+                       ),
+                     ),
+                     */
+                     /* Container(
+                        height: 60,
+                        width: 260,
+                        color: Colors.white,
+                        child: Center(
+                            child: DropdownButtonFormField<String>(
+                              isExpanded: true,
+                              decoration: InputDecoration(
+                                border: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(6)
+                                ),
+                              ),
+                              hint: const Text('Selecione o nome do Filme',style: TextStyle(color: Colors.black)),
+                             // hint: Text('Selecione o filme', style: TextStyle(color: Colors.white),),
+                              dropdownColor: Colors.white,
+                              style: TextStyle(color: Colors.black),
+                              value: valorEscolido,
+                              items: ListaNome.map(buildMenuItem).toList(),
+                              onChanged: (value)=> setState(() => this.valorEscolido = value),
+                            ),
+
                         ),
                       ),
-                      SizedBox(
+                  */
+                    Container(
+                      height: 60,
+                      width: 260,
+                      color: Colors.white,
+                      child: Center(
+                        child: DropdownButton(
+                          hint: const Text('Selecione o Filme'),
+                          value: valorEscolido!,
+                          onChanged: (newValue){
+                            setState(() {
+                              valorEscolido = newValue as String?;
+                            });
+                          },
+                          items: ListaNome.map((valorEscolido){
+                            return DropdownMenuItem(
+                              child: Text(valorEscolido),
+                              value: valorEscolido
+                            );
+                          }).toList(),
+                        ),
+                      ),
+                    ),
+                    const  SizedBox(
                         height: 20,
                       ),
                       Row(
@@ -158,7 +220,7 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
                             ),
                           ),
                         ),
-                          SizedBox(
+                       const   SizedBox(
                             width: 90,
                           ),
                           Padding(
@@ -187,7 +249,7 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
                           ),
                         ]
                       ),
-                      SizedBox(
+                  const    SizedBox(
                         height: 40,
                       ),
                       Center(
@@ -216,7 +278,7 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
                           ),
                         ),
                       ),
-                      SizedBox(
+                  const    SizedBox(
                         height: 200,
                       ),
 
@@ -247,15 +309,15 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
     );
 
   }
-  DropdownMenuItem<String> buildMenuItem(String listaNome) =>
+  /*DropdownMenuItem<String> buildMenuItem(String listaNome) =>
       DropdownMenuItem(
         value: listaNome,
         child: Text(
           listaNome,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
         ),
 
       );
 
-
+*/
 }

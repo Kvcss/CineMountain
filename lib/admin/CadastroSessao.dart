@@ -110,21 +110,22 @@ class _SessaoState extends State<Sessao> {
                         SizedBox(
                           height: 20,
                         ),
-                        Center(
-                          child: Container(
-                            decoration: BoxDecoration(
+                        Container(
+                          height : 50,
+                          width: 250,
+                          color: Colors.white,
+                          child: Center(
+                              child: DropdownButton<String>(
+                                // hint: Text('Selecione o nome do Filme',style: TextStyle(color: Colors.black)),
+                                dropdownColor: Colors.white,
 
-                                borderRadius: BorderRadius.circular(16)
-                            ),
-                            child: DropdownButton<String>(
-                              // hint: Text('Selecione o nome do Filme',style: TextStyle(color: Colors.black)),
-                              dropdownColor: Colors.black,
-                              hint: Text('Selecione o filme', style: TextStyle(color: Colors.white),),
-                              style: TextStyle(color: Colors.white),
-                              items: ListaNome.map(buildMenuItem).toList(),
-                              onChanged: (value)=> setState(() => this.valorEscolido = value),
+                                hint: Text('Selecione o filme', style: TextStyle(color: Colors.black),),
+                                style: TextStyle(color: Colors.white),
+                                items: ListaNome.map(buildMenuItem).toList(),
+                                onChanged: (value)=> setState(() => valorEscolido = value),
+                               //   value: 'Filme selecionado'
+                              ),
 
-                            ),
                           ),
                         ),
                         SizedBox(
@@ -214,7 +215,7 @@ class _SessaoState extends State<Sessao> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 200,
                         ),
 
@@ -250,7 +251,7 @@ class _SessaoState extends State<Sessao> {
         value: listaNome,
         child: Text(
           listaNome,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.white),
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
         ),
 
       );
