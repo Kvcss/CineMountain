@@ -1,3 +1,5 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -14,6 +16,28 @@ class _SessaoState extends State<Sessao> {
   final TextEditingController _controllerData = TextEditingController();
   final TextEditingController _controllerHorario = TextEditingController();
   final TextEditingController _controllerSala = TextEditingController();
+  String _mensagemErro = "AAAAAAA";
+
+
+  validaSalas(Partes sessao) async{
+    var collection = FirebaseFirestore.instance.collection('Pre vendas');
+    var result = await collection.get();
+    print(sessao.Sala.toString());
+    for(var doc in result.docs){
+      print(doc['Sala'].toString());
+     /* if(sessao.Sala == doc['Numero da Sala']){
+        _adicionarPreVendas(sessao);
+      }
+      else{
+        setState(() {
+          _mensagemErro = 'Informe uma sala existente';
+        });
+      }
+
+      */
+    }
+
+  }
   //final dropValue = ValueNotifier('');
   List<String> ListaNome = [];
   String? valorEscolido;
@@ -27,7 +51,7 @@ class _SessaoState extends State<Sessao> {
     sessao.Horario = Horario;
     sessao.Sala = Sala;
     sessao.NomeDoFilme = NomeDoFime;
-    _adicionarPreVendas(sessao);
+    validaSalas(sessao);
   }
   _adicionarPreVendas(Partes sessao)async{
     await Firebase.initializeApp();
@@ -123,11 +147,14 @@ class _SessaoState extends State<Sessao> {
                                 style: TextStyle(color: Colors.white),
                                 items: ListaNome.map(buildMenuItem).toList(),
                                 onChanged: (value)=> setState(() => valorEscolido = value),
-                               //   value: 'Filme selecionado'
                               ),
 
                           ),
                         ),
+                        SizedBox(
+                          height: 20,
+                        ),
+                        Text('Filme Selecionado: '+ valorEscolido.toString(), style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),),
                         SizedBox(
                           height: 20,
                         ),
@@ -234,6 +261,9 @@ class _SessaoState extends State<Sessao> {
                               validarCadastro();
                             },
                           ),
+                        ),
+                        Center(
+                          child: Text(_mensagemErro,style: TextStyle(color: Colors.red, fontSize: 15, fontWeight: FontWeight.bold),),
                         )
                       ],
                     )

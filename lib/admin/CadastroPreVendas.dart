@@ -19,6 +19,9 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
   List<String> ListaNome = [];
    String? valorEscolido;
 
+   getPrevenda()async {
+
+   }
    validarCadastro(){
      String DataDeLancamento = _controllerDataLancamento.text;
      String Horario = _controllerHorario.text;
@@ -145,9 +148,27 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
                        ),
                      ),
                      */
-                     /* Container(
+                      Container(
+                        height : 50,
+                        width: 250,
+                        color: Colors.white,
+                        child: Center(
+                          child: DropdownButton<String>(
+                            // hint: Text('Selecione o nome do Filme',style: TextStyle(color: Colors.black)),
+                            dropdownColor: Colors.white,
+
+                            hint: Text('Selecione o filme', style: TextStyle(color: Colors.black),),
+                            style: TextStyle(color: Colors.white),
+                            items: ListaNome.map(buildMenuItem).toList(),
+                            onChanged: (value)=> setState(() => valorEscolido = value),
+                          ),
+
+                        ),
+                      ),
+              /*
+                     Container(
                         height: 60,
-                        width: 260,
+                        width: 240,
                         color: Colors.white,
                         child: Center(
                             child: DropdownButtonFormField<String>(
@@ -161,7 +182,7 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
                              // hint: Text('Selecione o filme', style: TextStyle(color: Colors.white),),
                               dropdownColor: Colors.white,
                               style: TextStyle(color: Colors.black),
-                              value: valorEscolido,
+                              //value: valorEscolido,
                               items: ListaNome.map(buildMenuItem).toList(),
                               onChanged: (value)=> setState(() => this.valorEscolido = value),
                             ),
@@ -169,7 +190,7 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
                         ),
                       ),
                   */
-                    Container(
+                  /*  Container(
                       height: 60,
                       width: 260,
                       color: Colors.white,
@@ -191,6 +212,8 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
                         ),
                       ),
                     ),
+
+                   */
                     const  SizedBox(
                         height: 20,
                       ),
@@ -309,7 +332,7 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
     );
 
   }
-  /*DropdownMenuItem<String> buildMenuItem(String listaNome) =>
+  DropdownMenuItem<String> buildMenuItem(String listaNome) =>
       DropdownMenuItem(
         value: listaNome,
         child: Text(
@@ -319,5 +342,4 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
 
       );
 
-*/
 }
