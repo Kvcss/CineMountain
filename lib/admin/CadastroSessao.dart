@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:projetointegrado_e/admin/HomeAdm.dart';
 
 import '../model/Sec.dart';
 class Sessao extends StatefulWidget {
@@ -16,17 +17,36 @@ class _SessaoState extends State<Sessao> {
   final TextEditingController _controllerData = TextEditingController();
   final TextEditingController _controllerHorario = TextEditingController();
   final TextEditingController _controllerSala = TextEditingController();
-  String _mensagemErro = "AAAAAAA";
+  String _mensagemErro = '';
 
+  validaPreVenda(Partes sessao)async{
+    var collection = FirebaseFirestore.instance.collection('Pre vendas');
+    var result = await collection.get();
+    int aux = 0;
+    _mensagemErro = '';
+    for(var doc in result.docs){
+      if(sessao.NomeDoFilme == doc.get('Nome do Filme: ') && sessao.Sala == doc.get('Sala: ') && sessao.DataLancamento == doc.get('Data: ') && sessao.Horario == doc.get('Horario: ')){
+        setState(() {
+          _mensagemErro = 'Já tem uma Pré venda deste Filme';
+          aux ++;
+        });
+      }
+
+      if (aux ==0){
+        _adicionarPreVendas(sessao);
+      }
+    }
+
+  }
 
   validaSalas(Partes sessao) async{
-    var collection = FirebaseFirestore.instance.collection('Pre vendas');
+    var collection = FirebaseFirestore.instance.collection('Salas');
     var result = await collection.get();
     print(sessao.Sala.toString());
     for(var doc in result.docs){
-      print(doc['Sala'].toString());
-     /* if(sessao.Sala == doc['Numero da Sala']){
-        _adicionarPreVendas(sessao);
+      print(doc.get('Numero da Sala: '));
+      if(sessao.Sala == doc.get('Numero da Sala: ')){
+        validaPreVenda(sessao);
       }
       else{
         setState(() {
@@ -34,7 +54,6 @@ class _SessaoState extends State<Sessao> {
         });
       }
 
-      */
     }
 
   }
