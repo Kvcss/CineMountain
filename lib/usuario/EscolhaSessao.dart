@@ -15,7 +15,7 @@ class EscolhaSessao extends StatefulWidget {
 }
 
 class _EscolhaSessaoState extends State<EscolhaSessao> {
-
+  String teste1= "SEG.";
 
   @override
   Widget build(BuildContext context) {
@@ -100,11 +100,102 @@ class _EscolhaSessaoState extends State<EscolhaSessao> {
                             )),
                           ),
 
-                        )
+                        ),
                       ],
+
                     )
                   ],
 
+
+                ),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+              Container(
+                height: 130,
+                width: 400,
+                color: Colors.grey,
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: SingleChildScrollView(
+                          scrollDirection: Axis.horizontal,
+                          child: Row(
+                            children: [
+                            const SizedBox(
+                                width: 10,
+                              ),
+                              GestureDetector(
+                                child: Container(
+                                  height: 120,
+                                  width: 110,
+                                  color: Colors.pink,
+                                  child: Column(
+                                    children: [
+                                        Center(
+                                        child: Text(teste1, style: TextStyle(color: Colors.white,fontSize: 20, fontWeight: FontWeight.bold),)
+                                        )
+                                    ],
+                                  ),
+                                ),
+                                onTap: (){
+
+                                },
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                height: 120,
+                                width: 110,
+                                color: Colors.pink,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                height: 120,
+                                width: 110,
+                                color: Colors.pink,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                height: 120,
+                                width: 110,
+                                color: Colors.pink,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                height: 120,
+                                width: 110,
+                                color: Colors.pink,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                height: 120,
+                                width: 110,
+                                color: Colors.pink,
+                              ),
+                              const SizedBox(
+                                width: 10,
+                              ),
+                              Container(
+                                height: 120,
+                                width: 110,
+                                color: Colors.pink,
+                              )
+                            ],
+                          ),
+                        ),
+                    )
+                  ],
                 ),
               )
             ],
