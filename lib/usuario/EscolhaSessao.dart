@@ -5,6 +5,7 @@ import 'dart:ui';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:projetointegrado_e/model/Filmes.dart';
+import 'package:projetointegrado_e/model/dataSelector.dart';
 class EscolhaSessao extends StatefulWidget {
   Filmes getFilme = Filmes();
 
@@ -16,10 +17,43 @@ class EscolhaSessao extends StatefulWidget {
 
 class _EscolhaSessaoState extends State<EscolhaSessao> {
   String teste1= "SEG.";
+  int dateIndexSelected = 1;
+  DateTime currentDate = DateTime.now();
 
+  String ? _dayFormat(int dayWeek){
+    switch (dayWeek){
+      case 1:
+        return "SEG";
+        break;
+      case 2:
+        return "TER";
+        break;
+      case 3:
+        return "QUA";
+        break;
+      case 4:
+        return "QUI";
+        break;
+      case 5:
+        return "SEX";
+        break;
+      case 6:
+        return "SAB";
+        break;
+      case 7:
+        return "DOM";
+        break;
+      default:
+        return "SEG";
+        break;
+
+    }
+  }
+
+  get color => null;
   @override
   Widget build(BuildContext context) {
-
+   // Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
@@ -105,97 +139,87 @@ class _EscolhaSessaoState extends State<EscolhaSessao> {
 
                     )
                   ],
-
-
                 ),
               ),
               const SizedBox(
                 height: 30,
               ),
               Container(
-                height: 130,
-                width: 400,
-                color: Colors.grey,
+               height: 110,
+                width: 340,
+                decoration: const BoxDecoration(
+                  color: (Colors.white10),
+                    borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(12),
+                  bottomLeft: Radius.circular(12),
+                )
+              ),
                 child: Row(
                   children: [
-                    Expanded(
-                        child: SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(
-                            children: [
-                            const SizedBox(
-                                width: 10,
+                    SizedBox(
+                      width: 14,
+                    ),
+                    Container(
+                      width: 320,
+                      child: ListView.builder(
+                        itemCount: 7,
+                        scrollDirection: Axis.horizontal,
+                        itemBuilder: (context, index){
+                          var data = currentDate.add(Duration(days: index));
+                          return GestureDetector(
+                            onTap: (){
+                              setState(() {
+                                dateIndexSelected = index;
+                              });
+                            },
+                            child: Container(
+                              padding: EdgeInsets.all(13),
+                              margin: const EdgeInsets.symmetric(
+                                vertical: 10,
+                                horizontal: 10
                               ),
-                              GestureDetector(
-                                child: Container(
-                                  height: 120,
-                                  width: 110,
-                                  color: Colors.pink,
-                                  child: Column(
-                                    children: [
-                                        Center(
-                                        child: Text(teste1, style: TextStyle(color: Colors.white,fontSize: 20, fontWeight: FontWeight.bold),)
-                                        )
-                                    ],
+                              width: 80,
+                              decoration: BoxDecoration(
+                                color: dateIndexSelected == index ? color: Colors.pink,
+                                borderRadius: BorderRadius.circular(5)
+                              ),
+                              child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    data.day.toString(),
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      fontWeight: FontWeight.bold,
+                                      height: 1.0,
+                                      color: index == dateIndexSelected ?(Colors.white):(Colors.black)
+                                    ),
                                   ),
-                                ),
-                                onTap: (){
+                                  Text(
+                                    _dayFormat(data.weekday)!, style: TextStyle(color: index == dateIndexSelected ?(Colors.white):(Colors.black), fontWeight: FontWeight.bold,fontSize: 15),
+                                  )
+                                ],
+                              ),
+                            ),
+                          );
+                        },
 
-                                },
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                height: 120,
-                                width: 110,
-                                color: Colors.pink,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                height: 120,
-                                width: 110,
-                                color: Colors.pink,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                height: 120,
-                                width: 110,
-                                color: Colors.pink,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                height: 120,
-                                width: 110,
-                                color: Colors.pink,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                height: 120,
-                                width: 110,
-                                color: Colors.pink,
-                              ),
-                              const SizedBox(
-                                width: 10,
-                              ),
-                              Container(
-                                height: 120,
-                                width: 110,
-                                color: Colors.pink,
-                              )
-                            ],
-                          ),
-                        ),
+                      ),
                     )
                   ],
+                ),
+              ),
+             const SizedBox(
+                height: 60,
+              ),
+              Container(
+                height: 200,
+                width: 370,
+                color: Colors.white,
+                child: SingleChildScrollView(
+                  child: StreamBuilder(
+                    stream:
+                  ),
                 ),
               )
             ],

@@ -97,6 +97,7 @@ class _EmCartazState extends State<EmCartaz> {
                       getFilme.Duracao = documents ['Duracao'];
                       getFilme.Sinopse = documents ['Sinopse'];
                       getFilme.Url = documents ['Image'];
+
                     });
                   //  print(getFilme);
                       Navigator.push(
