@@ -1,7 +1,5 @@
 
 
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:projetointegrado_e/model/Filmes.dart';
@@ -218,8 +216,27 @@ class _EscolhaSessaoState extends State<EscolhaSessao> {
                 color: Colors.white,
                 child: SingleChildScrollView(
                   child: StreamBuilder(
-                    stream:
+                    stream: FirebaseFirestore.instance.collection('Nome do Filme: ').snapshots(),
+                    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot>snapshot){
+                      if(!snapshot.hasData){
+                        return const Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
+                      return Container(
+                        height: 50,
+                        width: 90,
+                        child: ListView(
+                          children: snapshot.data!.docs.map((documents){
+                           return const Text('OLa'
+                           );
+                          }).toList(),
+                        ),
+                      );
+                    },
                   ),
+
+                 
                 ),
               )
             ],

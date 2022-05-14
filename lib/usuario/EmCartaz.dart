@@ -3,6 +3,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:projetointegrado_e/model/Filmes.dart';
+import 'package:projetointegrado_e/model/Sec.dart';
 
 import 'EscolhaSessao.dart';
 
@@ -16,6 +17,19 @@ class EmCartaz extends StatefulWidget {
 
 class _EmCartazState extends State<EmCartaz> {
   Filmes getFilme = Filmes();
+  Partes getSessao = Partes();
+
+  verificaSessao()async{
+    var collection = FirebaseFirestore.instance.collection('Sessao');
+    var result = await collection.get();
+    for(var doc in result.docs){
+      if(doc['Nome do Filme: ']){
+        print('ola');
+      }
+    }
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
