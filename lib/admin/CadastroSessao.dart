@@ -77,10 +77,10 @@ class _SessaoState extends State<Sessao> {
     var collection = FirebaseFirestore.instance.collection("Sessao");
     collection.doc().set(
         {
-          'Nome do Filme: ': sessao.NomeDoFilme,
-          'Data: ' : sessao.DataLancamento,
-          'Sala: ': sessao.Sala,
-          'Horario: ': sessao.Horario,
+          'Nome do Filme': sessao.NomeDoFilme,
+          'Data' : sessao.DataLancamento,
+          'Sala': sessao.Sala,
+          'Horario': sessao.Horario,
         }
     );
   }

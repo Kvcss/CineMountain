@@ -39,10 +39,10 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
      var collection = FirebaseFirestore.instance.collection("Pre vendas");
      collection.doc().set(
          {
-           'Nome do Filme: ': preVenda.NomeDoFilme,
-           'Data: ' : preVenda.DataLancamento,
-           'Sala: ': preVenda.Sala,
-           'Horario: ': preVenda.Horario,
+           'Nome do Filme': preVenda.NomeDoFilme,
+           'Data' : preVenda.DataLancamento,
+           'Sala': preVenda.Sala,
+           'Horario': preVenda.Horario,
          }
      );
    }

@@ -33,10 +33,10 @@ class _CadastroSalasState extends State<CadastroSalas> {
     var collection = FirebaseFirestore.instance.collection("Salas");
     collection.doc().set(
         {
-          'Numero da Sala: ': salas.NumeroDaSala,
-          'Tipo da Sala: ' : salas.NumeroLinhas,
-          'Numero de Colunas: ': salas.NumeroColunas,
-          'Numero de Linhas: ': salas.NumeroLinhas,
+          'Numero da Sala': salas.NumeroDaSala,
+          'Tipo da Sala' : salas.NumeroLinhas,
+          'Numero de Colunas': salas.NumeroColunas,
+          'Numero de Linhas': salas.NumeroLinhas,
         }
     );
   }
@@ -94,10 +94,10 @@ class _CadastroSalasState extends State<CadastroSalas> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                       const SizedBox(
                           height: 20,
                         ),
-                        SizedBox(
+                      const  SizedBox(
                           height: 20,
                         ),
                         Row(
@@ -126,7 +126,7 @@ class _CadastroSalasState extends State<CadastroSalas> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                           const   SizedBox(
                                 width: 90,
                               ),
                               Padding(
@@ -155,7 +155,7 @@ class _CadastroSalasState extends State<CadastroSalas> {
                               ),
                             ]
                         ),
-                        SizedBox(
+                      const  SizedBox(
                           height: 40,
                         ),
                         Center(
@@ -209,7 +209,7 @@ class _CadastroSalasState extends State<CadastroSalas> {
                             ),
                           ),
                         ),
-                        SizedBox(
+                     const    SizedBox(
                           height: 200,
                         ),
 

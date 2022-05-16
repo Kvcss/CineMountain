@@ -1,9 +1,14 @@
 
 
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:projetointegrado_e/model/Filmes.dart';
+import 'package:projetointegrado_e/model/Sec.dart';
 import 'package:projetointegrado_e/model/dataSelector.dart';
+
+import 'EscolhaAssentos.dart';
 class EscolhaSessao extends StatefulWidget {
   Filmes getFilme = Filmes();
 
@@ -17,6 +22,82 @@ class _EscolhaSessaoState extends State<EscolhaSessao> {
   String teste1= "SEG.";
   int dateIndexSelected = 1;
   DateTime currentDate = DateTime.now();
+  String getData = "";
+  Partes sessao = Partes();
+  List lista = [];
+
+  getSessao()async{
+    var collection = FirebaseFirestore.instance.collection('Sessao');
+    var result = await collection.get();
+    for (var doc in result.docs){
+      if(doc['Nome do Filme: ']==widget.getFilme.NomeDoFilme.toString()){
+        if(doc['Data: ']==getData.substring(0,10))
+          {
+            setState(() {
+              sessao.NomeDoFilme = doc['Nome do Filme: '];
+              sessao.DataLancamento = getData.substring(0,10);
+              lista.add("Horario: "+doc['Horario: ']+" Sala: "+doc['Sala: ']);
+            });
+
+          }
+      }
+    }
+
+  }
+  criarlistView(){
+    if(lista.isEmpty){
+      return Container(
+        color: Colors.black,
+        child: const Center(child:  Text('Nenhuma sessão cadastrada para esta data!!', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 15),),
+        ),
+    );
+    }else{
+      return ListView.builder(
+        shrinkWrap: true,
+        itemCount: lista.length,
+        itemBuilder: (context, index){
+          return
+             Container(
+              height: 100,
+              width: 100,
+              color: Colors.black,
+              child: SingleChildScrollView(
+                 // Text("${lista[index]}")
+                child: Column(
+                  children: [
+                    SizedBox(
+                      height: 55,
+                      child: GestureDetector(
+                        child: Container(
+                          height: 50,
+                          width: 250,
+                          decoration: BoxDecoration(
+                              color: Colors.pink,
+                            borderRadius: BorderRadius.circular(30)
+                          ),
+                          child: Center(
+                             child: Text("${lista[index]}", style: const TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),)
+                          ),
+                        ),
+                        onTap: (){
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => EscolhaAssentos()));
+                        },
+                      ),
+                    )
+                  ],
+                ),
+              )
+            );
+
+        },
+      );
+    }
+
+  }
+
 
   String ? _dayFormat(int dayWeek){
     switch (dayWeek){
@@ -154,7 +235,7 @@ class _EscolhaSessaoState extends State<EscolhaSessao> {
               ),
                 child: Row(
                   children: [
-                    SizedBox(
+                   const SizedBox(
                       width: 14,
                     ),
                     Container(
@@ -167,7 +248,10 @@ class _EscolhaSessaoState extends State<EscolhaSessao> {
                           return GestureDetector(
                             onTap: (){
                               setState(() {
+                                lista.clear();
                                 dateIndexSelected = index;
+                                getData = currentDate.add(Duration(days: index)).toString();
+                                getSessao();
                               });
                             },
                             child: Container(
@@ -213,31 +297,10 @@ class _EscolhaSessaoState extends State<EscolhaSessao> {
               Container(
                 height: 200,
                 width: 370,
-                color: Colors.white,
+                color: Colors.black,
                 child: SingleChildScrollView(
-                  child: StreamBuilder(
-                    stream: FirebaseFirestore.instance.collection('Nome do Filme: ').snapshots(),
-                    builder: (BuildContext context, AsyncSnapshot<QuerySnapshot>snapshot){
-                      if(!snapshot.hasData){
-                        return const Center(
-                          child: CircularProgressIndicator(),
-                        );
-                      }
-                      return Container(
-                        height: 50,
-                        width: 90,
-                        child: ListView(
-                          children: snapshot.data!.docs.map((documents){
-                           return const Text('OLa'
-                           );
-                          }).toList(),
-                        ),
-                      );
-                    },
-                  ),
-
-                 
-                ),
+                child: criarlistView(),
+              ),
               )
             ],
           ),
