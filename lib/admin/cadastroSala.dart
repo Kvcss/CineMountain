@@ -193,7 +193,7 @@ class _CadastroSalasState extends State<CadastroSalas> {
                               child: Padding(
                                 padding: const EdgeInsets.all(7.0),
                                 child: TextField(
-                                  controller: _controllerNumeroColuna,
+                                 // controller: _controllerNumeroColuna,
                                   keyboardType: TextInputType.text,
                                   style: const TextStyle(fontSize: 15),
                                   decoration: InputDecoration(

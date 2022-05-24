@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:projetointegrado_e/admin/HomeAdm.dart';
+import 'package:projetointegrado_e/usuario/Home.dart';
 
 import '../model/Sec.dart';
 class Sessao extends StatefulWidget {
@@ -35,10 +36,9 @@ class _SessaoState extends State<Sessao> {
       }
 
     }
-    
-     */
-      _adicionarPreVendas(sessao);
 
+     */
+    _adicionarPreVendas(sessao);
 
   }
 
@@ -48,8 +48,9 @@ class _SessaoState extends State<Sessao> {
     print(sessao.Sala.toString());
     for(var doc in result.docs){
       print(doc.get('Numero da Sala: '));
+      print(sessao.Sala.toString());
       if(sessao.Sala == doc.get('Numero da Sala: ')){
-        validaPreVenda(sessao);
+        _adicionarPreVendas(sessao);
       }
       else{
         setState(() {
@@ -80,12 +81,15 @@ class _SessaoState extends State<Sessao> {
     var collection = FirebaseFirestore.instance.collection("Sessao");
     collection.doc().set(
         {
-          'Nome do Filme: ': sessao.NomeDoFilme,
           'Data: ' : sessao.DataLancamento,
-          'Sala: ': sessao.Sala,
           'Horario: ': sessao.Horario,
+          'Nome do Filme: ': sessao.NomeDoFilme,
+          'Sala: ': sessao.Sala,
+
         }
     );
+    Navigator.push(context, MaterialPageRoute(
+        builder: (contex) => HomeAdm()));
   }
   Future associarArray()async{
     await Firebase.initializeApp();
@@ -161,15 +165,15 @@ class _SessaoState extends State<Sessao> {
                           width: 250,
                           color: Colors.white,
                           child: Center(
-                              child: DropdownButton<String>(
-                                // hint: Text('Selecione o nome do Filme',style: TextStyle(color: Colors.black)),
-                                dropdownColor: Colors.white,
+                            child: DropdownButton<String>(
+                              // hint: Text('Selecione o nome do Filme',style: TextStyle(color: Colors.black)),
+                              dropdownColor: Colors.white,
 
-                                hint: Text('Selecione o filme', style: TextStyle(color: Colors.black),),
-                                style: TextStyle(color: Colors.white),
-                                items: ListaNome.map(buildMenuItem).toList(),
-                                onChanged: (value)=> setState(() => valorEscolido = value),
-                              ),
+                              hint: Text('Selecione o filme', style: TextStyle(color: Colors.black),),
+                              style: TextStyle(color: Colors.white),
+                              items: ListaNome.map(buildMenuItem).toList(),
+                              onChanged: (value)=> setState(() => valorEscolido = value),
+                            ),
 
                           ),
                         ),
@@ -281,6 +285,7 @@ class _SessaoState extends State<Sessao> {
                                 borderRadius: BorderRadius.circular(32)),
                             onPressed: () {
                               validarCadastro();
+
                             },
                           ),
                         ),

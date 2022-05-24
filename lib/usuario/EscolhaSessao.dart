@@ -27,14 +27,15 @@ class _EscolhaSessaoState extends State<EscolhaSessao> {
   List Auxiliar = [];
   List cadeiras =[];
   List<AuxliarTeste> ola =[];
+  Partes getSalaHorario = Partes();
   var teste;
   var _chairStatus = [
     [1,1,1,1,1,1,1],
-    [1,1,1,1,3,1,1],
-    [1,1,1,1,1,3,3],
-    [1,1,1,1,1,3,3],
-    [1,1,1,1,1,3,3],
-    [1,1,1,1,1,3,3],
+    [1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1],
+    [1,1,1,1,1,1,1],
   ];
   int contador =0;
 
@@ -74,7 +75,7 @@ class _EscolhaSessaoState extends State<EscolhaSessao> {
     Navigator.push(
         context,
         MaterialPageRoute(
-            builder: (context) => EscolhaAssentos(_chairStatus,widget.getFilme,lista[index])));
+            builder: (context) => EscolhaAssentos(_chairStatus,widget.getFilme,lista[index],getSalaHorario)));
   }
 
   getSessao()async{
@@ -89,9 +90,12 @@ class _EscolhaSessaoState extends State<EscolhaSessao> {
             setState(() {
               sessao.NomeDoFilme = doc['Nome do Filme: '];
               sessao.DataLancamento = getData.substring(0,10);
+              getSalaHorario.Horario = doc['Horario: '];
+              getSalaHorario.Sala = doc['Sala: '];
               lista.add("Horario: "+doc['Horario: ']+" Sala: "+doc['Sala: ']);
               Auxiliar.add(doc['Horario: ']);
               Auxiliar.add(doc['Sala: ']);
+              print(getSalaHorario.Horario);
             });
 
           }

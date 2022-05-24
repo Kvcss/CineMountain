@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:projetointegrado_e/model/Filmes.dart';
+import 'package:projetointegrado_e/model/Sec.dart';
 
 
 import 'Carrinho.dart';
@@ -12,7 +13,8 @@ class Bomboniere extends StatefulWidget {
   int contador;
   Filmes getFilmes = Filmes();
   int valorTotal;
-  Bomboniere(this.lista,this.contador,this.getFilmes,this.valorTotal,{Key? key}) : super(key: key);
+  Partes getSalaHorario = Partes();
+  Bomboniere(this.lista,this.contador,this.getFilmes,this.valorTotal,this.getSalaHorario,{Key? key}) : super(key: key);
 
   @override
   State<Bomboniere> createState() => _BomboniereState();
@@ -597,6 +599,7 @@ class _BomboniereState extends State<Bomboniere> {
                       ),
                     ),
                     onTap: (){
+                      print(widget.getSalaHorario.Horario);
                       // String getFilme = widget.getFilme.NomeDoFilme.toString();
                    //   print(widget.list);
                       setState(() {
@@ -607,7 +610,7 @@ class _BomboniereState extends State<Bomboniere> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Carrinho(widget.lista,widget.contador,widget.getFilmes,valorTotalTudo,listaProdutos,valorCompras)));
+                              builder: (context) => Carrinho(widget.lista,widget.contador,widget.getFilmes,valorTotalTudo,listaProdutos,valorCompras,widget.getSalaHorario)));
                     },
                   ),
 

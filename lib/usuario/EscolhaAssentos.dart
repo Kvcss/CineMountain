@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:projetointegrado_e/model/Filmes.dart';
+import 'package:projetointegrado_e/model/Sec.dart';
 
 import 'package:projetointegrado_e/usuario/TipoIngresso.dart';
 
@@ -12,7 +13,8 @@ class EscolhaAssentos extends StatefulWidget {
   String lista;
   Filmes getNomeFilme = Filmes();
   var _chairStatus;
-  EscolhaAssentos(this._chairStatus,this.getNomeFilme,this.lista,{Key? key}) : super(key: key);
+  Partes getSalaHorario = Partes();
+  EscolhaAssentos(this._chairStatus,this.getNomeFilme,this.lista,this.getSalaHorario,{Key? key}) : super(key: key);
 
   @override
   State<EscolhaAssentos> createState() => _EscolhaAssentosState();
@@ -220,11 +222,12 @@ class _EscolhaAssentosState extends State<EscolhaAssentos> {
                   ),
                 ),
                 onTap: (){
+                  print(widget.getSalaHorario.Horario);
                  // String getFilme = widget.getFilme.NomeDoFilme.toString();
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => TipoIngresso(widget.getNomeFilme,contador)));
+                          builder: (context) => TipoIngresso(widget.getNomeFilme,contador,widget.getSalaHorario)));
                 },
               ),
             ),

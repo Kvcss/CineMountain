@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:projetointegrado_e/admin/CadastroSessao.dart';
 import 'CadastroFilmeAdm.dart';
@@ -11,6 +13,19 @@ class HomeAdm extends StatefulWidget {
 }
 
 class _HomeAdmState extends State<HomeAdm> {
+  List<String> listaNome =[];
+  ListassociarArray()async{
+
+    await Firebase.initializeApp();
+    var collection = FirebaseFirestore.instance.collection('Filmes');
+    var result = await collection.get();
+    for(var doc in result.docs){
+      setState(() {
+        listaNome.add(doc['Nome do Filme']);
+      });
+    }
+
+  }
   @override
   Widget build(BuildContext context) {
     double _screenHeight = MediaQuery.of(context).size.height;
@@ -178,7 +193,9 @@ class _HomeAdmState extends State<HomeAdm> {
                       borderRadius: BorderRadius.circular(32)
                   ),
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder:(contex)=> Sessao()));
+                      Navigator.push(context, MaterialPageRoute(
+                          builder: (contex) => Sessao()));
+
                   },
                 ),
               )

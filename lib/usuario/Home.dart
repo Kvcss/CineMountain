@@ -230,7 +230,7 @@ class _HomeState extends State<Home> {
                     child: Container(
                         child: GestureDetector(
                           child: Image.network(
-                            "https://s3-alpha-sig.figma.com/img/3722/2e3d/e587a2104f0a3ed8c5cbab0c0e766481?Expires=1654473600&Signature=LHCGHS3EhO9MH1cB2ELiWTvedIL1mV~BGS5XUYmgxP-sPZCP0w~9AOhwNodpxTsVDpMFDcGylQA5Dpam0X4lLjjth2wK3Ym~YIaXWkXGaYv00Ljtf732DCrH9i~KpXGVTbtHjUDzDWKyZFgqC5DDGtd0KSScwFgBqC8-T2ZAB0HBnbbGkIFOlAYOcgxk9Qjp9xflFkxhfdReeELupbPaBBWLvePk6TQumm1i68b78y4OQEdXwmIa1rfd~qFZ41s9JHw9ZR3MEhERFILOYUKC0lGkjMhP5CrXH41SUP8bSgLmHXG8bh6H-zt5a7os5Dyr~IJLE~A4-mPLyrMbce152w__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
+                            "https://s3-alpha-sig.figma.com/img/ac3d/dfb4/bdaf779c9ea32975413fab92807f2f7d?Expires=1654473600&Signature=g64xHYnc71ne~PpqKr5QGhdg837zgau3YS1KhGa8xXriyl28BQ1EPlcRw-PRtVcP9uQTSL8RRjQBnDS771zycHWCDALf9Y6-BJ-UxAm6o7pH5gquxic6CZhC8u0tZAwC6moJB-4tSGKVROg3T4uurs63v7PI0d~gxXLdergyCdfw~Z76bNQ8VTg2QgcHK4vC3zd7MJLAALgih4c6lxaLyuKzfDPxFWG9udjF3XHKj5ULbM0VS9QYUB9JS-LuvoIJDacpMyScFPwqALO3QcRrSoK-Nxn2iXTbAY5V9~H7~hazlvaHYoKb4XsaeVgtphjHIPH5g0Vmn~VffIH0ikZ9PQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
                             color: Colors.white,
                           ),
                           onTap: () {

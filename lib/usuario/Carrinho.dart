@@ -2,6 +2,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:projetointegrado_e/model/Filmes.dart';
+import 'package:projetointegrado_e/model/Sec.dart';
+import 'package:projetointegrado_e/usuario/Pagamento.dart';
 import 'package:projetointegrado_e/usuario/TipoIngresso.dart';
 
 import 'Bomboniere.dart';
@@ -13,7 +15,8 @@ class Carrinho extends StatefulWidget {
   int valorTotal;
   List<Filmes>listaCompras;
   int valorCompras;
-   Carrinho(this.lista,this.contador,this.getFilmes,this.valorTotal,this.listaCompras,this.valorCompras,{Key? key}) : super(key: key);
+  Partes getSalaHorario = Partes();
+   Carrinho(this.lista,this.contador,this.getFilmes,this.valorTotal,this.listaCompras,this.valorCompras,this.getSalaHorario,{Key? key}) : super(key: key);
 
   @override
   State<Carrinho> createState() => _CarrinhoState();
@@ -94,7 +97,7 @@ class _CarrinhoState extends State<Carrinho> {
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
-                                                          builder: (context) => TipoIngresso(widget.getFilmes,widget.contador)));
+                                                          builder: (context) => TipoIngresso(widget.getFilmes,widget.contador,widget.getSalaHorario)));
                                                 },
                                               ),
                                             )
@@ -176,7 +179,7 @@ class _CarrinhoState extends State<Carrinho> {
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
-                                                          builder: (context) => Bomboniere(widget.lista, widget.contador, widget.getFilmes, widget.valorTotal)));
+                                                          builder: (context) => Bomboniere(widget.lista, widget.contador, widget.getFilmes, widget.valorTotal,widget.getSalaHorario)));
                                                 },
                                               ),
                                             )
@@ -232,12 +235,12 @@ class _CarrinhoState extends State<Carrinho> {
                           });
 
                           */
-                          /* Navigator.push(
+                          print(widget.getSalaHorario.Horario);
+                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Bomboniere(getMovie,widget.contador,widget.getFilmes,valorTotal)));
+                                  builder: (context) => Pagamento(widget.valorTotal,widget.getFilmes,widget.getSalaHorario)));
 
-                          */
                         },
                       ),
                     ],

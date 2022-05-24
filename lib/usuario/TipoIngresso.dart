@@ -2,6 +2,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:projetointegrado_e/model/Filmes.dart';
+import 'package:projetointegrado_e/model/Sec.dart';
 import 'package:projetointegrado_e/usuario/Bomboniere.dart';
 
 import '../model/HelperTipoDeIngresso.dart';
@@ -9,8 +10,9 @@ import '../model/HelperTipoDeIngresso.dart';
 class TipoIngresso extends StatefulWidget {
   Filmes getFilmes = Filmes();
   int contador;
+  Partes getSalaHorario = Partes();
 
-  TipoIngresso(this.getFilmes,this.contador,{Key? key}) : super(key: key);
+  TipoIngresso(this.getFilmes,this.contador,this.getSalaHorario,{Key? key}) : super(key: key);
 
   @override
   State<TipoIngresso> createState() => _TipoIngressoState();
@@ -384,6 +386,7 @@ class _TipoIngressoState extends State<TipoIngresso> {
                 ),
               ),
               onTap: (){
+                print(widget.getSalaHorario.Horario);
                 // String getFilme = widget.getFilme.NomeDoFilme.toString();
                 setState(() {
                   valorTotal = inteira + meia_entrada + cine_pass;
@@ -391,7 +394,7 @@ class _TipoIngressoState extends State<TipoIngresso> {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                        builder: (context) => Bomboniere(getMovie,widget.contador,widget.getFilmes,valorTotal)));
+                        builder: (context) => Bomboniere(getMovie,widget.contador,widget.getFilmes,valorTotal,widget.getSalaHorario)));
               },
             ),
           ],
