@@ -6,6 +6,7 @@ import 'package:projetointegrado_e/Widgets/my_dots_app.dart';
 import 'package:projetointegrado_e/Widgets/page_view_app.dart';
 import 'Bomboniere.dart';
 import 'EmCartaz.dart';
+import 'prevenda.dart';
 
 
 class Home extends StatefulWidget {
@@ -105,11 +106,19 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 12),
-                    child: Container(
-                      width: 110,
-                      color: Colors.pink,
-                      child: Image.network(
-                          "https://s3-alpha-sig.figma.com/img/9990/e495/e624738c061210e2222c71f23dc82bce?Expires=1654473600&Signature=QKUnVHBKUzh9BoEUqByte4s4bOUJmd7d4yIrNElUUEAN5EwRoOvYL0R3rcsDPkoUdVyyQg~okvA80b1L5V5Iv1pAa4nfsHpcmYfvuheYmORni0pXikmpKFE1IGNZut85uucO~6zfHxhjywssrjcPMd3Zl00NuZBc-pkaJjrKiKE3uIKCHX4RzWf99xHWp24U2WLVLUgIsVdiIFhBodHec4YLeCSH2LI0cd0GeEmMJmWr2a8x1bItd4-R8~WYhSLWhv9kwkl48yndtaO5s~LnYkOclk0CBHDjuMK2-l1pl16UPC4dVraKTX1bHrBG8OgXuU9EmAMQCvvUvHfIycof2A__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
+                    child: GestureDetector(
+                      child: Container(
+                        width: 110,
+                        color: Colors.pink,
+                        child: Image.network(
+                            "https://s3-alpha-sig.figma.com/img/9990/e495/e624738c061210e2222c71f23dc82bce?Expires=1654473600&Signature=QKUnVHBKUzh9BoEUqByte4s4bOUJmd7d4yIrNElUUEAN5EwRoOvYL0R3rcsDPkoUdVyyQg~okvA80b1L5V5Iv1pAa4nfsHpcmYfvuheYmORni0pXikmpKFE1IGNZut85uucO~6zfHxhjywssrjcPMd3Zl00NuZBc-pkaJjrKiKE3uIKCHX4RzWf99xHWp24U2WLVLUgIsVdiIFhBodHec4YLeCSH2LI0cd0GeEmMJmWr2a8x1bItd4-R8~WYhSLWhv9kwkl48yndtaO5s~LnYkOclk0CBHDjuMK2-l1pl16UPC4dVraKTX1bHrBG8OgXuU9EmAMQCvvUvHfIycof2A__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
+                      ),
+                      onTap: (){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => prevenda()));
+                      },
                     ),
                   ),
                   const SizedBox(

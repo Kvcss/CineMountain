@@ -176,7 +176,7 @@ class _BomboniereState extends State<Bomboniere> {
                                                           Filmes obj = Filmes();
                                                           obj.Url =
                                                               "https://s3-alpha-sig.figma.com/img/1c97/54b5/48a0238d86e28b37fca2641772730fee?Expires=1654473600&Signature=CA5B3606edvbAaxmBLh3NfbtSr-USSDfOR1GmaJS0jGm783yLXyn~3YRQdBP7UWkQpERt8CVim2MUdQiIL092auAXIOZ-hvbhTUFBV4k~M3NfQcMre-gWnD1Qrl3Oye7h~8rYAGYKqb3PsSjSEfMgtV4cHtwCYvPb4RvSw15lf1ux3uEYr-ZaRdFrRg0MtT-WXjMnCnrRUj5ujdFANprkl0gqoFTV4dnxl6-C8GCgGBbIPqqWy-irzOmeGJwNAqqLxn2vKpKj~zW5rfCDlDqKXSRYRJ~y59ezsxOAVUi1oLXx2hnnyLxkR6Hc0K1wPvE8e8~URn-XTtGurNIYHyPIA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA";
-                                                         obj.Sinopse = i.toString() + 'Combo';
+                                                         obj.Sinopse = i.toString() + 'X Combo';
                                                           contCombo = contCombo +1;
                                                           listaProdutos.add(obj);
                                                           valorCombo = valorCombo +15;
@@ -294,7 +294,7 @@ class _BomboniereState extends State<Bomboniere> {
                                                       contPipocas = contPipocas +1;
                                                       obj2.Url =
                                                           "https://s3-alpha-sig.figma.com/img/e075/c0d6/f95e2160a8c09187c57e93d97175cff9?Expires=1654473600&Signature=T1vDg7x0Pvl9RkB9Ve3oZON1XflXn6j0ZEvwNHwTNc0t9i-W7yu7AoIX7E0ZPirAROnACoWFzPnYH6d1CEj-YOM7L3i0-N3zHqPuls69-5YWaLGPs6sJ5UMVe8psRJRQxpu1xLw5PYjxsPIJfBiFkrnrNdJcOuitoKiKTN3pZIzNbD6c3oRens3~8eGlfezgp-iFTXfBv8rI~n-jeh7Bjzco4ut9QTWlAb3uOCMjE39YoQcMc1mS2~IjUs06lX3lwTBiRhyIOXIHwK7xJaNHz5Og0bzHPxtxY~iVGm~~Oz2icHqNdxdzfWZqvMY6dFnbQGDfOP-BGa5SSYMw5YCicw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA";
-                                                      obj2.Sinopse = i.toString() + 'Pipocas';
+                                                      obj2.Sinopse = i.toString() + 'X Pipocas';
                                                       listaProdutos.add(obj2);
                                                       valorPipocas = valorPipocas +10;
 
@@ -411,7 +411,7 @@ class _BomboniereState extends State<Bomboniere> {
                                                     Filmes obj3 = Filmes();
                                                     obj3.Url =
                                                         "https://s3-alpha-sig.figma.com/img/c1c9/6b5c/7069e046c99e72e17349b6e9667233ec?Expires=1654473600&Signature=RDsVJH53NTpjFXTFcVfyCPCHQTa3lfNltPccwdwDWiwC4Mk64ypy8AfdZugYkVUu0kZgoSreIDR-rutklmDYXSdzehm43fPUYuUdUsWPSxVypzVt8zRTmMFzZpKvZx98m5BjJpYUpwyKDF5bse7gg7Op4Wpn17H9aPIu6Yg9icPOB4mTRIfAfVvzNVD5hl~8Mj5g9Lx9p2Dw6njNCNDbEQtOtu~9pNhrKCZyi5kMOLwVKWyQafd74Dvgjn6c4gxG32NuOx28YjLF~Fh9SFmJz~4X0W2V9BJErOx4gaYvgQRxmW4fllDEUaRIIsYNlQ0nKcrrdTE1z0fKOfh5K9bzpw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA";
-                                                   obj3.Sinopse  = i.toString() + 'Bebidas';
+                                                   obj3.Sinopse  = i.toString() + 'X Bebidas';
                                                    listaProdutos.add(obj3);
                                                     contBebidas = contBebidas +1;
                                                     valorBebidas = valorBebidas +6;
@@ -528,7 +528,7 @@ class _BomboniereState extends State<Bomboniere> {
                                                     contDoce = contDoce +1;
 
                                                     obj4.Url = "https://s3-alpha-sig.figma.com/img/27e2/fd15/cb2397fe78cfe7c89a0124bd5bdcb5b0?Expires=1654473600&Signature=QS0tulWFKQn6NNQa9O8wb6YEor8hzKPhXrX2CGMFoOFgthZ8JCePm7y5~GpC7tatPRILuCO2m-D97S18bWwthQhggjTVfTP8pOAg1HkH5tj9VDq0uZsBx24SeGADwVTqSX3tC6PEzu2JgaEBm1OM0XJZMsAz0KR5eL6e18GNnWisQXWZDz2sBzKEiEdbxeKQv-3-VttMji5gpha9680CfhzJ8NPr0diuVre16XIyqyN3~sC6u1HrQlBQ4Q9GHYDRLJwnzfGJgzrWzT6Cgl75lYbMx2fAKJU9F4M6D0jyN0UPfptYp76a87BjhOx9vaWWmgELq7OW4HvCiDpTqQuhsg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA";
-                                                    obj4.Sinopse = i.toString() + 'Doces';
+                                                    obj4.Sinopse = i.toString() + 'X Doces';
                                                     listaProdutos.add(obj4);
                                                     valorDoces = valorDoces +3;
                                                   });
@@ -607,7 +607,7 @@ class _BomboniereState extends State<Bomboniere> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Carrinho(widget.lista,widget.contador,widget.getFilmes,valorTotalTudo,listaProdutos)));
+                              builder: (context) => Carrinho(widget.lista,widget.contador,widget.getFilmes,valorTotalTudo,listaProdutos,valorCompras)));
                     },
                   ),
 

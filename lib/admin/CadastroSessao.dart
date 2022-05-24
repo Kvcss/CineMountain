@@ -18,24 +18,27 @@ class _SessaoState extends State<Sessao> {
   final TextEditingController _controllerHorario = TextEditingController();
   final TextEditingController _controllerSala = TextEditingController();
   String _mensagemErro = '';
+  validavalida(Partes sessao){
 
+  }
   validaPreVenda(Partes sessao)async{
-    var collection = FirebaseFirestore.instance.collection('Pre vendas');
+    /*var collection = FirebaseFirestore.instance.collection('Pre vendas');
     var result = await collection.get();
     int aux = 0;
     _mensagemErro = '';
     for(var doc in result.docs){
-      if(sessao.NomeDoFilme == doc.get('Nome do Filme: ') && sessao.Sala == doc.get('Sala: ') && sessao.DataLancamento == doc.get('Data: ') && sessao.Horario == doc.get('Horario: ')){
+      if((sessao.NomeDoFilme == doc['Nome do Filme: '] )&&( sessao.Sala == doc['Sala: ']) && (sessao.DataLancamento == doc['Data: '] )&& (sessao.Horario == doc['Horario: '])){
         setState(() {
           _mensagemErro = 'Já tem uma Pré venda deste Filme';
           aux ++;
         });
       }
 
-      if (aux ==0){
-        _adicionarPreVendas(sessao);
-      }
     }
+    
+     */
+      _adicionarPreVendas(sessao);
+
 
   }
 
@@ -77,10 +80,10 @@ class _SessaoState extends State<Sessao> {
     var collection = FirebaseFirestore.instance.collection("Sessao");
     collection.doc().set(
         {
-          'Nome do Filme': sessao.NomeDoFilme,
-          'Data' : sessao.DataLancamento,
-          'Sala': sessao.Sala,
-          'Horario': sessao.Horario,
+          'Nome do Filme: ': sessao.NomeDoFilme,
+          'Data: ' : sessao.DataLancamento,
+          'Sala: ': sessao.Sala,
+          'Horario: ': sessao.Horario,
         }
     );
   }

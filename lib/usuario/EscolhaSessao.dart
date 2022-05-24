@@ -39,7 +39,7 @@ class _EscolhaSessaoState extends State<EscolhaSessao> {
   int contador =0;
 
   lerDados(int index)async {
-    var collection = FirebaseFirestore.instance.collection('Sessao');
+   /* var collection = FirebaseFirestore.instance.collection('Sessao');
     var result = await collection.get();
     int i = 0;
     for (var doc in result.docs) {
@@ -70,7 +70,7 @@ class _EscolhaSessaoState extends State<EscolhaSessao> {
       }
 
     });
-    print(_chairStatus);
+ */
     Navigator.push(
         context,
         MaterialPageRoute(

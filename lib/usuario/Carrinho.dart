@@ -4,13 +4,16 @@ import 'package:flutter/material.dart';
 import 'package:projetointegrado_e/model/Filmes.dart';
 import 'package:projetointegrado_e/usuario/TipoIngresso.dart';
 
+import 'Bomboniere.dart';
+
 class Carrinho extends StatefulWidget {
   List<Filmes> lista;
   int contador;
   Filmes getFilmes = Filmes();
   int valorTotal;
   List<Filmes>listaCompras;
-   Carrinho(this.lista,this.contador,this.getFilmes,this.valorTotal,this.listaCompras,{Key? key}) : super(key: key);
+  int valorCompras;
+   Carrinho(this.lista,this.contador,this.getFilmes,this.valorTotal,this.listaCompras,this.valorCompras,{Key? key}) : super(key: key);
 
   @override
   State<Carrinho> createState() => _CarrinhoState();
@@ -167,10 +170,13 @@ class _CarrinhoState extends State<Carrinho> {
                                                     borderRadius: BorderRadius.circular(32)
                                                 ),
                                                 onPressed: (){
+                                                  setState(() {
+                                                    widget.valorTotal = widget.valorTotal - widget.valorCompras;
+                                                  });
                                                   Navigator.push(
                                                       context,
                                                       MaterialPageRoute(
-                                                          builder: (context) => TipoIngresso(widget.getFilmes,widget.contador)));
+                                                          builder: (context) => Bomboniere(widget.lista, widget.contador, widget.getFilmes, widget.valorTotal)));
                                                 },
                                               ),
                                             )
