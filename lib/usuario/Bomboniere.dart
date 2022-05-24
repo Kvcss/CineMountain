@@ -1,11 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:projetointegrado_e/model/Filmes.dart';
 
+
+import 'Carrinho.dart';
 
 
 class Bomboniere extends StatefulWidget {
-  const Bomboniere({Key? key}) : super(key: key);
+  List <Filmes> lista;
+  int contador;
+  Filmes getFilmes = Filmes();
+  int valorTotal;
+  Bomboniere(this.lista,this.contador,this.getFilmes,this.valorTotal,{Key? key}) : super(key: key);
 
   @override
   State<Bomboniere> createState() => _BomboniereState();
@@ -21,6 +28,18 @@ class _BomboniereState extends State<Bomboniere> {
   String NomeDoce = "";
   String NomePipoca = "";
   String NomeCombo = "";
+  int contCombo =0;
+  int contPipocas =0;
+  int contBebidas =0;
+  int contDoce =0;
+  int valorCombo =0;
+  int valorPipocas =0;
+  int valorBebidas =0;
+  int valorDoces =0;
+  int valorCompras=0;
+  int valorTotalTudo =0;
+  List<Filmes> listaProdutos=[];
+
   Future lerDados()async{
     await Firebase.initializeApp();
     var collection = FirebaseFirestore.instance.collection('produtos');
@@ -109,7 +128,8 @@ class _BomboniereState extends State<Bomboniere> {
                                         height: _screenHeight*.10,
                                         width: _screenHeight*.15,
                                         color: Colors.black,
-                                        child: Image.network("https://s3-alpha-sig.figma.com/img/1c97/54b5/48a0238d86e28b37fca2641772730fee?Expires=1653264000&Signature=XoOxfRT8UWfSbgPmDI-6WtMEAK9fcnSVQXyHtB2FD8D94C88D3r1iAn8ammOcG-uTXErFjlOL9nkEOs5e0i2uztl-1-MROpL-W5vw4F~CP0gkCO4pw8Hp9yu1GveIqwj3ustHAHMwAehG8s0pGXfQ-plFbMvB4Htfk6FBOk7dfeevbaGNmO~6NWY~eMyaMa4KNQjqxvzdMenAUAeO5BSlsNgxGcwf1sNvs~MPHFYNt2fvUgkOKulxgyUXhuMMJWowwT3m0~crWHutwsKQggy0~~cLcCYe2DdBGqbsdxjkoeqoagLAn5xp3n3tJeu9GDB2bJZj8BplE89ipVFyO2oVQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
+                                        child: Image.network(
+                                            "https://s3-alpha-sig.figma.com/img/1c97/54b5/48a0238d86e28b37fca2641772730fee?Expires=1654473600&Signature=CA5B3606edvbAaxmBLh3NfbtSr-USSDfOR1GmaJS0jGm783yLXyn~3YRQdBP7UWkQpERt8CVim2MUdQiIL092auAXIOZ-hvbhTUFBV4k~M3NfQcMre-gWnD1Qrl3Oye7h~8rYAGYKqb3PsSjSEfMgtV4cHtwCYvPb4RvSw15lf1ux3uEYr-ZaRdFrRg0MtT-WXjMnCnrRUj5ujdFANprkl0gqoFTV4dnxl6-C8GCgGBbIPqqWy-irzOmeGJwNAqqLxn2vKpKj~zW5rfCDlDqKXSRYRJ~y59ezsxOAVUi1oLXx2hnnyLxkR6Hc0K1wPvE8e8~URn-XTtGurNIYHyPIA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
                                       ),
                                       const  SizedBox(
                                         width: 50,
@@ -137,18 +157,71 @@ class _BomboniereState extends State<Bomboniere> {
                                             children: <Widget>[
                                               Padding(
                                                 padding: const EdgeInsets.only(top: 5, bottom: 0),
-                                                child: RaisedButton(
-                                                  child: const Text(
-                                                    "Eu quero",
-                                                    style: TextStyle(color: Colors.white, fontSize: 15),
-                                                  ),
-                                                  color: Colors.pink,
-                                                  padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius: BorderRadius.circular(32)
-                                                  ),
-                                                  onPressed: (){
-                                                  },
+                                                child: Row(
+                                                  children: [
+                                                    GestureDetector(
+                                                      child: Container(
+                                                        height: 30,
+                                                        width: 30,
+                                                        color: Colors.white,
+                                                        child: Column(
+                                                          children: const [
+                                                            Text('+', style: TextStyle(color: Colors.black, fontSize: 23, fontWeight: FontWeight.bold))
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      onTap: (){
+                                                        setState(() {
+                                                          int i=1;
+                                                          Filmes obj = Filmes();
+                                                          obj.Url =
+                                                              "https://s3-alpha-sig.figma.com/img/1c97/54b5/48a0238d86e28b37fca2641772730fee?Expires=1654473600&Signature=CA5B3606edvbAaxmBLh3NfbtSr-USSDfOR1GmaJS0jGm783yLXyn~3YRQdBP7UWkQpERt8CVim2MUdQiIL092auAXIOZ-hvbhTUFBV4k~M3NfQcMre-gWnD1Qrl3Oye7h~8rYAGYKqb3PsSjSEfMgtV4cHtwCYvPb4RvSw15lf1ux3uEYr-ZaRdFrRg0MtT-WXjMnCnrRUj5ujdFANprkl0gqoFTV4dnxl6-C8GCgGBbIPqqWy-irzOmeGJwNAqqLxn2vKpKj~zW5rfCDlDqKXSRYRJ~y59ezsxOAVUi1oLXx2hnnyLxkR6Hc0K1wPvE8e8~URn-XTtGurNIYHyPIA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA";
+                                                         obj.Sinopse = i.toString() + 'Combo';
+                                                          contCombo = contCombo +1;
+                                                          listaProdutos.add(obj);
+                                                          valorCombo = valorCombo +15;
+
+                                                        });
+                                                      },
+                                                    ),
+                                                    const SizedBox(
+                                                      width:10 ,
+                                                    ),
+                                                    Container(
+                                                      height: 30,
+                                                      width: 30,
+                                                      color: Colors.white,
+                                                      child: Center(
+                                                        child:
+                                                        Text(contCombo.toString(),style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),)
+                                                      ),
+                                                    ),
+                                                    const SizedBox(
+                                                      width:10 ,
+                                                    ),
+                                                    GestureDetector(
+                                                      child: Container(
+                                                        height: 30,
+                                                        width: 30,
+                                                        color: Colors.white,
+                                                        child: Column(
+                                                          children: const [
+                                                            Text('-', style: TextStyle(color: Colors.black, fontSize: 23, fontWeight: FontWeight.bold))
+                                                          ],
+                                                        ),
+                                                      ),
+                                                      onTap: (){
+                                                        if(contCombo!=0) {
+                                                          setState(() {
+                                                            contCombo =
+                                                                contCombo - 1;
+                                                                listaProdutos.removeAt(contCombo);
+                                                                valorCombo = valorCombo - 15;
+                                                          });
+                                                        }
+                                                      },
+                                                    ),
+                                                  ],
                                                 ),
                                               ),
                                             ],
@@ -173,8 +246,8 @@ class _BomboniereState extends State<Bomboniere> {
                                   color: Colors.black,
                                   height: _screenHeight*.10,
                                   width: _screenHeight*.15,
-                                  child: Image.network("https://s3-alpha-sig.figma.com/img/e075/c0d6/f95e2160a8c09187c57e93d97175cff9?Expires=1653264000&Signature=goRsIGu7ra~V2paNMRigyAMXPvGIjRKk1PIh6~TEnn5VS~kiX9DUjHc-Hue4HsFxPSW2keq-Aomb-vv0RGvuVaiNjuvyi4LCUSMzarpDVA7r5B7sstLdTnGde-lA2hT50Fbk-udeURZZcVjPkNcZvgkiqPGzFytp6ShL6grg3f3Vca5D24683iIJaf8QKIefZ4ujnf1HAQy~z8Hp~4Q2O4FD3HvBrgp0yONyEU1UjOf82FKZrnFO6N-uAiuZrPuyOeVbvMq514ezImciuKjr7YU-rEGU-kO8ZJG89ff-zKNKD2PgTEg44o1-Y-i1Y2J2zvgAwv2HyLcGBQJwmbav1Q__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
-                                ),
+                                  child: Image.network(
+                                      "https://s3-alpha-sig.figma.com/img/e075/c0d6/f95e2160a8c09187c57e93d97175cff9?Expires=1654473600&Signature=T1vDg7x0Pvl9RkB9Ve3oZON1XflXn6j0ZEvwNHwTNc0t9i-W7yu7AoIX7E0ZPirAROnACoWFzPnYH6d1CEj-YOM7L3i0-N3zHqPuls69-5YWaLGPs6sJ5UMVe8psRJRQxpu1xLw5PYjxsPIJfBiFkrnrNdJcOuitoKiKTN3pZIzNbD6c3oRens3~8eGlfezgp-iFTXfBv8rI~n-jeh7Bjzco4ut9QTWlAb3uOCMjE39YoQcMc1mS2~IjUs06lX3lwTBiRhyIOXIHwK7xJaNHz5Og0bzHPxtxY~iVGm~~Oz2icHqNdxdzfWZqvMY6dFnbQGDfOP-BGa5SSYMw5YCicw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA")),
                                 const SizedBox(
                                     width: 50
                                 ),
@@ -201,18 +274,72 @@ class _BomboniereState extends State<Bomboniere> {
                                       children: <Widget>[
                                         Padding(
                                           padding: const EdgeInsets.only(top: 5, bottom: 0),
-                                          child: RaisedButton(
-                                            child: const Text(
-                                              "Eu quero",
-                                              style: TextStyle(color: Colors.white, fontSize: 15),
-                                            ),
-                                            color: Colors.pink,
-                                            padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(32)
-                                            ),
-                                            onPressed: (){
-                                            },
+                                          child: Row(
+                                            children: [
+                                              GestureDetector(
+                                                child: Container(
+                                                  height: 30,
+                                                  width: 30,
+                                                  color: Colors.white,
+                                                  child: Column(
+                                                    children: const [
+                                                      Text('+', style: TextStyle(color: Colors.black, fontSize: 23, fontWeight: FontWeight.bold))
+                                                    ],
+                                                  ),
+                                                ),
+                                                onTap: (){
+                                                    setState(() {
+                                                      Filmes obj2 = Filmes();
+                                                      int i =1;
+                                                      contPipocas = contPipocas +1;
+                                                      obj2.Url =
+                                                          "https://s3-alpha-sig.figma.com/img/e075/c0d6/f95e2160a8c09187c57e93d97175cff9?Expires=1654473600&Signature=T1vDg7x0Pvl9RkB9Ve3oZON1XflXn6j0ZEvwNHwTNc0t9i-W7yu7AoIX7E0ZPirAROnACoWFzPnYH6d1CEj-YOM7L3i0-N3zHqPuls69-5YWaLGPs6sJ5UMVe8psRJRQxpu1xLw5PYjxsPIJfBiFkrnrNdJcOuitoKiKTN3pZIzNbD6c3oRens3~8eGlfezgp-iFTXfBv8rI~n-jeh7Bjzco4ut9QTWlAb3uOCMjE39YoQcMc1mS2~IjUs06lX3lwTBiRhyIOXIHwK7xJaNHz5Og0bzHPxtxY~iVGm~~Oz2icHqNdxdzfWZqvMY6dFnbQGDfOP-BGa5SSYMw5YCicw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA";
+                                                      obj2.Sinopse = i.toString() + 'Pipocas';
+                                                      listaProdutos.add(obj2);
+                                                      valorPipocas = valorPipocas +10;
+
+
+                                                    });
+                                                },
+                                              ),
+                                              const SizedBox(
+                                                width:10 ,
+                                              ),
+                                              Container(
+                                                height: 30,
+                                                width: 30,
+                                                color: Colors.white,
+                                                child: Center(
+                                                    child:
+                                                    Text(contPipocas.toString(),style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),)
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width:10 ,
+                                              ),
+                                              GestureDetector(
+                                                child: Container(
+                                                  height: 30,
+                                                  width: 30,
+                                                  color: Colors.white,
+                                                  child: Column(
+                                                    children: const [
+                                                      Text('-', style: TextStyle(color: Colors.black, fontSize: 23, fontWeight: FontWeight.bold))
+                                                    ],
+                                                  ),
+                                                ),
+                                                onTap: (){
+                                                  if(contPipocas != 0) {
+                                                    setState(() {
+                                                      contPipocas =
+                                                          contPipocas - 1;
+                                                      listaProdutos.removeAt(contPipocas);
+                                                      valorPipocas = valorPipocas - 10;
+                                                    });
+                                                  }
+                                                },
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],
@@ -236,7 +363,8 @@ class _BomboniereState extends State<Bomboniere> {
                                   color: Colors.black,
                                   height: _screenHeight*.10,
                                   width: _screenHeight*.15,
-                                  child: Image.network("https://s3-alpha-sig.figma.com/img/c1c9/6b5c/7069e046c99e72e17349b6e9667233ec?Expires=1653264000&Signature=gPTf8AFC8vybWCjW3jjxL8YKGz-Jie-dx1vuq9-JKbjmL5EqAlSXPCE54MZVsIzgEk9SAQKRC3-0LDCYOa~nkYT-Mfo9uDU7B148qKkdSEVI~-yGBvbcXtvjqxcR2cBPVNloCAhGpyo7jbaphM6pEv5hrDcxtQIESTKg~aJpWRiT6ydoffeWKkJlQRu27nEjMB6sxlo~5vLo9st1taYOuuqSlxBMCbPMbA3rfkW9xn41eJHGvqvRE06GdjZX-xRuf6U7W9VAsq9G-M-x0OH9Exw-6fbGS3DgDpfKgW4~OjMh4PX8drswhy0BH1FM5pmeg3yW4n~PlKY37vLqASrV9g__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
+                                  child: Image.network(
+                                      "https://s3-alpha-sig.figma.com/img/c1c9/6b5c/7069e046c99e72e17349b6e9667233ec?Expires=1654473600&Signature=RDsVJH53NTpjFXTFcVfyCPCHQTa3lfNltPccwdwDWiwC4Mk64ypy8AfdZugYkVUu0kZgoSreIDR-rutklmDYXSdzehm43fPUYuUdUsWPSxVypzVt8zRTmMFzZpKvZx98m5BjJpYUpwyKDF5bse7gg7Op4Wpn17H9aPIu6Yg9icPOB4mTRIfAfVvzNVD5hl~8Mj5g9Lx9p2Dw6njNCNDbEQtOtu~9pNhrKCZyi5kMOLwVKWyQafd74Dvgjn6c4gxG32NuOx28YjLF~Fh9SFmJz~4X0W2V9BJErOx4gaYvgQRxmW4fllDEUaRIIsYNlQ0nKcrrdTE1z0fKOfh5K9bzpw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
                                 ),
                                 const SizedBox(
                                     width: 50
@@ -264,18 +392,70 @@ class _BomboniereState extends State<Bomboniere> {
                                       children: <Widget>[
                                         Padding(
                                           padding: const EdgeInsets.only(top: 5, bottom: 0),
-                                          child: RaisedButton(
-                                            child: const Text(
-                                              "Eu quero",
-                                              style: TextStyle(color: Colors.white, fontSize: 15),
-                                            ),
-                                            color: Colors.pink,
-                                            padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(32)
-                                            ),
-                                            onPressed: (){
-                                            },
+                                          child: Row(
+                                            children: [
+                                              GestureDetector(
+                                                child: Container(
+                                                  height: 30,
+                                                  width: 30,
+                                                  color: Colors.white,
+                                                  child: Column(
+                                                    children: const [
+                                                      Text('+', style: TextStyle(color: Colors.black, fontSize: 23, fontWeight: FontWeight.bold))
+                                                    ],
+                                                  ),
+                                                ),
+                                                onTap: (){
+                                                  setState(() {
+                                                    int i=1;
+                                                    Filmes obj3 = Filmes();
+                                                    obj3.Url =
+                                                        "https://s3-alpha-sig.figma.com/img/c1c9/6b5c/7069e046c99e72e17349b6e9667233ec?Expires=1654473600&Signature=RDsVJH53NTpjFXTFcVfyCPCHQTa3lfNltPccwdwDWiwC4Mk64ypy8AfdZugYkVUu0kZgoSreIDR-rutklmDYXSdzehm43fPUYuUdUsWPSxVypzVt8zRTmMFzZpKvZx98m5BjJpYUpwyKDF5bse7gg7Op4Wpn17H9aPIu6Yg9icPOB4mTRIfAfVvzNVD5hl~8Mj5g9Lx9p2Dw6njNCNDbEQtOtu~9pNhrKCZyi5kMOLwVKWyQafd74Dvgjn6c4gxG32NuOx28YjLF~Fh9SFmJz~4X0W2V9BJErOx4gaYvgQRxmW4fllDEUaRIIsYNlQ0nKcrrdTE1z0fKOfh5K9bzpw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA";
+                                                   obj3.Sinopse  = i.toString() + 'Bebidas';
+                                                   listaProdutos.add(obj3);
+                                                    contBebidas = contBebidas +1;
+                                                    valorBebidas = valorBebidas +6;
+                                                  });
+                                                },
+                                              ),
+                                              const SizedBox(
+                                                width:10 ,
+                                              ),
+                                              Container(
+                                                height: 30,
+                                                width: 30,
+                                                color: Colors.white,
+                                                child: Center(
+                                                    child:
+                                                    Text(contBebidas.toString(),style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),)
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width:10 ,
+                                              ),
+                                              GestureDetector(
+                                                child: Container(
+                                                  height: 30,
+                                                  width: 30,
+                                                  color: Colors.white,
+                                                  child: Column(
+                                                    children: const [
+                                                      Text('-', style: TextStyle(color: Colors.black, fontSize: 23, fontWeight: FontWeight.bold))
+                                                    ],
+                                                  ),
+                                                ),
+                                                onTap: (){
+                                                  if(contBebidas!=0) {
+                                                    setState(() {
+                                                      contBebidas =
+                                                          contBebidas - 1;
+                                                      listaProdutos.removeAt(contBebidas);
+                                                      valorBebidas = valorBebidas - 6;
+                                                    });
+                                                  }
+                                                },
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],
@@ -299,7 +479,8 @@ class _BomboniereState extends State<Bomboniere> {
                                   color: Colors.black,
                                   height: _screenHeight*.10,
                                   width: _screenHeight*.15,
-                                  child: Image.network("https://s3-alpha-sig.figma.com/img/27e2/fd15/cb2397fe78cfe7c89a0124bd5bdcb5b0?Expires=1653264000&Signature=dyLcpFEpIzmnytq~JRDXaLpqd-o9cGuPCyix-V89yyWcLchtTp1kO2joYajjZ5wugSHbJtxmSGi7Kas2mM3l6IFSKjqi24ltZvXnSoT1KUaPMoHuTrFMyPwWEt3vF6ZO-9zZEfwvtdHN8sLjFXzgaFpqlUUI1s38xCJlVmK3bZtaCGUG6S2H7dJsOERrMlh0cogjrK~0NgWvwgWgLNBcD6xsXBQTmH8Izk~BNu99yXCY-v3-8uoGk2cPBoF61sH~kEkdSZewpUj2rOTx8YsbODvXgWPWU0IFDpXbVpEMgE2u3XooTImVBCwTnahFQh7~xwbD6YuK-nnEQX6xv1tUHw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
+                                  child: Image.network(
+                                      "https://s3-alpha-sig.figma.com/img/27e2/fd15/cb2397fe78cfe7c89a0124bd5bdcb5b0?Expires=1654473600&Signature=QS0tulWFKQn6NNQa9O8wb6YEor8hzKPhXrX2CGMFoOFgthZ8JCePm7y5~GpC7tatPRILuCO2m-D97S18bWwthQhggjTVfTP8pOAg1HkH5tj9VDq0uZsBx24SeGADwVTqSX3tC6PEzu2JgaEBm1OM0XJZMsAz0KR5eL6e18GNnWisQXWZDz2sBzKEiEdbxeKQv-3-VttMji5gpha9680CfhzJ8NPr0diuVre16XIyqyN3~sC6u1HrQlBQ4Q9GHYDRLJwnzfGJgzrWzT6Cgl75lYbMx2fAKJU9F4M6D0jyN0UPfptYp76a87BjhOx9vaWWmgELq7OW4HvCiDpTqQuhsg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
                                 ),
                                 const SizedBox(
                                     width: 50
@@ -327,18 +508,71 @@ class _BomboniereState extends State<Bomboniere> {
                                       children: <Widget>[
                                         Padding(
                                           padding: const EdgeInsets.only(top: 5, bottom: 0),
-                                          child: RaisedButton(
-                                            child: const Text(
-                                              "Eu quero",
-                                              style: TextStyle(color: Colors.white, fontSize: 15),
-                                            ),
-                                            color: Colors.pink,
-                                            padding: const EdgeInsets.fromLTRB(8, 4, 8, 4),
-                                            shape: RoundedRectangleBorder(
-                                                borderRadius: BorderRadius.circular(32)
-                                            ),
-                                            onPressed: (){
-                                            },
+                                          child: Row(
+                                            children: [
+                                              GestureDetector(
+                                                child: Container(
+                                                  height: 30,
+                                                  width: 30,
+                                                  color: Colors.white,
+                                                  child: Column(
+                                                    children: const [
+                                                       Text('+', style: TextStyle(color: Colors.black, fontSize: 23, fontWeight: FontWeight.bold))
+                                                    ],
+                                                  ),
+                                                ),
+                                                onTap: (){
+                                                  setState(() {
+                                                    int i = 1;
+                                                    Filmes obj4 = Filmes();
+                                                    contDoce = contDoce +1;
+
+                                                    obj4.Url = "https://s3-alpha-sig.figma.com/img/27e2/fd15/cb2397fe78cfe7c89a0124bd5bdcb5b0?Expires=1654473600&Signature=QS0tulWFKQn6NNQa9O8wb6YEor8hzKPhXrX2CGMFoOFgthZ8JCePm7y5~GpC7tatPRILuCO2m-D97S18bWwthQhggjTVfTP8pOAg1HkH5tj9VDq0uZsBx24SeGADwVTqSX3tC6PEzu2JgaEBm1OM0XJZMsAz0KR5eL6e18GNnWisQXWZDz2sBzKEiEdbxeKQv-3-VttMji5gpha9680CfhzJ8NPr0diuVre16XIyqyN3~sC6u1HrQlBQ4Q9GHYDRLJwnzfGJgzrWzT6Cgl75lYbMx2fAKJU9F4M6D0jyN0UPfptYp76a87BjhOx9vaWWmgELq7OW4HvCiDpTqQuhsg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA";
+                                                    obj4.Sinopse = i.toString() + 'Doces';
+                                                    listaProdutos.add(obj4);
+                                                    valorDoces = valorDoces +3;
+                                                  });
+
+                                                },
+                                              ),
+                                              const SizedBox(
+                                                width:10 ,
+                                              ),
+                                              Container(
+                                                height: 30,
+                                                width: 30,
+                                                color: Colors.white,
+                                                child: Center(
+                                                    child:
+                                                    Text(contDoce.toString(),style: TextStyle(color: Colors.black, fontSize: 20, fontWeight: FontWeight.bold),)
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width:10 ,
+                                              ),
+                                              GestureDetector(
+                                                child: Container(
+                                                  height: 30,
+                                                  width: 30,
+                                                  color: Colors.white,
+                                                  child: Column(
+                                                    children: const [
+                                                      Text('-', style: TextStyle(color: Colors.black, fontSize: 23, fontWeight: FontWeight.bold))
+                                                    ],
+                                                  ),
+                                                ),
+                                                onTap: (){
+                                                  if(contDoce!=0) {
+                                                    setState(() {
+                                                      contDoce =
+                                                          contDoce - 1;
+                                                          listaProdutos.removeAt(contDoce);
+                                                          valorDoces = valorDoces -3;
+                                                    });
+                                                  }
+                                                },
+                                              ),
+                                            ],
                                           ),
                                         ),
                                       ],
@@ -348,70 +582,34 @@ class _BomboniereState extends State<Bomboniere> {
                               ],
                             ),
                           ),
-                          Container(
-                            height: _screenHeight*.15,
-                            width: _screenHeight*.50,
-                            color: Colors.black,
-                            child: ListView(
-                              scrollDirection: Axis.horizontal,
-                              children: <Widget>[
-                                const SizedBox(
-                                  width: 45,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 12),
-                                  child: Container(
-                                    width: 60,
-                                    color: Colors.black,
-                                    child: Image.network(
-                                      "https://s3-alpha-sig.figma.com/img/3722/2e3d/e587a2104f0a3ed8c5cbab0c0e766481?Expires=1653264000&Signature=CQySErbSk-~VrB3v0kUlYkzr-bk6dp77yS9SOJY2N8wtzz1GaDi6NM0WHwOLqxzCZrjlzV5mR5rJbLLv9XusxX6BKte5HAO0UZ-cO3kh169mjqxQQtmYQ4OxnXQQSZkEwJ3ehGC2UMU-SmeYbPXql4uKDsJDgmQhyM08U2tbgiPp45Nny43yr6kcexZhaZBeLGdZXrMfm7xfiKtkdAy-nCtXaWLp3vPAF~3Rb~QDnIltYIVxTbeSNLRVJTCPPkDoqz9is06tI0fqKQv7elgMMXINCr9LCRvBzfEAcP-USpGQpjy7~dQ57Oq1Scs04iHsrbZ9NcLpvSFfZi5zJPLKuA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
-                                      color: Colors.white,
-                                    ),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 35,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 12),
-                                  child: Container(
-                                    child: Image.network(
-                                      'https://cdn.discordapp.com/attachments/891605575975190589/958171706692866058/Design_sem_nome__3_-removebg-preview_1.png',
-                                      height: 70,
-                                      fit: BoxFit.scaleDown,
-                                    ),
-                                    width: 60,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 35,
-                                ),
-                                Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10, vertical: 12),
-                                  child: Container(
-                                      child: GestureDetector(
-                                        child: Image.network(
-                                          "https://s3-alpha-sig.figma.com/img/ac3d/dfb4/bdaf779c9ea32975413fab92807f2f7d?Expires=1653264000&Signature=Vm6Y0dptdi9MbjFTSfopG3aKefMpYzQCayhx3Kj1zdTYZH2ooKq-rbpW8k-uNPASsmlSLfZyl57~A-AqAHjx2kmfMG6Hs4WGOqGOHEWSOaADDWVfXATMgoF4pa5pgE9oZ-XfVKpsLbWcaVyE77LwARo1pmbhuQbQdxWZbXlgwotW1lnXXhjQGSjEUNQeN~Y7qZx3LMdGswzwS5lTaJNcVm65YWRCOmWGcXqbEmaaKhkp4Hyi40JLpnwzzZEu0PZ0v6EU0GxNRmgA7TNmsMPLXxuzQFyDKATLirEHIO35pRiGfbOPLCAjo9PvPIJcHVzkqMr~NRNCudtkZKXM3aKxHQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
-                                          color: Colors.white,
-                                        ),
-                                        onTap: () {
-                                          lerDados();
-                                          Navigator.push(
-                                              context,
-                                              MaterialPageRoute(
-                                                  builder: (context) => Bomboniere()));
-                                        },
-                                      ),
-                                      width: 60,
-                                      color: Colors.black),
-                                ),
-                              ],
-                            ),
-                          ),
+                  const SizedBox(height: 30,),
+
+                  GestureDetector(
+                    child: Container(
+                      height: 50,
+                      width: 250,
+                      decoration: BoxDecoration(
+                          color: Colors.pink,
+                          borderRadius: BorderRadius.circular(30)
+                      ),
+                      child: const Center(
+                          child: Text("Continuar ->", style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),)
+                      ),
+                    ),
+                    onTap: (){
+                      // String getFilme = widget.getFilme.NomeDoFilme.toString();
+                   //   print(widget.list);
+                      setState(() {
+                        valorCompras = valorCombo + valorPipocas + valorBebidas + valorDoces;
+                        valorTotalTudo = widget.valorTotal + valorCompras;
+
+                      });
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => Carrinho(widget.lista,widget.contador,widget.getFilmes,valorTotalTudo,listaProdutos)));
+                    },
+                  ),
 
                         ],
                       ),

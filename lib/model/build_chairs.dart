@@ -1,29 +1,36 @@
 import 'package:flutter/material.dart';
 
 class BuildChairs{
-  static Widget selectedChair(){
-    return Container(
-      height: 10.0,
-      width: 10.0,
-      decoration: BoxDecoration(
-        color: Colors.pink,
-        borderRadius: BorderRadius.circular(6.0)
-      ),
-    );
-  }
-  static Widget avaliableChair(){
+    selectedChair(){
+    var color = Colors.blue;
     return GestureDetector(
       child: Container(
         height: 10.0,
         width: 10.0,
         decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(6.0)
+          color: color,
+          borderRadius: BorderRadius.circular(6.0)
         ),
       ),
     );
   }
-  static Widget reservedChair(){
+    avaliableChair(){
+    var color = Colors.white;
+    return GestureDetector(
+      child: Container(
+        height: 10.0,
+        width: 10.0,
+        decoration: BoxDecoration(
+            color: color,
+            borderRadius: BorderRadius.circular(6.0)
+        ),
+      ),
+      onTap: (){
+        color = Colors.pink;
+      },
+    );
+  }
+    reservedChair(){
     return Container(
       height: 10.0,
       width: 10.0,

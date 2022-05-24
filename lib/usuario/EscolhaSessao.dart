@@ -1,14 +1,13 @@
 
 
-import 'dart:ui';
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:projetointegrado_e/model/Filmes.dart';
 import 'package:projetointegrado_e/model/Sec.dart';
-import 'package:projetointegrado_e/model/dataSelector.dart';
+
 
 import 'EscolhaAssentos.dart';
+import 'auxiliarLista.dart';
 class EscolhaSessao extends StatefulWidget {
   Filmes getFilme = Filmes();
 
@@ -25,18 +24,74 @@ class _EscolhaSessaoState extends State<EscolhaSessao> {
   String getData = "";
   Partes sessao = Partes();
   List lista = [];
+  List Auxiliar = [];
+  List cadeiras =[];
+  List<AuxliarTeste> ola =[];
+  var teste;
+  var _chairStatus = [
+    [1,1,1,1,1,1,1],
+    [1,1,1,1,3,1,1],
+    [1,1,1,1,1,3,3],
+    [1,1,1,1,1,3,3],
+    [1,1,1,1,1,3,3],
+    [1,1,1,1,1,3,3],
+  ];
+  int contador =0;
+
+  lerDados(int index)async {
+    var collection = FirebaseFirestore.instance.collection('Sessao');
+    var result = await collection.get();
+    int i = 0;
+    for (var doc in result.docs) {
+      if (doc['Nome do Filme: '] == widget.getFilme.NomeDoFilme.toString()) {
+        if (doc['Data: '] == getData.substring(0, 10)) {
+          if (doc['Horario: '] == Auxiliar[i]) {
+            if (doc['Sala: '] == Auxiliar[i + 1]) {
+             cadeiras.add(doc['Lugares']);
+             teste = doc['Lugares'];
+            }
+          }
+          setState(() {
+            i = i+2;
+          });
+        }
+      }
+    }
+    int contador=0;
+    int contadorAux=1;
+    int contadorAux2=0;
+    setState(() {
+      for(contador=0;contador<((teste.length)/2);contador++) {
+        setState(() {
+        _chairStatus[cadeiras[0][contadorAux2]][cadeiras[0][contadorAux]] = 3;
+        contadorAux2 = contadorAux2 + 2;
+        contadorAux = contadorAux +2;
+      });
+      }
+
+    });
+    print(_chairStatus);
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+            builder: (context) => EscolhaAssentos(_chairStatus,widget.getFilme,lista[index])));
+  }
 
   getSessao()async{
     var collection = FirebaseFirestore.instance.collection('Sessao');
     var result = await collection.get();
     for (var doc in result.docs){
-      if(doc['Nome do Filme: ']==widget.getFilme.NomeDoFilme.toString()){
+      if(doc['Nome do Filme: ']==widget.getFilme.NomeDoFilme.toString(
+
+      )){
         if(doc['Data: ']==getData.substring(0,10))
           {
             setState(() {
               sessao.NomeDoFilme = doc['Nome do Filme: '];
               sessao.DataLancamento = getData.substring(0,10);
               lista.add("Horario: "+doc['Horario: ']+" Sala: "+doc['Sala: ']);
+              Auxiliar.add(doc['Horario: ']);
+              Auxiliar.add(doc['Sala: ']);
             });
 
           }
@@ -80,10 +135,8 @@ class _EscolhaSessaoState extends State<EscolhaSessao> {
                           ),
                         ),
                         onTap: (){
-                          Navigator.push(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => EscolhaAssentos()));
+                          lerDados(index);
+                         // print(cadeiras);
                         },
                       ),
                     )

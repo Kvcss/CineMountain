@@ -109,7 +109,7 @@ class _HomeState extends State<Home> {
                       width: 110,
                       color: Colors.pink,
                       child: Image.network(
-                          "https://s3-alpha-sig.figma.com/img/9990/e495/e624738c061210e2222c71f23dc82bce?Expires=1653264000&Signature=R1xW9cmNx2I5R5g-fb6VAmfjONh9PDuOVAVMgTAby8BlVSSuwwiern90NBqjl~pw4aycPbPGBMMUlsBhWRBuxtqV86wpRw5LnHWcpKgCJkVr5US17PtR2H~Kv~9gxmXJ9K2rGLletY0wuF83h28Z1k2~v~tCRotcVuO8SM5AUVgaxRDOs9l3za~JfE3DoDntdywygWL6VFuVwkL0-Xmrpc-zwVtDN6nSz~2MhlKirHXzj3Ue0ygu6EF~Twd~fuwDtjHl6sMWQJbf0CWDRqDC1Q5JJ6rsPvLwsXeoUvXx9LiIkvR9igpZDMFEmxMnfJrPoJbooPllYjHrra9LI8bMUQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
+                          "https://s3-alpha-sig.figma.com/img/9990/e495/e624738c061210e2222c71f23dc82bce?Expires=1654473600&Signature=QKUnVHBKUzh9BoEUqByte4s4bOUJmd7d4yIrNElUUEAN5EwRoOvYL0R3rcsDPkoUdVyyQg~okvA80b1L5V5Iv1pAa4nfsHpcmYfvuheYmORni0pXikmpKFE1IGNZut85uucO~6zfHxhjywssrjcPMd3Zl00NuZBc-pkaJjrKiKE3uIKCHX4RzWf99xHWp24U2WLVLUgIsVdiIFhBodHec4YLeCSH2LI0cd0GeEmMJmWr2a8x1bItd4-R8~WYhSLWhv9kwkl48yndtaO5s~LnYkOclk0CBHDjuMK2-l1pl16UPC4dVraKTX1bHrBG8OgXuU9EmAMQCvvUvHfIycof2A__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
                     ),
                   ),
                   const SizedBox(
@@ -123,7 +123,7 @@ class _HomeState extends State<Home> {
                         width: 110,
                         color: Colors.pink,
                         child: Image.network(
-                          "https://s3-alpha-sig.figma.com/img/9a26/26af/3a7b91d31c7f62151fec0276790f0ba2?Expires=1653264000&Signature=dP8QZMIfNIBd3MUrIE4UxFWE3ngq-c~ZiebA0~x-n1bvGYc85fgmzkxYEzrmlMDVPE3XLIB~wEDxPlYjRli4-Uidw9EIKMxywmGsaAGau5tNAtTC~YNwKbcnExSySLu-GcryK2Yjvurb~Wh-9wAjQAJiQwZ~ECg~jki-8Z3VeR2pCWBsg9nw92cKe3wjysLApb5mOa8BwSyXv6idYvo8Z-3Xoa2pcAa5DsRW7NPXYbiPBcNYwLz9-v41~afg~tXWEGZWfFsyhrLDpNtc8JCS~7Cy22RPTTa8P4P4nL0rHdrTigZGAfLUeCO6T43Vlfacko6MFOq~HL4hsCXE80wx~Q__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
+                          "https://s3-alpha-sig.figma.com/img/9a26/26af/3a7b91d31c7f62151fec0276790f0ba2?Expires=1654473600&Signature=XWo77hFMgPIQySkvqldLJLVIH6516LlLKMLaSVt5Rs54GhVdSj~aL6aECGPgtJbstBdiYD0KCP262SpBbw-UfNt~AnAyPJQFCHCIKuJ68aaQhpU-FscvjK3JLAhG1mzpiI7n~-LDYoCFTshAz98m6-VoX~V0NbEJoC2gtHQ6oCjHPFL~eYnqTSebtSlgOm4n7yK-OT1Xn28hKCffwvfsaB4OkU4VG0KI~PiAoCUnzahbrMSID3a5Br204P6WmhQ~Og0--SwjJu1ff4j4auoyi-lhSmpHuy7l6ciZaFeMcu9SAORKlNE7H0LvPjl3n28qjGm4n~xyI-wyyqALh7F0YA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
                       ),
                       onTap: (){
                         Navigator.push(
@@ -191,7 +191,7 @@ class _HomeState extends State<Home> {
                       width: 60,
                       color: Colors.black,
                       child: Image.network(
-                        "https://s3-alpha-sig.figma.com/img/3722/2e3d/e587a2104f0a3ed8c5cbab0c0e766481?Expires=1653264000&Signature=CQySErbSk-~VrB3v0kUlYkzr-bk6dp77yS9SOJY2N8wtzz1GaDi6NM0WHwOLqxzCZrjlzV5mR5rJbLLv9XusxX6BKte5HAO0UZ-cO3kh169mjqxQQtmYQ4OxnXQQSZkEwJ3ehGC2UMU-SmeYbPXql4uKDsJDgmQhyM08U2tbgiPp45Nny43yr6kcexZhaZBeLGdZXrMfm7xfiKtkdAy-nCtXaWLp3vPAF~3Rb~QDnIltYIVxTbeSNLRVJTCPPkDoqz9is06tI0fqKQv7elgMMXINCr9LCRvBzfEAcP-USpGQpjy7~dQ57Oq1Scs04iHsrbZ9NcLpvSFfZi5zJPLKuA__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
+                        "https://s3-alpha-sig.figma.com/img/3722/2e3d/e587a2104f0a3ed8c5cbab0c0e766481?Expires=1654473600&Signature=LHCGHS3EhO9MH1cB2ELiWTvedIL1mV~BGS5XUYmgxP-sPZCP0w~9AOhwNodpxTsVDpMFDcGylQA5Dpam0X4lLjjth2wK3Ym~YIaXWkXGaYv00Ljtf732DCrH9i~KpXGVTbtHjUDzDWKyZFgqC5DDGtd0KSScwFgBqC8-T2ZAB0HBnbbGkIFOlAYOcgxk9Qjp9xflFkxhfdReeELupbPaBBWLvePk6TQumm1i68b78y4OQEdXwmIa1rfd~qFZ41s9JHw9ZR3MEhERFILOYUKC0lGkjMhP5CrXH41SUP8bSgLmHXG8bh6H-zt5a7os5Dyr~IJLE~A4-mPLyrMbce152w__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
                         color: Colors.white,
                       ),
                     ),
@@ -221,15 +221,17 @@ class _HomeState extends State<Home> {
                     child: Container(
                         child: GestureDetector(
                           child: Image.network(
-                            "https://s3-alpha-sig.figma.com/img/ac3d/dfb4/bdaf779c9ea32975413fab92807f2f7d?Expires=1653264000&Signature=Vm6Y0dptdi9MbjFTSfopG3aKefMpYzQCayhx3Kj1zdTYZH2ooKq-rbpW8k-uNPASsmlSLfZyl57~A-AqAHjx2kmfMG6Hs4WGOqGOHEWSOaADDWVfXATMgoF4pa5pgE9oZ-XfVKpsLbWcaVyE77LwARo1pmbhuQbQdxWZbXlgwotW1lnXXhjQGSjEUNQeN~Y7qZx3LMdGswzwS5lTaJNcVm65YWRCOmWGcXqbEmaaKhkp4Hyi40JLpnwzzZEu0PZ0v6EU0GxNRmgA7TNmsMPLXxuzQFyDKATLirEHIO35pRiGfbOPLCAjo9PvPIJcHVzkqMr~NRNCudtkZKXM3aKxHQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
+                            "https://s3-alpha-sig.figma.com/img/3722/2e3d/e587a2104f0a3ed8c5cbab0c0e766481?Expires=1654473600&Signature=LHCGHS3EhO9MH1cB2ELiWTvedIL1mV~BGS5XUYmgxP-sPZCP0w~9AOhwNodpxTsVDpMFDcGylQA5Dpam0X4lLjjth2wK3Ym~YIaXWkXGaYv00Ljtf732DCrH9i~KpXGVTbtHjUDzDWKyZFgqC5DDGtd0KSScwFgBqC8-T2ZAB0HBnbbGkIFOlAYOcgxk9Qjp9xflFkxhfdReeELupbPaBBWLvePk6TQumm1i68b78y4OQEdXwmIa1rfd~qFZ41s9JHw9ZR3MEhERFILOYUKC0lGkjMhP5CrXH41SUP8bSgLmHXG8bh6H-zt5a7os5Dyr~IJLE~A4-mPLyrMbce152w__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
                             color: Colors.white,
                           ),
                           onTap: () {
                             lerDados();
-                            Navigator.push(
+                            /*Navigator.push(
                                 context,
                                 MaterialPageRoute(
                                     builder: (context) => Bomboniere()));
+
+                             */
                           },
                         ),
                         width: 60,

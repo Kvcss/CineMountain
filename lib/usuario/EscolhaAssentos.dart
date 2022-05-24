@@ -1,27 +1,44 @@
 
 import 'package:flutter/material.dart';
-import 'package:projetointegrado_e/model/ArmChairsModel.dart';
 
-import '../model/build_chairs.dart';
+import 'package:projetointegrado_e/model/Filmes.dart';
+
+import 'package:projetointegrado_e/usuario/TipoIngresso.dart';
+
+import 'auxiliarLista.dart';
+
 
 class EscolhaAssentos extends StatefulWidget {
-  const EscolhaAssentos({Key? key}) : super(key: key);
+  String lista;
+  Filmes getNomeFilme = Filmes();
+  var _chairStatus;
+  EscolhaAssentos(this._chairStatus,this.getNomeFilme,this.lista,{Key? key}) : super(key: key);
 
   @override
   State<EscolhaAssentos> createState() => _EscolhaAssentosState();
 }
 
 class _EscolhaAssentosState extends State<EscolhaAssentos> {
-  Widget _chairList(){
+ /* var _chairStatus = [
+    [1,1,1,1,1,1,1],
+    [1,1,1,1,3,1,1],
+    [1,1,1,1,1,3,3],
+    [1,1,1,1,1,3,3],
+    [1,1,1,1,1,3,3],
+    [1,1,1,1,1,3,3],
+  ];
 
-      var _chairStatus = [
-        [1,1,1,1,1,1,1],
-        [1,1,1,1,3,1,1],
-        [1,1,1,1,1,3,3],
-        [2,2,1,1,1,3,3],
-        [1,1,1,1,1,3,3],
-        [2,2,1,1,1,3,3],
-      ];
+  */
+   int index = 0;
+  List<Color> myColors = [
+    Colors.white,
+    Colors.blue,
+  ];
+  int contador =0;
+
+  Widget _chairList(){
+    Color colors = Colors.white;
+
       Size size = MediaQuery.of(context).size;
       return Container(
         child: Column(
@@ -38,23 +55,61 @@ class _EscolhaAssentosState extends State<EscolhaAssentos> {
                         x == 8 ||
                             (i == 0 && x == 1) ||
                             (i == 0 && x == 7) ||
-                            (x == 4)? Container() : GestureDetector(
-                              child: Container(
+                            (x == 4)? Container() :
+                          Container(
                           height: size.width/11 - 10,
                           margin: EdgeInsets.all(5.0),
-                          child: _chairStatus[i][x - 1] == 1 ?
-                          BuildChairs.avaliableChair()
-                          :_chairStatus [i][x - 1] == 2
-                          ?BuildChairs.selectedChair()
-                          :BuildChairs.reservedChair()
+                          child: widget._chairStatus[i][x - 1] == 1 ?
+                              // CADEIRAS SELECIONADAS
+                            GestureDetector(
+                              onTap: //
+                              (){
+                                  changeColorIndex(i,x-1);
+                                  setState(() {
+                                    contador = contador +1;
+                                    print(contador);
+                                  });
+
+                              },
+                              child: Container(
+                                height: 10.0,
+                                width: 10.0,
+                                decoration: BoxDecoration(
+                                    color: Colors.white,
+                                    borderRadius: BorderRadius.circular(6.0)
+                                ),
+                              ),
+
+                            )
+                          :widget._chairStatus [i][x - 1] == 2
+                          ? GestureDetector(
+                            onTap: (){
+                              changeColorIndexUndo(i,x-1);
+                              setState(() {
+                                contador = contador -1;
+                                print(contador);
+                              });
+                            },
+                            child: Container(
+                              height: 10.0,
+                              width: 10.0,
+                              decoration: BoxDecoration(
+                                  color: Colors.pink,
+                                  borderRadius: BorderRadius.circular(6.0)
+                              ),
+                            ),
+                          )
+                          :Container(
+                            height: 10.0,
+                            width: 10.0,
+                            decoration: BoxDecoration(
+                                color: Colors.grey,
+                                borderRadius: BorderRadius.circular(6.0)
+                            ),
+                          )
                           ,
                         ),
-                          onTap: (){
-                              setState(() {
-                                _chairStatus [i][x-1] = 2;
-                              });
-                          },
-                            ),
+
                       )
 
                   ],
@@ -64,17 +119,30 @@ class _EscolhaAssentosState extends State<EscolhaAssentos> {
         ),
       );
   }
+  changeColorIndex(int i, x){
+    setState(() {
+      widget._chairStatus[i][x]=2;
+    });
+
+
+  }
+  changeColorIndexUndo(int i, x){
+    setState(() {
+      widget._chairStatus[i][x] =1;
+    });
+  }
   @override
   Widget build(BuildContext context) {
+
     Size size = MediaQuery.of(context).size;
-    return Expanded(
-      flex: 47,
+    return Scaffold(
+      body: Container(
+        color: Colors.black,
         child: Stack(
           alignment: Alignment.center,
           children: [
             Container(
               width: size.width,
-
             ),
             //Movie white scream
             Positioned(
@@ -115,23 +183,56 @@ class _EscolhaAssentosState extends State<EscolhaAssentos> {
             ),
             //end movie white scream
             Positioned(
-              bottom: size.height * 0.2,
+              bottom: size.height * 0.3,
               child: Container(
-                height:  240,
                 width: size.width,
+                child: _chairList(),
+              )
+            ),
+            Positioned(
+              top: 100,
                 child: Column(
-                  children: List.generate(ArmChairsModel.listChairs.length,(i)=>
-                  SeatsRow(
-                    numSeats: ArmChairsModel.listChair[i].seats,
-                    freeSeats: ArmChairModel.listChair[i].freeSeats,
-                    rowSeats: ArmChairsModel.listChairs[i].rowSeats,
-                  )
-                  ),
+                  children: [
+                    Center(
+                      child: Text(widget.getNomeFilme.NomeDoFilme, style: const TextStyle(color: Colors.white,fontSize: 28, fontWeight: FontWeight.bold),),
+                    ),
+                   const SizedBox(
+                      height: 20,
+                    ),
+                    Center(
+                      child:  Text(widget.lista, style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),)
+                    )
+                  ],
                 ),
             ),
+            Positioned(
+              top: 650,
+              child: GestureDetector(
+                child: Container(
+                  height: 50,
+                  width: 250,
+                  decoration: BoxDecoration(
+                      color: Colors.pink,
+                      borderRadius: BorderRadius.circular(30)
+                  ),
+                  child: const Center(
+                      child: Text("Continuar ->", style: const TextStyle(color: Colors.white, fontSize: 20, fontWeight: FontWeight.bold),)
+                  ),
+                ),
+                onTap: (){
+                 // String getFilme = widget.getFilme.NomeDoFilme.toString();
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => TipoIngresso(widget.getNomeFilme,contador)));
+                },
+              ),
             ),
           ],
         ),
+    ),
+
     );
+
   }
 }
