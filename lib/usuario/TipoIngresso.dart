@@ -101,7 +101,7 @@ class _TipoIngressoState extends State<TipoIngresso> {
                     children: [
                       Container(
                         height: 90,
-                        width: 400,
+                        width: 390,
                         color: Colors.black,
                         child: Column(
                           children: [
@@ -110,7 +110,7 @@ class _TipoIngressoState extends State<TipoIngresso> {
                                const Text('INTEIRA', style: TextStyle(color: Colors.white,fontSize: 19, fontWeight: FontWeight.bold),
                                ),
                                const SizedBox(
-                                  width: 210,
+                                  width: 200,
                                 ),
                                 GestureDetector(
                                   child: Container(
