@@ -14,8 +14,10 @@ class HomeAdm extends StatefulWidget {
 
 class _HomeAdmState extends State<HomeAdm> {
   List<String> listaNome =[];
-  ListassociarArray()async{
-
+  List<String> listaSalas =[];
+    listassociarArray()async{
+    listaNome.clear();
+    listaSalas.clear();
     await Firebase.initializeApp();
     var collection = FirebaseFirestore.instance.collection('Filmes');
     var result = await collection.get();
@@ -24,7 +26,16 @@ class _HomeAdmState extends State<HomeAdm> {
         listaNome.add(doc['Nome do Filme']);
       });
     }
-
+    var collectionSalas = FirebaseFirestore.instance.collection('Salas');
+    var resultSalas = await collectionSalas.get();
+    for(var doc1 in resultSalas.docs)
+    {
+      setState(() {
+        listaSalas.add(doc1['Numero da Sala']);
+      });
+    }
+   await Navigator.push(context, MaterialPageRoute(
+        builder: (contex) => Sessao(listaNome,listaSalas)));
   }
   @override
   Widget build(BuildContext context) {
@@ -192,9 +203,12 @@ class _HomeAdmState extends State<HomeAdm> {
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(32)
                   ),
-                  onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(
-                          builder: (contex) => Sessao()));
+                  onPressed: (){
+                    setState(() {
+                        listassociarArray();
+                    });
+
+
 
                   },
                 ),

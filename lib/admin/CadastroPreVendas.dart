@@ -17,6 +17,7 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
   final TextEditingController _controllerSala = TextEditingController();
  // final dropValue = ValueNotifier('');
   List<String> ListaNome = [];
+  List<String> lista2 = ['ana','roberta', 'nicolas'];
    String? valorEscolido;
 
    getPrevenda()async {
@@ -156,10 +157,10 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
                           child: DropdownButton<String>(
                             // hint: Text('Selecione o nome do Filme',style: TextStyle(color: Colors.black)),
                             dropdownColor: Colors.white,
-
+                            value: valorEscolido,
                             hint: Text('Selecione o filme', style: TextStyle(color: Colors.black),),
                             style: TextStyle(color: Colors.white),
-                            items: ListaNome.map(buildMenuItem).toList(),
+                            items: lista2.map(buildMenuItem).toList(),
                             onChanged: (value)=> setState(() => valorEscolido = value),
                           ),
 
@@ -332,11 +333,11 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
     );
 
   }
-  DropdownMenuItem<String> buildMenuItem(String listaNome) =>
+  DropdownMenuItem<String> buildMenuItem(String lista2) =>
       DropdownMenuItem(
-        value: listaNome,
+        value: lista2,
         child: Text(
-          listaNome,
+          lista2,
           style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
         ),
 

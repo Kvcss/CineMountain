@@ -6,7 +6,6 @@ import 'package:projetointegrado_e/model/Sec.dart';
 
 import 'package:projetointegrado_e/usuario/TipoIngresso.dart';
 
-import 'auxiliarLista.dart';
 
 
 class EscolhaAssentos extends StatefulWidget {

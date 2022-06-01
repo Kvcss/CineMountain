@@ -1,14 +1,18 @@
 
 
+import 'dart:ui';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:projetointegrado_e/admin/HomeAdm.dart';
-import 'package:projetointegrado_e/usuario/Home.dart';
+
 
 import '../model/Sec.dart';
 class Sessao extends StatefulWidget {
-  const Sessao({Key? key}) : super(key: key);
+  List<String> listaNome;
+  List<String> listaSala;
+  Sessao(this.listaNome,this.listaSala,{Key? key}) : super(key: key);
 
   @override
   State<Sessao> createState() => _SessaoState();
@@ -62,8 +66,9 @@ class _SessaoState extends State<Sessao> {
 
   }
   //final dropValue = ValueNotifier('');
-  List<String> ListaNome = [];
+  //List<String> ListaNome = [];
   String? valorEscolido;
+  String? valorEscolidoSala;
   validarCadastro(){
     String DataDeLancamento = _controllerData.text;
     String Horario = _controllerHorario.text;
@@ -92,12 +97,14 @@ class _SessaoState extends State<Sessao> {
         builder: (contex) => HomeAdm()));
   }
   Future associarArray()async{
-    await Firebase.initializeApp();
+   /* await Firebase.initializeApp();
     var collection = FirebaseFirestore.instance.collection('Filmes');
     var result = await collection.get();
     for(var doc in result.docs){
       ListaNome.add(doc['Nome do Filme']);
     }
+
+    */
 
   }
   @override
@@ -105,11 +112,7 @@ class _SessaoState extends State<Sessao> {
     double _screenHeight = MediaQuery.of(context).size.height;
     return Scaffold(
       backgroundColor: Colors.black,
-      body: FutureBuilder(
-          future: associarArray(),
-          initialData: "Aguardando os dados....",
-          builder: (context, snapshot) {
-            return Container(
+      body: Container(
               color: Colors.black,
               child: SingleChildScrollView(
                 child: Stack(
@@ -157,31 +160,32 @@ class _SessaoState extends State<Sessao> {
                             ],
                           ),
                         ),
-                        SizedBox(
+                        const SizedBox(
                           height: 20,
                         ),
                         Container(
                           height : 50,
-                          width: 250,
-                          color: Colors.white,
+                          width: 200,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10)
+                            ),
                           child: Center(
                             child: DropdownButton<String>(
+
                               // hint: Text('Selecione o nome do Filme',style: TextStyle(color: Colors.black)),
                               dropdownColor: Colors.white,
-
-                              hint: Text('Selecione o filme', style: TextStyle(color: Colors.black),),
+                              value: valorEscolido,
+                              hint: const Center(child:Text('Selecione o filme', style: TextStyle(color: Colors.black,fontSize: 15),),),
                               style: TextStyle(color: Colors.white),
-                              items: ListaNome.map(buildMenuItem).toList(),
+                              items: widget.listaNome.map(buildMenuItem).toList(),
                               onChanged: (value)=> setState(() => valorEscolido = value),
                             ),
 
                           ),
                         ),
-                        SizedBox(
-                          height: 20,
-                        ),
-                        Text('Filme Selecionado: '+ valorEscolido.toString(), style: TextStyle(color: Colors.white, fontSize: 15, fontWeight: FontWeight.bold),),
-                        SizedBox(
+
+                       const SizedBox(
                           height: 20,
                         ),
                         Row(
@@ -210,11 +214,11 @@ class _SessaoState extends State<Sessao> {
                                   ),
                                 ),
                               ),
-                              SizedBox(
+                              const SizedBox(
                                 width: 90,
                               ),
                               Padding(
-                                padding: EdgeInsets.only(right: 0),
+                                padding: const EdgeInsets.only(right: 0),
                                 child: Container(
                                   color: Colors.black,
                                   height: _screenHeight * .08,
@@ -239,32 +243,29 @@ class _SessaoState extends State<Sessao> {
                               ),
                             ]
                         ),
-                        SizedBox(
+                       const  SizedBox(
                           height: 40,
                         ),
                         Center(
-                          child: Padding(
-                            padding: EdgeInsets.only(right: 0),
-                            child: Container(
-                              color: Colors.black,
-                              height: _screenHeight * .08,
-                              width: _screenHeight * .15,
-                              child: Padding(
-                                padding: const EdgeInsets.all(7.0),
-                                child: TextField(
-                                  controller: _controllerSala,
-                                  keyboardType: TextInputType.text,
-                                  style: const TextStyle(fontSize: 15),
-                                  decoration: InputDecoration(
-                                      contentPadding:
-                                      const EdgeInsets.fromLTRB(5, 15, 15, 15),
-                                      hintText: "Sala:",
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10))),
-                                ),
+                          child:  Container(
+                            height : 50,
+                            width: 200,
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(10)
+                            ),
+                            child: Center(
+                              child: DropdownButton<String>(
+
+                                // hint: Text('Selecione o nome do Filme',style: TextStyle(color: Colors.black)),
+                                dropdownColor: Colors.white,
+                                value: valorEscolidoSala,
+                                hint: const Center(child:Text('Selecione a sala', style: TextStyle(color: Colors.black,fontSize: 15),),),
+                                style: TextStyle(color: Colors.white),
+                                items: widget.listaSala.map(buildMenuItem).toList(),
+                                onChanged: (value)=> setState(() => valorEscolidoSala = value),
                               ),
+
                             ),
                           ),
                         ),
@@ -290,16 +291,15 @@ class _SessaoState extends State<Sessao> {
                           ),
                         ),
                         Center(
-                          child: Text(_mensagemErro,style: TextStyle(color: Colors.red, fontSize: 15, fontWeight: FontWeight.bold),),
+                          child: Text(_mensagemErro,style: TextStyle(color: Colors.red, fontSize: 80, fontWeight: FontWeight.bold),),
                         )
                       ],
                     )
                   ],
                 ),
               ),
-            );
-          }
-      ),
+            ),
+
     );
 
   }
@@ -308,7 +308,16 @@ class _SessaoState extends State<Sessao> {
         value: listaNome,
         child: Text(
           listaNome,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
+          style: const TextStyle( fontSize: 15, color: Colors.black),
+        ),
+
+      );
+  DropdownMenuItem<String> buildMenuItemSala(String listaSala) =>
+      DropdownMenuItem(
+        value: listaSala,
+        child: Text(
+          listaSala,
+          style: const TextStyle( fontSize: 15, color: Colors.black),
         ),
 
       );

@@ -26,10 +26,9 @@ class _EscolhaSessaoState extends State<EscolhaSessao> {
   List lista = [];
   List Auxiliar = [];
   List cadeiras =[];
-  List<AuxliarTeste> ola =[];
   Partes getSalaHorario = Partes();
   var teste;
-  var _chairStatus = [
+  final _chairStatus = [
     [1,1,1,1,1,1,1],
     [1,1,1,1,1,1,1],
     [1,1,1,1,1,1,1],

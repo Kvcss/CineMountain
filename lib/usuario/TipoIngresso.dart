@@ -30,6 +30,7 @@ class _TipoIngressoState extends State<TipoIngresso> {
   List <Filmes> getMovie=[];
   Filmes obj = Filmes();
   int valorTotal =0;
+  int verificaIngresso =0;
 
   @override
   Widget build(BuildContext context) {
@@ -135,6 +136,7 @@ class _TipoIngressoState extends State<TipoIngresso> {
                                         obj1.Sinopse = (i.toString()+ 'X Ingresso- Inteira');
                                         getMovie.add(obj1);
                                         inteira = inteira + 40;
+                                        verificaIngresso = verificaIngresso +1;
                                       });
 
                                     }
@@ -176,6 +178,7 @@ class _TipoIngressoState extends State<TipoIngresso> {
                                         verifica = verifica - 1;
                                         getMovie.removeAt(auxInteira);
                                         inteira = inteira - 40;
+                                        verificaIngresso = verificaIngresso -1;
                                       });
                                     }
                                   },
@@ -232,6 +235,7 @@ class _TipoIngressoState extends State<TipoIngresso> {
                                     obj2.Sinopse = (i.toString()+ 'X Ingresso- Meia Entrada');
                                     getMovie.add(obj2);
                                     meia_entrada = meia_entrada + 20;
+                                    verificaIngresso = verificaIngresso +1;
 
                                   });
                                 }
@@ -267,6 +271,7 @@ class _TipoIngressoState extends State<TipoIngresso> {
                                     verifica = verifica - 1;
                                     getMovie.removeAt(auxMeia);
                                     meia_entrada = meia_entrada - 20;
+                                    verificaIngresso = verificaIngresso -1;
                                   });
                                 }
                               },
@@ -320,6 +325,7 @@ class _TipoIngressoState extends State<TipoIngresso> {
                                     obj3.Sinopse = (i.toString()+ 'X Ingresso- Cine Pass');
                                     getMovie.add(obj3);
                                     cine_pass = cine_pass + 20;
+                                    verificaIngresso = verificaIngresso +1;
                                   });
                                 }
                               },
@@ -354,6 +360,7 @@ class _TipoIngressoState extends State<TipoIngresso> {
                                     verifica = verifica - 1;
                                     getMovie.removeAt(auxCine);
                                     cine_pass = cine_pass - 20;
+                                    verificaIngresso = verificaIngresso -1;
                                   });
                                 }
                               },
@@ -391,10 +398,15 @@ class _TipoIngressoState extends State<TipoIngresso> {
                 setState(() {
                   valorTotal = inteira + meia_entrada + cine_pass;
                 });
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => Bomboniere(getMovie,widget.contador,widget.getFilmes,valorTotal,widget.getSalaHorario)));
+                if(verificaIngresso == widget.contador) {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              Bomboniere(
+                                  getMovie, widget.contador, widget.getFilmes,
+                                  valorTotal, widget.getSalaHorario)));
+                }
               },
             ),
           ],
