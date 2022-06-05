@@ -1,6 +1,6 @@
 
 
-import 'dart:ui';
+
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -42,27 +42,7 @@ class _SessaoState extends State<Sessao> {
     }
 
      */
-    _adicionarPreVendas(sessao);
-
-  }
-
-  validaSalas(Partes sessao) async{
-    var collection = FirebaseFirestore.instance.collection('Salas');
-    var result = await collection.get();
-    print(sessao.Sala.toString());
-    for(var doc in result.docs){
-      print(doc.get('Numero da Sala: '));
-      print(sessao.Sala.toString());
-      if(sessao.Sala == doc.get('Numero da Sala: ')){
-        _adicionarPreVendas(sessao);
-      }
-      else{
-        setState(() {
-          _mensagemErro = 'Informe uma sala existente';
-        });
-      }
-
-    }
+   // _adicionarPreVendas(sessao);
 
   }
   //final dropValue = ValueNotifier('');
@@ -72,14 +52,14 @@ class _SessaoState extends State<Sessao> {
   validarCadastro(){
     String DataDeLancamento = _controllerData.text;
     String Horario = _controllerHorario.text;
-    String Sala = _controllerSala.text;
+    String Sala = valorEscolidoSala!;
     String NomeDoFime = valorEscolido!;
     Partes sessao = Partes();
     sessao.DataLancamento = DataDeLancamento;
     sessao.Horario = Horario;
     sessao.Sala = Sala;
     sessao.NomeDoFilme = NomeDoFime;
-    validaSalas(sessao);
+    _adicionarPreVendas(sessao);
   }
   _adicionarPreVendas(Partes sessao)async{
     await Firebase.initializeApp();
