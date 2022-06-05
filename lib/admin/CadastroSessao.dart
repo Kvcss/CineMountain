@@ -53,6 +53,7 @@ class _SessaoState extends State<Sessao> {
     String DataDeLancamento = _controllerData.text;
     String Horario = _controllerHorario.text;
     String Sala = valorEscolidoSala!;
+    //a
     String NomeDoFime = valorEscolido!;
     Partes sessao = Partes();
     sessao.DataLancamento = DataDeLancamento;
