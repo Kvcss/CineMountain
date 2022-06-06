@@ -27,7 +27,6 @@ class _ReciboState extends State<Recibo> {
           'Nome do Filme: ': widget.getFilme.NomeDoFilme,
           'Sala: ': widget.getSalaHorario.Sala,
           'Valor Total: ':widget.valorTotal,
-
         }
     );
   }
@@ -163,7 +162,7 @@ class _ReciboState extends State<Recibo> {
                   height: 100,
                   width: 100,
                   color: Colors.black,
-                  child: Image.network("https://s3-alpha-sig.figma.com/img/c327/f2b5/b43ebe481ff7c01a0ecd0d5000268fcc?Expires=1654473600&Signature=LgXny3ZGmmV15fTKZ2j4WCJtFOfPUrfRHSoUgKwAoLngy702eub~fv8JzLZT~SFe23Ki0H56xQR1a47gMd-RiUbOkOsZGgmsQDDQEC3G0itB7V18Ev-l4DJNL~qSsDCnzBjnzyHsjo-eDh7tOFErIooMJBZjsUUeSNZL0~HSnOfVsJ37pavVrf4CW5RMDx1sRBpYPMduJcdklKkIW0MScF3rr5P8P103hodCOsJ5SSLlEv6H~fTviHSPfKGHV--hnW1XAqNCt36rmU4CMdn3ovPj9owVU-dzJqNCJ3Ppv8GrnsuToERcgmYp8c6aKoTOCh~2QNxGrptnV5j4-0Uguw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
+                  child: Image.network("https://s3-alpha-sig.figma.com/img/c327/f2b5/b43ebe481ff7c01a0ecd0d5000268fcc?Expires=1655683200&Signature=f8VZkIMjyjW9n6b7TwYvjjovaAft0EPVQxMhdA4uVIOJoEHqANaqDzcXyphhqAvrbzPD08pgwVP6DrURPUGhR-VmJJJXHUvUCgl4XcJXT1NR6bLlRN1IGw9vmxaCj2UB4uPf0pe-rJUtEhqfqM1c16Mq2NUup3nNYM4kWEw3pOao9QC3YrqExpfyXXIK308JZiUB8jkb439nEINTai~ZId3VdiQYkyaTjMjTMyBWj2~dIhVx51JfsgEP3oTyUKLP7zrRydxUO0uUya9xf0gtWbPmBx-e8XYsAgKZc6UOkTGzZqU9wPNRWLR2JcdyKr391rLtb0ntgdeZToNnjV6Iig__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
                 ),
               ),
               const SizedBox(

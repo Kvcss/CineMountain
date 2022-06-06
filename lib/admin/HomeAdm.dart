@@ -37,6 +37,30 @@ class _HomeAdmState extends State<HomeAdm> {
    await Navigator.push(context, MaterialPageRoute(
         builder: (contex) => Sessao(listaNome,listaSalas)));
   }
+  listassociarArray2()async{
+    listaNome.clear();
+    listaSalas.clear();
+    await Firebase.initializeApp();
+    var collection = FirebaseFirestore.instance.collection('Filmes');
+    var result = await collection.get();
+    for(var doc in result.docs){
+      setState(() {
+        listaNome.add(doc['Nome do Filme']);
+      });
+    }
+    var collectionSalas = FirebaseFirestore.instance.collection('Salas');
+    var resultSalas = await collectionSalas.get();
+    for(var doc1 in resultSalas.docs)
+    {
+      setState(() {
+        listaSalas.add(doc1['Numero da Sala']);
+      });
+    }
+    await Navigator.push(context, MaterialPageRoute(
+        builder: (contex) => CadastroPreVendas(listaNome,listaSalas)));
+  }
+
+
   @override
   Widget build(BuildContext context) {
     double _screenHeight = MediaQuery.of(context).size.height;
@@ -140,7 +164,11 @@ class _HomeAdmState extends State<HomeAdm> {
                       borderRadius: BorderRadius.circular(32)
                   ),
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder:(contex)=> CadastroFilme()));
+                    setState(() {
+
+                      Navigator.push(context, MaterialPageRoute(builder:(contex)=> CadastroFilme()));
+                    });
+
                   },
                 ),
               )
@@ -161,7 +189,8 @@ class _HomeAdmState extends State<HomeAdm> {
                       borderRadius: BorderRadius.circular(32)
                   ),
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder:(contex)=> CadastroPreVendas()));
+                    listassociarArray2();
+                   // Navigator.push(context, MaterialPageRoute(builder:(contex)=> CadastroPreVendas()));
                   },
                 ),
               )

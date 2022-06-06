@@ -8,7 +8,6 @@ class Filmes{
   late String _Url;
 
   Filmes();
-
   String get Sinopse => _Sinopse;
 
   set Sinopse(String value){

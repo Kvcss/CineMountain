@@ -3,9 +3,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
+import '../model/Filmes.dart';
 import '../model/PreVendas.dart';
+import '../usuario/Home.dart';
+import 'HomeAdm.dart';
 class CadastroPreVendas extends StatefulWidget {
-  const CadastroPreVendas({Key? key}) : super(key: key);
+   List <String> listaNome = [];
+   List <String> listaSala = [];
+   CadastroPreVendas(this.listaNome,this.listaSala,{Key? key}) : super(key: key);
 
   @override
   State<CadastroPreVendas> createState() => _CadastroPreVendasState();
@@ -14,19 +19,53 @@ class CadastroPreVendas extends StatefulWidget {
 class _CadastroPreVendasState extends State<CadastroPreVendas> {
   final TextEditingController _controllerDataLancamento = TextEditingController();
   final TextEditingController _controllerHorario = TextEditingController();
-  final TextEditingController _controllerSala = TextEditingController();
- // final dropValue = ValueNotifier('');
-  List<String> ListaNome = [];
-  List<String> lista2 = ['ana','roberta', 'nicolas'];
-   String? valorEscolido;
 
-   getPrevenda()async {
+ // final dropValue = ValueNotifier('');
+//  List<String> ListaNome = [];
+ // List<String> lista2 = ['ana','roberta', 'nicolas'];
+   String? valorEscolido;
+   String ? valorEscolidoSala;
+   Filmes obj = Filmes();
+
+   inserePreVendas(Filmes obj)async{
+     await Firebase.initializeApp();
+     var collection = FirebaseFirestore.instance.collection("Em Pre Venda");
+     collection.doc().set(
+         {
+           'Data Lancamento': obj.DataLancamento,
+           'Duracao': obj.Duracao,
+           'Nome do Filme': obj.NomeDoFilme,
+           'Genero': obj.Genero,
+           'Sinopse' :obj.Sinopse,
+           'Restricao de idade' : obj.RestricaoDeIdade,
+           'Image' : obj.Url,
+         }
+     );
+   }
+
+   getMoviePrevenda()async {
+     var collection = FirebaseFirestore.instance.collection("Filmes");
+     var result = await collection.get();
+     for (var doc in result.docs){
+       if(doc['Nome do Filme']== valorEscolido){
+         print('aaa');
+         obj.NomeDoFilme = doc['Nome do Filme'];
+         obj.DataLancamento = doc['Data Lancamento'];
+         obj.Duracao = doc['Duracao'];
+         obj.Url = doc['Image'];
+         obj.RestricaoDeIdade = doc['Restrição de idade'];
+         obj.Sinopse = doc['Sinopse'];
+         obj.Genero = doc['Genero'];
+         inserePreVendas(obj);
+       }
+     }
+
 
    }
    validarCadastro(){
      String DataDeLancamento = _controllerDataLancamento.text;
      String Horario = _controllerHorario.text;
-     String Sala = _controllerSala.text;
+     String Sala = valorEscolidoSala!;
       String NomeDoFime = valorEscolido!;
      PreVenda preVenda = PreVenda();
      preVenda.NomeDoFilme = NomeDoFime;
@@ -46,14 +85,18 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
            'Horario': preVenda.Horario,
          }
      );
+     await getMoviePrevenda();
+     await  Navigator.push(context, MaterialPageRoute(builder:(contex)=> HomeAdm()));
    }
    Future associarArray()async{
-    await Firebase.initializeApp();
+    /*await Firebase.initializeApp();
     var collection = FirebaseFirestore.instance.collection('Filmes');
     var result = await collection.get();
     for(var doc in result.docs){
       ListaNome.add(doc['Nome do Filme']);
     }
+
+     */
 
   }
   @override
@@ -151,16 +194,20 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
                      */
                       Container(
                         height : 50,
-                        width: 250,
-                        color: Colors.white,
+                        width: 200,
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(10)
+                        ),
                         child: Center(
                           child: DropdownButton<String>(
+
                             // hint: Text('Selecione o nome do Filme',style: TextStyle(color: Colors.black)),
                             dropdownColor: Colors.white,
                             value: valorEscolido,
-                            hint: Text('Selecione o filme', style: TextStyle(color: Colors.black),),
+                            hint: const Center(child:Text('Selecione o filme', style: TextStyle(color: Colors.black,fontSize: 15),),),
                             style: TextStyle(color: Colors.white),
-                            items: lista2.map(buildMenuItem).toList(),
+                            items: widget.listaNome.map(buildMenuItem).toList(),
                             onChanged: (value)=> setState(() => valorEscolido = value),
                           ),
 
@@ -277,28 +324,25 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
                         height: 40,
                       ),
                       Center(
-                        child: Padding(
-                          padding: EdgeInsets.only(right: 0),
-                          child: Container(
-                            color: Colors.black,
-                            height: _screenHeight * .08,
-                            width: _screenHeight * .15,
-                            child: Padding(
-                              padding: const EdgeInsets.all(7.0),
-                              child: TextField(
-                                 controller: _controllerSala,
-                                keyboardType: TextInputType.text,
-                                style: const TextStyle(fontSize: 15),
-                                decoration: InputDecoration(
-                                    contentPadding:
-                                    const EdgeInsets.fromLTRB(5, 15, 15, 15),
-                                    hintText: "Sala:",
-                                    filled: true,
-                                    fillColor: Colors.white,
-                                    border: OutlineInputBorder(
-                                        borderRadius: BorderRadius.circular(10))),
-                              ),
+                        child:  Container(
+                          height : 50,
+                          width: 200,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10)
+                          ),
+                          child: Center(
+                            child: DropdownButton<String>(
+
+                              // hint: Text('Selecione o nome do Filme',style: TextStyle(color: Colors.black)),
+                              dropdownColor: Colors.white,
+                              value: valorEscolidoSala,
+                              hint: const Center(child:Text('Selecione a sala', style: TextStyle(color: Colors.black,fontSize: 15),),),
+                              style: TextStyle(color: Colors.white),
+                              items: widget.listaSala.map(buildMenuItem).toList(),
+                              onChanged: (value)=> setState(() => valorEscolidoSala = value),
                             ),
+
                           ),
                         ),
                       ),
@@ -333,12 +377,21 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
     );
 
   }
-  DropdownMenuItem<String> buildMenuItem(String lista2) =>
+  DropdownMenuItem<String> buildMenuItem(String listaNome) =>
       DropdownMenuItem(
-        value: lista2,
+        value: listaNome,
         child: Text(
-          lista2,
-          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20, color: Colors.black),
+          listaNome,
+          style: TextStyle( fontSize: 15, color: Colors.black),
+        ),
+
+      );
+  DropdownMenuItem<String> buildMenuItemSala(String listaSala) =>
+      DropdownMenuItem(
+        value: listaSala,
+        child: Text(
+          listaSala,
+          style: const TextStyle( fontSize: 15, color: Colors.black),
         ),
 
       );

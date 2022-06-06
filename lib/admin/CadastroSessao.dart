@@ -1,13 +1,11 @@
 
-
-
-
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:projetointegrado_e/admin/HomeAdm.dart';
 
 
+import '../model/Filmes.dart';
 import '../model/Sec.dart';
 class Sessao extends StatefulWidget {
   List<String> listaNome;
@@ -21,27 +19,65 @@ class Sessao extends StatefulWidget {
 class _SessaoState extends State<Sessao> {
   final TextEditingController _controllerData = TextEditingController();
   final TextEditingController _controllerHorario = TextEditingController();
-  final TextEditingController _controllerSala = TextEditingController();
+  //final TextEditingController _controllerSala = TextEditingController();
   String _mensagemErro = '';
-  validavalida(Partes sessao){
+  int aux = 0;
+  Filmes obj = Filmes();
+
+  insertEmCartz(Filmes obj)async{
+    //print('bbbb');
+    await Firebase.initializeApp();
+    var collection = FirebaseFirestore.instance.collection("Em Cartaz");
+    collection.doc().set(
+        {
+          'Data Lancamento': obj.DataLancamento,
+          'Duracao': obj.Duracao,
+          'Nome do Filme': obj.NomeDoFilme,
+          'Genero': obj.Genero,
+          'Sinopse' :obj.Sinopse,
+          'Restricao de idade' : obj.RestricaoDeIdade,
+          'Image' : obj.Url,
+        }
+    );
+  }
+  getMovie()async{
+    var collection = FirebaseFirestore.instance.collection("Filmes");
+    var result = await collection.get();
+    for (var doc in result.docs){
+      if(doc['Nome do Filme']== valorEscolido){
+        print('aaa');
+        obj.NomeDoFilme = doc['Nome do Filme'];
+        obj.DataLancamento = doc['Data Lancamento'];
+        obj.Duracao = doc['Duracao'];
+        obj.Url = doc['Image'];
+        obj.RestricaoDeIdade = doc['Restrição de idade'];
+        obj.Sinopse = doc['Sinopse'];
+        obj.Genero = doc['Genero'];
+        insertEmCartz(obj);
+      }
+    }
 
   }
+
   validaPreVenda(Partes sessao)async{
-    /*var collection = FirebaseFirestore.instance.collection('Pre vendas');
+    var collection = FirebaseFirestore.instance.collection('Pre vendas');
     var result = await collection.get();
-    int aux = 0;
-    _mensagemErro = '';
+    setState(() {
+      aux = 0;
+    });
     for(var doc in result.docs){
-      if((sessao.NomeDoFilme == doc['Nome do Filme: '] )&&( sessao.Sala == doc['Sala: ']) && (sessao.DataLancamento == doc['Data: '] )&& (sessao.Horario == doc['Horario: '])){
+      if((sessao.NomeDoFilme == doc['Nome do Filme'] )){
         setState(() {
           _mensagemErro = 'Já tem uma Pré venda deste Filme';
-          aux ++;
+          aux = aux +1;
         });
       }
 
     }
-
-     */
+      if(aux==0) {
+        await getMovie();
+        await _adicionarPreVendas(sessao, aux);
+      }
    // _adicionarPreVendas(sessao);
 
   }
@@ -53,28 +89,31 @@ class _SessaoState extends State<Sessao> {
     String DataDeLancamento = _controllerData.text;
     String Horario = _controllerHorario.text;
     String Sala = valorEscolidoSala!;
-    //a
+
     String NomeDoFime = valorEscolido!;
     Partes sessao = Partes();
     sessao.DataLancamento = DataDeLancamento;
     sessao.Horario = Horario;
     sessao.Sala = Sala;
     sessao.NomeDoFilme = NomeDoFime;
-    _adicionarPreVendas(sessao);
-  }
-  _adicionarPreVendas(Partes sessao)async{
-    await Firebase.initializeApp();
-    var collection = FirebaseFirestore.instance.collection("Sessao");
-    collection.doc().set(
-        {
-          'Data: ' : sessao.DataLancamento,
-          'Horario: ': sessao.Horario,
-          'Nome do Filme: ': sessao.NomeDoFilme,
-          'Sala: ': sessao.Sala,
+    validaPreVenda(sessao);
 
+
+  }
+  _adicionarPreVendas(Partes sessao, int aux)async {
+    print('entrou');
+      await Firebase.initializeApp();
+      var collection = FirebaseFirestore.instance.collection("Sessao");
+      collection.doc().set(
+          {
+            'Data: ': sessao.DataLancamento,
+            'Horario: ': sessao.Horario,
+            'Nome do Filme: ': sessao.NomeDoFilme,
+            'Sala: ': sessao.Sala,
         }
     );
-    Navigator.push(context, MaterialPageRoute(
+
+    await Navigator.push(context, MaterialPageRoute(
         builder: (contex) => HomeAdm()));
   }
   Future associarArray()async{
@@ -266,13 +305,14 @@ class _SessaoState extends State<Sessao> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(32)),
                             onPressed: () {
+
                               validarCadastro();
 
                             },
                           ),
                         ),
                         Center(
-                          child: Text(_mensagemErro,style: TextStyle(color: Colors.red, fontSize: 80, fontWeight: FontWeight.bold),),
+                          child: Text(_mensagemErro,style: TextStyle(color: Colors.red, fontSize: 16, fontWeight: FontWeight.bold),),
                         )
                       ],
                     )

@@ -54,7 +54,7 @@ class _PagamentoState extends State<Pagamento> {
                                 height: 88,
                                 width: 135,
                                 color: Colors.black,
-                                child: Image.network("https://s3-alpha-sig.figma.com/img/b176/da0f/946d36b515099616104671625d8e38d8?Expires=1654473600&Signature=Ag8ymB80YZJcGZSMJ62iWpRqz6yFc7OSw-NB3hb8h7rHy2HK0glKWDCP3rHuDGrojQ01BK7nGTgMesgztn47aO5NeqlCGiprM3SsimKSUj5q~3A8InKueOCqD95vZ4tpnTkOIn9WFN90F8w9CYItJcIw5DTTCvhTUAgIqRHLQUQeP17lTXi7720mWVOP0Td3NSy7OA1gABlJX1hEcMCabFgPpDs6cp~8Rt8DAqoBnlh0YdE6~X7xRtqDm8UGjPqACZTL7KsZ7i0MCGz5ZIe6fApy~aiOf3Jip7zY5Be6iNyc-OMJIgfcKyed9HBu63s6XA-H9YnxcN0MPsk6DLU4UQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
+                                child: Image.network("https://s3-alpha-sig.figma.com/img/b176/da0f/946d36b515099616104671625d8e38d8?Expires=1655683200&Signature=EZW4k-JGX4FV~I0ZjuLJwM6ZZU1-tRKOMUh0~f3i0bd4aAX2n5gKMntgk8BpX8fJfNTQVezxljkWyMAWKN-uOcmbdasmsPuGk8x38MTYBZ-lnAQ0051XpldM~CEJA3-LpySO62Hgkh9ft4RbtS7NgBkE68dPhMUle6xSOkXWGGKVfmP9OnI-6P2WgdVPwnw4g0fURZTk2ZMIb~Fk0ao3JN9lyhEAvv1bO2M1QIMjLcaIn~O07jLTukUtvTewDyLl7-03MI4xni2ziX9T3HZuAez2h-84BrbePRj1-kv8r3dEtkcGbTp4FNqu7lLb9xJCNCBzTuv4WC3v4vq~oKrseQ__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA"),
                               ),
                             ),
                             const SizedBox(

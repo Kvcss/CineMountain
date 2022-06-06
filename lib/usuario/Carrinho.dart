@@ -23,7 +23,7 @@ class Carrinho extends StatefulWidget {
 }
 
 class _CarrinhoState extends State<Carrinho> {
-  List lista= ['ola', 'legal'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

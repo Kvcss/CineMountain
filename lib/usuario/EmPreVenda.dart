@@ -5,17 +5,18 @@ import 'package:flutter/material.dart';
 import 'package:projetointegrado_e/model/Filmes.dart';
 import 'package:projetointegrado_e/model/Sec.dart';
 
+import 'EscolhaPreVenda.dart';
 import 'EscolhaSessao.dart';
 
 
-class EmCartaz extends StatefulWidget {
-  const EmCartaz({Key? key}) : super(key: key);
+class EmPreVenda extends StatefulWidget {
+  const EmPreVenda({Key? key}) : super(key: key);
 
   @override
-  State<EmCartaz> createState() => _EmCartazState();
+  State<EmPreVenda> createState() => _EmPreVenda();
 }
 
-class _EmCartazState extends State<EmCartaz> {
+class _EmPreVenda extends State<EmPreVenda> {
   Filmes getFilme = Filmes();
   Partes getSessao = Partes();
 
@@ -24,7 +25,7 @@ class _EmCartazState extends State<EmCartaz> {
     var result = await collection.get();
     for(var doc in result.docs){
       if(doc['Nome do Filme: ']){
-       // print('ola');
+        // print('ola');
       }
     }
 
@@ -35,20 +36,20 @@ class _EmCartazState extends State<EmCartaz> {
     return SafeArea(
       child: Scaffold(
         backgroundColor: Colors.black,
-        appBar: AppBar(title:const Text('      Em Cartaz 🎬',style: TextStyle(
+        appBar: AppBar(title:const Text('      Em Pre Venda 🎬',style: TextStyle(
             fontSize: 28,
             fontWeight: FontWeight.bold,
             color: Colors.white),),
           backgroundColor: Colors.black,
         ),
         body: StreamBuilder(
-          stream: FirebaseFirestore.instance.collection('Em Cartaz').snapshots(),
+          stream: FirebaseFirestore.instance.collection('Em Pre Venda').snapshots(),
           builder: (BuildContext context, AsyncSnapshot<QuerySnapshot>snapshot){
             if(!snapshot.hasData){
               return const Center(
                 child: CircularProgressIndicator(),
               );
-             }
+            }
             return ListView(
               children: snapshot.data!.docs.map((documents){
 
@@ -71,26 +72,26 @@ class _EmCartazState extends State<EmCartaz> {
                         ),
                         Column(
                           children: [
-                               const SizedBox(
-                                  height: 20,
-                                ),
-                                Center(
-                                  child: Text(documents['Nome do Filme'], style: const TextStyle(
+                            const SizedBox(
+                              height: 20,
+                            ),
+                            Center(
+                                child: Text(documents['Nome do Filme'], style: const TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                     fontSize: 20
-                                  ),)
-                                ),
-                               const SizedBox(
-                                  height: 40,
-                                ),
-                               Center(
-                                 child: Text('Gênero: '+documents['Genero'], style: const TextStyle(
-                                     color: Colors.white,
-                                     fontWeight: FontWeight.bold,
-                                     fontSize: 12
-                                 ),),
-                               ),
+                                ),)
+                            ),
+                            const SizedBox(
+                              height: 40,
+                            ),
+                            Center(
+                              child: Text('Gênero: '+documents['Genero'], style: const TextStyle(
+                                  color: Colors.white,
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 12
+                              ),),
+                            ),
                             Center(
                               child:  Text('Data Lançamento: '+documents['Data Lancamento'], style: const TextStyle(
                                   color: Colors.white,
@@ -105,7 +106,7 @@ class _EmCartazState extends State<EmCartaz> {
                     )
                     ,
                   ),
-                    onTap: (){
+                  onTap: (){
                     setState(() {
                       getFilme.NomeDoFilme = documents['Nome do Filme'];
                       getFilme.Genero = documents ['Genero'];
@@ -114,12 +115,12 @@ class _EmCartazState extends State<EmCartaz> {
                       getFilme.Url = documents ['Image'];
 
                     });
-                  //  print(getFilme);
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => EscolhaSessao(getFilme)));
-                    }
+                    //  print(getFilme);
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => EscolhaPreVenda(getFilme)));
+                  }
                   ,
                 );
               }).toList(),

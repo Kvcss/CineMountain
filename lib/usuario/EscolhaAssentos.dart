@@ -30,7 +30,8 @@ class _EscolhaAssentosState extends State<EscolhaAssentos> {
   ];
 
   */
-   int index = 0;
+  List <int> lugares = [];
+  int index = 0;
   List<Color> myColors = [
     Colors.white,
     Colors.blue,
@@ -65,10 +66,14 @@ class _EscolhaAssentosState extends State<EscolhaAssentos> {
                             GestureDetector(
                               onTap: //
                               (){
+                                  print(i);
+                                  lugares.add(i);
+                                  lugares.add(x-1);
                                   changeColorIndex(i,x-1);
                                   setState(() {
                                     contador = contador +1;
                                     print(contador);
+                                    print(lugares);
                                   });
 
                               },
@@ -85,10 +90,13 @@ class _EscolhaAssentosState extends State<EscolhaAssentos> {
                           :widget._chairStatus [i][x - 1] == 2
                           ? GestureDetector(
                             onTap: (){
+                              lugares.removeAt(contador);
+                              lugares.removeAt(contador-1);
                               changeColorIndexUndo(i,x-1);
                               setState(() {
                                 contador = contador -1;
                                 print(contador);
+                                print(lugares);
                               });
                             },
                             child: Container(

@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
 import '../model/Sala.dart';
+import 'HomeAdm.dart';
 class CadastroSalas extends StatefulWidget {
   const CadastroSalas({Key? key}) : super(key: key);
 
@@ -12,19 +13,17 @@ class CadastroSalas extends StatefulWidget {
 
 class _CadastroSalasState extends State<CadastroSalas> {
   final TextEditingController _controllerNumeroSala = TextEditingController();
-  final TextEditingController _controllerTipoSala = TextEditingController();
-  final TextEditingController _controllerNumeroLinha= TextEditingController();
-  final TextEditingController _controllerNumeroColuna = TextEditingController();
+
+
+
   validarCadastro(){
     String Nsala = _controllerNumeroSala.text;
-    String Tsala = _controllerTipoSala.text;
-    String Nlinha = _controllerNumeroLinha.text;
-    String Ncoluna = _controllerNumeroColuna.text;
+    String Tsala = valorEscolido!;
+
     Salas sala = Salas();
     sala.NumeroDaSala = Nsala;
     sala.TipoSala = Tsala;
-    sala.NumeroLinhas = Nlinha;
-    sala.NumeroColunas = Ncoluna;
+
     _adicionarPreVendas(sala);
   }
 
@@ -34,12 +33,15 @@ class _CadastroSalasState extends State<CadastroSalas> {
     collection.doc().set(
         {
           'Numero da Sala': salas.NumeroDaSala,
-          'Tipo da Sala' : salas.NumeroLinhas,
-          'Numero de Colunas': salas.NumeroColunas,
-          'Numero de Linhas': salas.NumeroLinhas,
+          'Tipo da Sala' : salas.TipoSala,
+
+
         }
     );
+    Navigator.push(context, MaterialPageRoute(builder: (contex) => HomeAdm()));
   }
+  String? valorEscolido;
+  List <String> listaNome = ['3D', '2D'];
 
   @override
   Widget build(BuildContext context) {
@@ -100,119 +102,54 @@ class _CadastroSalasState extends State<CadastroSalas> {
                       const  SizedBox(
                           height: 20,
                         ),
-                        Row(
-                            children : <Widget>[
-                              Padding(
-                                padding: EdgeInsets.only(left: 25),
-                                child: Container(
-                                  color: Colors.black,
-                                  height: _screenHeight * .08,
-                                  width: _screenHeight * .15,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(7.0),
-                                    child: TextField(
-                                     controller: _controllerNumeroSala,
-                                      keyboardType: TextInputType.text,
-                                      style: const TextStyle(fontSize: 15),
-                                      decoration: InputDecoration(
-                                          contentPadding:
-                                          const EdgeInsets.fromLTRB(5, 15, 15, 15),
-                                          hintText: "N Sala:",
-                                          filled: true,
-                                          fillColor: Colors.white,
-                                          border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(10))),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                           const   SizedBox(
-                                width: 90,
-                              ),
-                              Padding(
-                                padding: EdgeInsets.only(right: 0),
-                                child: Container(
-                                  color: Colors.black,
-                                  height: _screenHeight * .08,
-                                  width: _screenHeight * .15,
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(7.0),
-                                    child: TextField(
-                                     controller: _controllerTipoSala,
-                                      keyboardType: TextInputType.text,
-                                      style: const TextStyle(fontSize: 15),
-                                      decoration: InputDecoration(
-                                          contentPadding:
-                                          const EdgeInsets.fromLTRB(5, 15, 15, 15),
-                                          hintText: "T Sala:",
-                                          filled: true,
-                                          fillColor: Colors.white,
-                                          border: OutlineInputBorder(
-                                              borderRadius: BorderRadius.circular(10))),
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ]
+                        Center(
+                          child: Container(
+                            color: Colors.black,
+                            height: _screenHeight * .08,
+                            width: _screenHeight * .20,
+                            padding: const EdgeInsets.all(7.0),
+                            child: TextField(
+                              controller: _controllerNumeroSala,
+                              keyboardType: TextInputType.text,
+                              style: const TextStyle(fontSize: 15),
+                              decoration: InputDecoration(
+                                  contentPadding:
+                                  const EdgeInsets.fromLTRB(5, 15, 15, 15),
+                                  hintText: "Numero da Sala:",
+                                  filled: true,
+                                  fillColor: Colors.white,
+                                  border: OutlineInputBorder(
+                                      borderRadius: BorderRadius.circular(10))),
+                            ),
+                          ),
                         ),
                       const  SizedBox(
                           height: 40,
                         ),
-                        Center(
-                          child: Padding(
-                            padding: EdgeInsets.only(right: 0),
-                            child: Container(
-                              color: Colors.black,
-                              height: _screenHeight * .08,
-                              width: _screenHeight * .15,
-                              child: Padding(
-                                padding: const EdgeInsets.all(7.0),
-                                child: TextField(
-                                  controller: _controllerNumeroLinha,
-                                  keyboardType: TextInputType.text,
-                                  style: const TextStyle(fontSize: 15),
-                                  decoration: InputDecoration(
-                                      contentPadding:
-                                      const EdgeInsets.fromLTRB(5, 15, 15, 15),
-                                      hintText: "N linhas:",
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10))),
-                                ),
-                              ),
-                            ),
+                        Container(
+                          height : 50,
+                          width: 200,
+                          decoration: BoxDecoration(
+                              color: Colors.white,
+                              borderRadius: BorderRadius.circular(10)
                           ),
-                        ),  Center(
-                          child: Padding(
-                            padding: EdgeInsets.only(right: 0),
-                            child: Container(
-                              color: Colors.black,
-                              height: _screenHeight * .08,
-                              width: _screenHeight * .15,
-                              child: Padding(
-                                padding: const EdgeInsets.all(7.0),
-                                child: TextField(
-                                 // controller: _controllerNumeroColuna,
-                                  keyboardType: TextInputType.text,
-                                  style: const TextStyle(fontSize: 15),
-                                  decoration: InputDecoration(
-                                      contentPadding:
-                                      const EdgeInsets.fromLTRB(5, 15, 15, 15),
-                                      hintText: "N colunas:",
-                                      filled: true,
-                                      fillColor: Colors.white,
-                                      border: OutlineInputBorder(
-                                          borderRadius: BorderRadius.circular(10))),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                     const    SizedBox(
-                          height: 200,
-                        ),
+                          child: Center(
+                            child: DropdownButton<String>(
 
+                              // hint: Text('Selecione o nome do Filme',style: TextStyle(color: Colors.black)),
+                              dropdownColor: Colors.white,
+                              value: valorEscolido,
+                              hint: const Center(child:Text('Selecione o tipo da Sala', style: TextStyle(color: Colors.black,fontSize: 15),),),
+                              style: TextStyle(color: Colors.white),
+                              items: listaNome.map(buildMenuItem).toList(),
+                              onChanged: (value)=> setState(() => valorEscolido = value),
+                            ),
+
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 280,
+                        ),
                         Padding(
                           padding: EdgeInsets.all(0),
                           child: RaisedButton(
@@ -239,4 +176,13 @@ class _CadastroSalasState extends State<CadastroSalas> {
 
     );
   }
+  DropdownMenuItem<String> buildMenuItem(String listaNome) =>
+      DropdownMenuItem(
+        value: listaNome,
+        child: Text(
+          listaNome,
+          style: const TextStyle( fontSize: 15, color: Colors.black),
+        ),
+
+      );
 }
