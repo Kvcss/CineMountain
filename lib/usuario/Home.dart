@@ -7,6 +7,7 @@ import 'package:projetointegrado_e/Widgets/page_view_app.dart';
 import 'Bomboniere.dart';
 import 'EmCartaz.dart';
 import 'EmPreVenda.dart';
+import 'Login.dart';
 import 'prevenda.dart';
 
 
@@ -197,13 +198,18 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 12),
-                    child: Container(
-                      width: 60,
-                      color: Colors.black,
-                      child: Image.network(
-                        "https://s3-alpha-sig.figma.com/img/3722/2e3d/e587a2104f0a3ed8c5cbab0c0e766481?Expires=1655683200&Signature=Driq50Abw~fZi-HOJibRjQWTOVbeQWEd6lSZ2ZgjTO1dLieAAfT6KLdAHyVKzFrdzzEcv8FprnfOhrHtAZcrewXzWqyeFeuXYx21LgYQw-Av4pU8o1H2P8wRDKbW~3xyOZN9OmijoU0sK6QBnV5Nf37-ivrahusgXbr5fGI40zK1xLFgCHAmUgYdSdcOBY5ZQlWaQHFqzktF884HRtaWkxJe8gMWPLdHcPhy~v9S~sFgS0fJHYSAsCg6u-Jy~mkMO~oKELiOmH8n0NHGVSNocEggRy-SP052utsNssokX85O~0Kk3h8qU3VHOFHp9vOkwT8mQra4B~iNt6f905pNFw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
-                        color: Colors.white,
+                    child: GestureDetector(
+                      child: Container(
+                        width: 60,
+                        color: Colors.black,
+                        child: Image.network(
+                          "https://s3-alpha-sig.figma.com/img/3722/2e3d/e587a2104f0a3ed8c5cbab0c0e766481?Expires=1655683200&Signature=Driq50Abw~fZi-HOJibRjQWTOVbeQWEd6lSZ2ZgjTO1dLieAAfT6KLdAHyVKzFrdzzEcv8FprnfOhrHtAZcrewXzWqyeFeuXYx21LgYQw-Av4pU8o1H2P8wRDKbW~3xyOZN9OmijoU0sK6QBnV5Nf37-ivrahusgXbr5fGI40zK1xLFgCHAmUgYdSdcOBY5ZQlWaQHFqzktF884HRtaWkxJe8gMWPLdHcPhy~v9S~sFgS0fJHYSAsCg6u-Jy~mkMO~oKELiOmH8n0NHGVSNocEggRy-SP052utsNssokX85O~0Kk3h8qU3VHOFHp9vOkwT8mQra4B~iNt6f905pNFw__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA",
+                          color: Colors.white,
+                        ),
                       ),
+                      onTap: (){
+
+                      },
                     ),
                   ),
                   const SizedBox(
@@ -212,14 +218,22 @@ class _HomeState extends State<Home> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 10, vertical: 12),
-                    child: Container(
-                      child: Image.network(
-                        'https://cdn.discordapp.com/attachments/891605575975190589/958171706692866058/Design_sem_nome__3_-removebg-preview_1.png',
-                        height: 70,
-                        fit: BoxFit.scaleDown,
+                    child: GestureDetector(
+                      child: Container(
+                        child: Image.network(
+                          'https://cdn.discordapp.com/attachments/891605575975190589/958171706692866058/Design_sem_nome__3_-removebg-preview_1.png',
+                          height: 70,
+                          fit: BoxFit.scaleDown,
+                        ),
+                        width: 60,
+                        color: Colors.black,
                       ),
-                      width: 60,
-                      color: Colors.black,
+                      onTap: (){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Login()));
+                      },
                     ),
                   ),
                   const SizedBox(

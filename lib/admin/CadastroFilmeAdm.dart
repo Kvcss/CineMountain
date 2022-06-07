@@ -5,6 +5,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:projetointegrado_e/model/Filmes.dart';
 import 'dart:io';
+
+import 'HomeAdm.dart';
 class CadastroFilme extends StatefulWidget {
 
   const CadastroFilme({Key? key}) : super(key: key);
@@ -122,6 +124,8 @@ class _CadastroFilmeState extends State<CadastroFilme> {
       'Image': filme.Url,
     }
   );
+  await Navigator.push(context, MaterialPageRoute(
+      builder: (contex) => HomeAdm()));
 
  }
 

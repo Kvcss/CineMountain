@@ -8,7 +8,8 @@ class Pagamento extends StatefulWidget {
   int valor;
   Filmes getFilmes = Filmes();
   Partes getSalaHorario = Partes();
-   Pagamento(this.valor,this.getFilmes,this.getSalaHorario,{Key? key}) : super(key: key);
+  List<int> lugares = [];
+   Pagamento(this.valor,this.getFilmes,this.getSalaHorario,this.lugares,{Key? key}) : super(key: key);
 
   @override
   State<Pagamento> createState() => _PagamentoState();
@@ -190,7 +191,7 @@ class _PagamentoState extends State<Pagamento> {
                                 Navigator.push(
                                     context,
                                     MaterialPageRoute(
-                                        builder: (context) => Recibo(widget.getFilmes,widget.getSalaHorario,widget.valor)));
+                                        builder: (context) => Recibo(widget.getFilmes,widget.getSalaHorario,widget.valor,widget.lugares)));
                               },
                             ),
 

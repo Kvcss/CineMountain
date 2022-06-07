@@ -10,8 +10,9 @@ class Recibo extends StatefulWidget {
   Filmes getFilme = Filmes();
   Partes getSalaHorario = Partes();
   int valorTotal;
+  List<int> lugares = [];
 
-   Recibo(this.getFilme,this.getSalaHorario,this.valorTotal,{Key? key}) : super(key: key);
+   Recibo(this.getFilme,this.getSalaHorario,this.valorTotal,this.lugares,{Key? key}) : super(key: key);
 
   @override
   State<Recibo> createState() => _ReciboState();
@@ -27,6 +28,7 @@ class _ReciboState extends State<Recibo> {
           'Nome do Filme: ': widget.getFilme.NomeDoFilme,
           'Sala: ': widget.getSalaHorario.Sala,
           'Valor Total: ':widget.valorTotal,
+          'Lugares: ':widget.lugares,
         }
     );
   }

@@ -16,7 +16,8 @@ class Carrinho extends StatefulWidget {
   List<Filmes>listaCompras;
   int valorCompras;
   Partes getSalaHorario = Partes();
-   Carrinho(this.lista,this.contador,this.getFilmes,this.valorTotal,this.listaCompras,this.valorCompras,this.getSalaHorario,{Key? key}) : super(key: key);
+  List<int> lugares = [];
+   Carrinho(this.lista,this.contador,this.getFilmes,this.valorTotal,this.listaCompras,this.valorCompras,this.getSalaHorario,this.lugares,{Key? key}) : super(key: key);
 
   @override
   State<Carrinho> createState() => _CarrinhoState();
@@ -27,6 +28,7 @@ class _CarrinhoState extends State<Carrinho> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: SingleChildScrollView(
         child: Container(
           color: Colors.black,
@@ -98,7 +100,7 @@ class _CarrinhoState extends State<Carrinho> {
                                                     Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
-                                                            builder: (context) => TipoIngresso(widget.getFilmes,widget.contador,widget.getSalaHorario)));
+                                                            builder: (context) => TipoIngresso(widget.getFilmes,widget.contador,widget.getSalaHorario,widget.lugares)));
                                                   },
                                                 ),
                                               )
@@ -180,7 +182,7 @@ class _CarrinhoState extends State<Carrinho> {
                                                     Navigator.push(
                                                         context,
                                                         MaterialPageRoute(
-                                                            builder: (context) => Bomboniere(widget.lista, widget.contador, widget.getFilmes, widget.valorTotal,widget.getSalaHorario)));
+                                                            builder: (context) => Bomboniere(widget.lista, widget.contador, widget.getFilmes, widget.valorTotal,widget.getSalaHorario,widget.lugares)));
                                                   },
                                                 ),
                                               )
@@ -240,7 +242,7 @@ class _CarrinhoState extends State<Carrinho> {
                              Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => Pagamento(widget.valorTotal,widget.getFilmes,widget.getSalaHorario)));
+                                    builder: (context) => Pagamento(widget.valorTotal,widget.getFilmes,widget.getSalaHorario,widget.lugares)));
 
                           },
                         ),

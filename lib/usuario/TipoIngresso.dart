@@ -11,8 +11,9 @@ class TipoIngresso extends StatefulWidget {
   Filmes getFilmes = Filmes();
   int contador;
   Partes getSalaHorario = Partes();
+  List <int> lugares =[];
 
-  TipoIngresso(this.getFilmes,this.contador,this.getSalaHorario,{Key? key}) : super(key: key);
+  TipoIngresso(this.getFilmes,this.contador,this.getSalaHorario,this.lugares,{Key? key}) : super(key: key);
 
   @override
   State<TipoIngresso> createState() => _TipoIngressoState();
@@ -210,7 +211,7 @@ class _TipoIngressoState extends State<TipoIngresso> {
                             const Text('MEIA ENTRADA', style: TextStyle(color: Colors.white,fontSize: 19, fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(
-                              width: 140,
+                              width: 128,
                             ),
                             GestureDetector(
                               child: Container(
@@ -300,7 +301,7 @@ class _TipoIngressoState extends State<TipoIngresso> {
                             const Text('CINE PASS', style: TextStyle(color: Colors.white,fontSize: 19, fontWeight: FontWeight.bold),
                             ),
                             const SizedBox(
-                              width: 186,
+                              width: 175,
                             ),
                             GestureDetector(
                               child: Container(
@@ -405,7 +406,7 @@ class _TipoIngressoState extends State<TipoIngresso> {
                           builder: (context) =>
                               Bomboniere(
                                   getMovie, widget.contador, widget.getFilmes,
-                                  valorTotal, widget.getSalaHorario)));
+                                  valorTotal, widget.getSalaHorario, widget.lugares)));
                 }
               },
             ),

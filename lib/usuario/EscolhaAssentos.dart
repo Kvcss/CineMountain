@@ -90,8 +90,8 @@ class _EscolhaAssentosState extends State<EscolhaAssentos> {
                           :widget._chairStatus [i][x - 1] == 2
                           ? GestureDetector(
                             onTap: (){
-                              lugares.removeAt(contador);
-                              lugares.removeAt(contador-1);
+                              lugares.remove(i);
+                              lugares.remove(x-1);
                               changeColorIndexUndo(i,x-1);
                               setState(() {
                                 contador = contador -1;
@@ -234,7 +234,7 @@ class _EscolhaAssentosState extends State<EscolhaAssentos> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => TipoIngresso(widget.getNomeFilme,contador,widget.getSalaHorario)));
+                          builder: (context) => TipoIngresso(widget.getNomeFilme,contador,widget.getSalaHorario,lugares)));
                 },
               ),
             ),

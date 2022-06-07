@@ -14,7 +14,8 @@ class Bomboniere extends StatefulWidget {
   Filmes getFilmes = Filmes();
   int valorTotal;
   Partes getSalaHorario = Partes();
-  Bomboniere(this.lista,this.contador,this.getFilmes,this.valorTotal,this.getSalaHorario,{Key? key}) : super(key: key);
+  List <int> lugares = [];
+  Bomboniere(this.lista,this.contador,this.getFilmes,this.valorTotal,this.getSalaHorario,this.lugares,{Key? key}) : super(key: key);
 
   @override
   State<Bomboniere> createState() => _BomboniereState();
@@ -610,7 +611,7 @@ class _BomboniereState extends State<Bomboniere> {
                       Navigator.push(
                           context,
                           MaterialPageRoute(
-                              builder: (context) => Carrinho(widget.lista,widget.contador,widget.getFilmes,valorTotalTudo,listaProdutos,valorCompras,widget.getSalaHorario)));
+                              builder: (context) => Carrinho(widget.lista,widget.contador,widget.getFilmes,valorTotalTudo,listaProdutos,valorCompras,widget.getSalaHorario,widget.lugares)));
                     },
                   ),
 

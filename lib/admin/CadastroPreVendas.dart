@@ -1,4 +1,5 @@
 
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -72,7 +73,30 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
      preVenda.Sala = Sala;
      preVenda.Horario = Horario;
      preVenda.DataLancamento = DataDeLancamento;
-     _adicionarPreVendas(preVenda);
+     verificaMovie(preVenda);
+
+   }
+   verificaMovie(PreVenda preVenda)async{
+     var collection = FirebaseFirestore.instance.collection("Em Pre Venda");
+     var result = await collection.get();
+
+     int aux =0;
+     print(aux);
+     for (var doc in result.docs){
+       if(doc['Nome do Filme']== valorEscolido){
+         setState(() {
+           aux = aux +1;
+         });
+       }
+     }
+     if(aux>0){
+       _adicionarPreVendas(preVenda);
+     }
+     else{
+       getMoviePrevenda();
+       _adicionarPreVendas(preVenda);
+     }
+
    }
    _adicionarPreVendas(PreVenda preVenda)async{
      await Firebase.initializeApp();
@@ -85,7 +109,6 @@ class _CadastroPreVendasState extends State<CadastroPreVendas> {
            'Horario': preVenda.Horario,
          }
      );
-     await getMoviePrevenda();
      await  Navigator.push(context, MaterialPageRoute(builder:(contex)=> HomeAdm()));
    }
    Future associarArray()async{

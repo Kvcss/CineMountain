@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:projetointegrado_e/admin/CadastroSessao.dart';
+import '../usuario/Login.dart';
 import 'CadastroFilmeAdm.dart';
 import 'CadastroPreVendas.dart';
 import 'cadastroSala.dart';
@@ -260,12 +261,20 @@ class _HomeAdmState extends State<HomeAdm> {
                   Padding(
                     padding: const EdgeInsets.symmetric(
                         horizontal: 12, vertical: 10),
-                    child: Container(
-                        child:
-                          Image.network('https://cdn.discordapp.com/attachments/891605575975190589/958171706692866058/Design_sem_nome__3_-removebg-preview_1.png'
-                          ),
-                      width: 200,
-                      color: Colors.black,
+                    child: GestureDetector(
+                      child: Container(
+                          child:
+                            Image.network('https://cdn.discordapp.com/attachments/891605575975190589/958171706692866058/Design_sem_nome__3_-removebg-preview_1.png'
+                            ),
+                        width: 200,
+                        color: Colors.black,
+                      ),
+                      onTap: (){
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Login()));
+                      },
                     ),
                   ),
                   const SizedBox(

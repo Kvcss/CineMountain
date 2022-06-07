@@ -24,6 +24,7 @@ class _SessaoState extends State<Sessao> {
   int aux = 0;
   Filmes obj = Filmes();
 
+
   insertEmCartz(Filmes obj)async{
     //print('bbbb');
     await Firebase.initializeApp();
@@ -58,7 +59,28 @@ class _SessaoState extends State<Sessao> {
     }
 
   }
+  VerificaGetMovie(Partes sessao,aux)async{
+    var collection = FirebaseFirestore.instance.collection('Em Cartaz');
+    var result = await collection.get();
+    int aux =0;
+    for (var doc in result.docs)
+      {
+        if(doc['Nome do Filme']== valorEscolido){
+          setState(() {
+            aux = aux +1;
+          });
+        }
+      }
+    if(aux > 0){
+       _adicionarPreVendas(sessao, aux);
+    }
+    else{
+       getMovie();
+       _adicionarPreVendas(sessao, aux);
+    }
 
+
+  }
   validaPreVenda(Partes sessao)async{
     var collection = FirebaseFirestore.instance.collection('Pre vendas');
     var result = await collection.get();
@@ -75,8 +97,8 @@ class _SessaoState extends State<Sessao> {
 
     }
       if(aux==0) {
-        await getMovie();
-        await _adicionarPreVendas(sessao, aux);
+        await VerificaGetMovie(sessao,aux);
+
       }
    // _adicionarPreVendas(sessao);
 
@@ -305,9 +327,7 @@ class _SessaoState extends State<Sessao> {
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(32)),
                             onPressed: () {
-
                               validarCadastro();
-
                             },
                           ),
                         ),
